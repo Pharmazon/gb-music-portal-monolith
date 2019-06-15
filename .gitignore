@@ -1,9 +1,3 @@
-/frontend/target/
-/frontend/*.iml
-
-/backend/target/
-/backend/*.iml
-
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 /mvn/
@@ -21,6 +15,8 @@ mvnw
 
 ### IntelliJ IDEA ###
 /.idea/
+/backend/*.iml
+*.iml
 *.iws
 *.iml
 *.ipr
