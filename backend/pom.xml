@@ -66,6 +66,13 @@
             <artifactId>annotations</artifactId>
             <version>${jetbrains.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -73,6 +80,24 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>5.2.4</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/musicportal</url>
+                    <user>musicportal</user>
+                    <password>musicportal</password>
+                </configuration>
+                <dependencies>
+                    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.2.5</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
