@@ -1,8 +1,12 @@
+/backend/target/
+/backend/*.iml
+/backend/target/*.class
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 /mvn/
 mvnw.cmd
 mvnw
+*.class
 
 ### STS ###
 .apt_generated
