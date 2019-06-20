@@ -32,3 +32,4 @@ mvnw
 /nbdist/
 /.nb-gradle/
 /build/
+/backend/.idea
