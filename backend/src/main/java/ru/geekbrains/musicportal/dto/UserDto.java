@@ -1,15 +1,44 @@
 package ru.geekbrains.musicportal.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.geekbrains.musicportal.entity.security.User;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.entity.user.Role;
+import ru.geekbrains.musicportal.entity.user.User;
+
+import java.util.List;
+
 
 @Data
-public class UserDTO {
-    private Long id;
-    private String login;
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class UserDto extends AbstractDto {
+
+    private String username;
+
     private String password;
 
-    public void fillByEntity(User user){
+    private String passwordQuestion;
 
+    private String passwordAnswer;
+
+    private String comment;
+
+    private boolean approved;
+
+    private List<Role> roles;
+
+    public UserDto(User user){
+        super.setId(user.getId());
+        super.setName(user.getName());
+        super.setDescription(user.getDescription());
+        username = user.getUsername();
+        password = user.getPassword();
+        passwordQuestion = user.getPasswordQuestion();
+        passwordAnswer = user.getPasswordAnswer();
+        comment = "";
+        approved = false;
     }
 }

@@ -1,27 +1,30 @@
 package ru.geekbrains.musicportal.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import ru.geekbrains.musicportal.service.security.UserService;
-import ru.geekbrains.musicportal.entity.security.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.geekbrains.musicportal.entity.user.User;
+import ru.geekbrains.musicportal.service.user.UserService;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
+@Setter
+@Slf4j
+@NoArgsConstructor
 public final class MusicportalAuthenticationProvider implements AuthenticationProvider {
-    private static final Logger logger = LoggerFactory
-            .getLogger(MusicportalAuthenticationProvider.class);
 
     private UserService userService;
-    private BCryptPasswordEncoder bcryptEncoder;
+    private PasswordEncoder passwordEncoder;
 
-    public void setUserService(UserService userService) {
+    @Autowired
+    public MusicportalAuthenticationProvider(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -34,16 +37,16 @@ public final class MusicportalAuthenticationProvider implements AuthenticationPr
         User user = (User)userService.loadUserByUsername(userName);
 
         if (user == null) {
-            logger.error("User not found. UserName=" + userName);
+            log.error("User not found. UserName=" + userName);
             throw new BadCredentialsException(userName);
         } else if (!user.isAccountNonLocked()) {
-            logger.error("Not activated.");
+            log.error("Not activated.");
             throw new LockedException(userName);
         } else if (!user.isEnabled()) {
-            logger.error("Not enabled.");
+            log.error("Not enabled.");
             throw new DisabledException(userName);
         } else {
-            if (bcryptEncoder.matches(password, user.getPassword())) {
+            if (passwordEncoder.matches(password, user.getPassword())) {
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                         user, null, user.getAuthorities());
 
@@ -52,7 +55,7 @@ public final class MusicportalAuthenticationProvider implements AuthenticationPr
                 user.getUserMembership().setFailedPasswordAnswerAttemptWindowStart(null);
                 userService.save(user);
 
-                logger.info("authenticate " + userName);
+                log.info("authenticate " + userName);
                 return token;
             } else {
                 user.getUserMembership().setFailedPasswordAnswerAttemptCount(
@@ -60,7 +63,7 @@ public final class MusicportalAuthenticationProvider implements AuthenticationPr
                 user.getUserMembership().setFailedPasswordAnswerAttemptWindowStart(LocalDateTime.now());
                 userService.save(user);
 
-                logger.error("Password does not match. UserName=" + userName);
+                log.error("Password does not match. UserName=" + userName);
                 throw new BadCredentialsException(userName);
             }
         }
