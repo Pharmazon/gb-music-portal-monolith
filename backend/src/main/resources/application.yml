@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?useUnicode=true&characterEncoding=utf8
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    #    continue-on-error: false
+
+    #Datasource Tomcat details
+    tomcat:
+      max-wait: 20000
+      max-active: 50
+      max-idle: 20
+      min-idle: 15
+
+  #Hibernate properties
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: update
+        format_sql: true
+        show-sql: true
+        max_fetch_depth: 20
+        jdbc:
+          fetch_size: 50
+          batch_size: 10
+
+#Logging properties
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

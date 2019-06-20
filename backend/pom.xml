@@ -21,6 +21,7 @@
         <lombok.version>RELEASE</lombok.version>
         <jetbrains.version>17.0.0</jetbrains.version>
         <postgresql.version>42.2.5</postgresql.version>
+        <modelmapper.version>2.3.4</modelmapper.version>
     </properties>
 
     <dependencies>
@@ -72,6 +73,12 @@
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
         </dependency>
     </dependencies>
 

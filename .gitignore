@@ -1,8 +1,12 @@
+/backend/target/
+/backend/*.iml
+/backend/target/*.class
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 /mvn/
 mvnw.cmd
 mvnw
+*.class
 
 ### STS ###
 .apt_generated
@@ -16,6 +20,7 @@ mvnw
 ### IntelliJ IDEA ###
 /.idea/
 /backend/*.iml
+/backend/.idea/
 *.iml
 *.iws
 *.iml
@@ -28,3 +33,4 @@ mvnw
 /nbdist/
 /.nb-gradle/
 /build/
+/backend/.idea
