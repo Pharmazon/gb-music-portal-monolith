@@ -20,6 +20,7 @@ mvnw
 ### IntelliJ IDEA ###
 /.idea/
 /backend/*.iml
+/backend/.idea/
 *.iml
 *.iws
 *.iml
