@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user_profiles")
+@Table(name = "ADDITIONAL_USER_DATA") // хорошо подходит под БД скоро полностью адаптирую полное соответствие
 public class UserProfile {
     @Getter
     @Setter
