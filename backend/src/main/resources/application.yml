@@ -4,7 +4,7 @@ spring:
     driverClassName: org.postgresql.Driver
     username: postgres
     password: postgres
-    #    continue-on-error: false
+#    continue-on-error: false
 
     #Datasource Tomcat details
     tomcat:
