@@ -1,17 +1,26 @@
 package ru.geekbrains.musicportal.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.geekbrains.musicportal.entity.database.PlaylistFeature;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.entity.playlist.PlaylistFeature;
 
 @Data
-public class PlaylistFeatureDTO {
-    private Long id;
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class PlaylistFeatureDto extends AbstractDto {
+
     private String playlistFeatureType;
+
     private String value;
 
-    public void fillByEntity(PlaylistFeature feature){
-        id = feature.getId();
-        playlistFeatureType = feature.getPlaylistFeatureType().getTitle();
-        value = feature.getValue();
+    public void PlaylistFeatureDto(PlaylistFeature feature){
+        super.setId(feature.getId());
+        super.setName(feature.getName());
+        super.setDescription(feature.getDescription());
+        playlistFeatureType = feature.getPlaylistFeatureType().getDescription();
+        value = feature.getDescription();
     }
 }

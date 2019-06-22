@@ -1,20 +1,27 @@
 package ru.geekbrains.musicportal.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import ru.geekbrains.musicportal.entity.database.Group;
-import ru.geekbrains.musicportal.entity.security.User;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.entity.track.MusicGroup;
+import ru.geekbrains.musicportal.entity.user.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Data
-public class GroupDTO {
-    private Long id;
-    private String title;
-    private ArrayList<UserDTO> participants;
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class GroupDto extends AbstractDto {
 
-    public void fillByEntity(Group group) {
-        id = group.getId();
-        title = group.getTitle();
+    private Collection<UserDto> participants;
+
+    public void GroupDto(MusicGroup group) {
+        super.setId(group.getId());
+        super.setName(group.getName());
+        super.setDescription(group.getDescription());
         if (participants != null) {
             participants.clear();
         } else {
@@ -23,8 +30,7 @@ public class GroupDTO {
 
         ArrayList<User> participantsTmp = (ArrayList<User>) group.getParticipants();
         for (User user : participantsTmp) {
-            UserDTO userDTO = new UserDTO();
-            userDTO.fillByEntity(user);
+            UserDto userDTO = new UserDto(user);
             participants.add(userDTO);
         }
     }
