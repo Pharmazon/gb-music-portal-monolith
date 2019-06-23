@@ -8,6 +8,6 @@ public interface CommonService<T extends AbstractEntity> {
 
     T save(T entity);
 
-    Optional<T> findById(String id);
+    Optional<T> findById(Long id);
 
 }

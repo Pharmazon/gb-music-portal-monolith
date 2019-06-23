@@ -17,7 +17,7 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Optional<Category> getById(String id){
+    public Optional<Category> getById(Long id){
         return categoryRepository.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findById(String id) {
+    public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
     }
 }

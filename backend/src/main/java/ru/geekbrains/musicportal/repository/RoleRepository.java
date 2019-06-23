@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.geekbrains.musicportal.entity.user.Role;
 
 @Repository
-public interface RoleRepository extends CrudRepository<Role, String> {
+public interface RoleRepository extends CrudRepository<Role, Long> {
 
     Role findOneByName(String name);
 

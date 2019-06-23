@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.geekbrains.musicportal.entity.blog.Article;
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 import ru.geekbrains.musicportal.entity.track.MusicGroup;
@@ -108,5 +110,15 @@ public class User extends AbstractEntity implements UserDetails {
             fetch = FetchType.LAZY,
             mappedBy = "user")
     private Collection<Playlist> playlists;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "author")
+    private Collection<Article> articles;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "id")
+    private Collection<Comment> comments;
 }
 

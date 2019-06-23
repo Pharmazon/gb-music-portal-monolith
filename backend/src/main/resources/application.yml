@@ -4,7 +4,7 @@ spring:
     driverClassName: org.postgresql.Driver
     username: postgres
     password: postgres
-    #    continue-on-error: false
+    #continue-on-error: false
 
     #Datasource Tomcat details
     tomcat:
@@ -20,7 +20,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         hbm2ddl:
-          auto: create
+          auto: none
         format_sql: true
         show-sql: true
         max_fetch_depth: 20
