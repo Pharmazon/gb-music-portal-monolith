@@ -1,0 +1,162 @@
+.upload-form {
+
+  width: 1010px;
+  height: 437px;
+  border-radius: 15px;
+  background-color: #1b2039;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-your-music-signature {
+
+  color: #ffffff;
+  font-family: "JosephinSansBold";
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 50px;
+  text-align: center;
+}
+
+.drag-your-files-signature {
+
+  color: #ffffff;
+  font-family: "JosephinSansSemiBold";
+  font-size: 18px;
+  font-weight: 400;
+
+}
+
+.upload-picture {
+
+  display: block;
+  text-align: center;
+
+}
+.select-file-input {
+
+  width: 210px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #3bc8e7;
+  outline: none;
+  margin-top: 49px;
+  color: #ffffff;
+  font-family: "JosephinSansBold";
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 50px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.track-information-form-block {
+
+  width: 1010px;
+  height: 414px;
+  border-radius: 15px;
+  background-color: #1b2039;
+  text-align: center;
+  padding-top: 50px;
+  margin-top: 30px;
+
+}
+
+.track-information-signature {
+
+  color: #3bc8e7;
+  font-family: "JosephinSansSemiBold";
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 50px;
+  margin-top: 30px;
+}
+
+.track-information-signature:after {
+
+  content: " ";
+  position: absolute;
+  background-image: url(~src/assets/images/divider.png);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+  margin-top: 50px;
+  margin-left: -120px;
+}
+
+.track-information-form {
+
+  margin-top: 30px;
+  width: 930px;
+  margin-left: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.track-information-form-item {
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.track-information-form label {
+
+  color: #3bc8e7;
+  font-family: "JosephinSansSemiBold";
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.track-information-form-item  select {
+
+  width: 433px;
+  height: 49px;
+}
+
+.track-information-form-input {
+
+  width: 410px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #777777;
+  font-family: "JosephinSansBold";
+  font-size: 15px;
+  font-weight: 400;
+  margin-right: 30px;
+  outline: none;
+  padding-left: 18px;
+  color: #777777;
+  margin-top: 14px;
+  margin-bottom: 30px;
+
+}
+
+.track-information-form-button {
+
+  width: 210px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #3bc8e7;
+  outline: none;
+  border: none;
+  text-align: center;
+  color: #ffffff;
+  font-family: "JosephinSansBold";
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+.track-name-input-label, .artist-name-input-label  {
+
+  color: #3bc8e7;
+  font-family: "JosephinSansSemiBold";
+  font-size: 16px;
+  font-weight: 400;
+}
