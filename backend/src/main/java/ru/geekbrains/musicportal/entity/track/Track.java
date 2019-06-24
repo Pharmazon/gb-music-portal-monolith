@@ -3,7 +3,7 @@ package ru.geekbrains.musicportal.entity.track;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.AbstractEntity;
+import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.group.Category;
 import ru.geekbrains.musicportal.entity.music.MusicFeature;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
@@ -22,18 +22,19 @@ public class Track extends AbstractEntity {
     private String fileLink;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
-    private MusicGroup group;
+    @JoinColumn(name = "music_group_id")
+    private MusicGroup musicGroup;
 
     @ManyToMany
     @JoinTable(
             name = "join_track_category",
             joinColumns = @JoinColumn(name = "track_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Collection<Category> categories;
 
-    @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "track",
+            fetch = FetchType.LAZY)
     private Collection<MusicFeature> musicFeatures;
 
     @ManyToMany

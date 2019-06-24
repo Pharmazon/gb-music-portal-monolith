@@ -11,12 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.musicportal.dto.UserDto;
 import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
+import ru.geekbrains.musicportal.enums.UserRoleEnum;
 import ru.geekbrains.musicportal.repository.RoleRepository;
 import ru.geekbrains.musicportal.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Objects;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,13 +42,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User findByUserName(String username) {
-        return userRepository.findByUserName(username);
+        return userRepository.findOneByUsername(username);
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(userName.toLowerCase());
+        User user = userRepository.findOneByUsername(userName.toLowerCase());
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username");
         }
@@ -59,6 +61,7 @@ public class UserServiceImpl implements UserService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
+    //переписать метод целиком
     @Override
     @Transactional
     public User save(UserDto dto) {
@@ -72,11 +75,11 @@ public class UserServiceImpl implements UserService {
             entity.getUserMembership().setCreateDate(LocalDateTime.now());
             entity.getUserMembership().setLastPasswordChangeDate(LocalDateTime.now());
             entity.getUserMembership().setLastLoginDate(LocalDateTime.now());
-            if(!dto.getRoles().isEmpty()){
-                dto.getRoles().forEach(role -> addUserInRole(dto.getUsername(), role.getName()));
-            }
+//            if(!dto.getRoles().isEmpty()){
+//                dto.getRoles().forEach(role -> addUserInRole(dto.getUsername(), role.getName()));
+//            }
         } else {
-            entity = userRepository.findByUserName(dto.getUsername().toLowerCase());
+            entity = userRepository.findOneByUsername(dto.getUsername().toLowerCase());
             if (entity == null) {
                 return entity;
             }
@@ -95,7 +98,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean changePassword(String userName, String oldPsw, String newPsw) {
         boolean res = true;
-        User user = userRepository.findByUserName(userName);
+        User user = userRepository.findOneByUsername(userName);
         if(user == null || !passwordEncoder.matches(oldPsw, user.getPassword())) return false;
         user.setPassword(passwordEncoder.encode(newPsw));
         user.getUserMembership().setLastPasswordChangeDate(LocalDateTime.now());
@@ -105,7 +108,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean changePasswordByPasswordAnswer(String userName, String newPsw, String passwordAnswer) {
         boolean res = true;
-        User user = userRepository.findByUserName(userName);
+        User user = userRepository.findOneByUsername(userName);
         if(user == null || !passwordEncoder.matches(user.getPasswordAnswer(), passwordAnswer)) return false;
         user.setPassword(passwordEncoder.encode(newPsw));
         user.getUserMembership().setLastPasswordChangeDate(LocalDateTime.now());
@@ -113,28 +116,22 @@ public class UserServiceImpl implements UserService {
         return res;
     }
 
-    public boolean addUserInRole(String userName, String roleName){
-        boolean res = false;
-        User user = userRepository.findByUserName(userName);
-        Role role = roleRepository.findOneByName(roleName);
-        if(user != null && role != null) {
-            role.getUsers().add(user);
-            roleRepository.save(role);
-            res = true;
-        }
-        return res;
+    public void registerUser(String username, String password, UserRoleEnum role) {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setCreationDate(LocalDateTime.now());
+        user.setLastUpdate(LocalDateTime.now());
+
+        Role roleFromDb = roleRepository.findOneByName(role.name());
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleFromDb);
+        user.setRoles(roles);
+        userRepository.save(user);
     }
 
-    public boolean removeUserFromRole(String userName, String roleName){
-        boolean res = false;
-        User user = userRepository.findByUserName(userName);
-        Role role = roleRepository.findOneByName(roleName);
-        if(user != null && role != null){
-            User remove = role.getUsers().stream().filter(u -> Objects.equals(u.getId(), user.getId())).findFirst().get();
-            role.getUsers().remove(remove);
-            roleRepository.save(role);
-            res = true;
-        }
-        return res;
+    @Override
+    public UserDto getDtoByUsername(String username) {
+        return userRepository.getDtoByUsername(username);
     }
 }
