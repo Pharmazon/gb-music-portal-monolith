@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userService = userService;
     }
 
+    @Lazy
     @Autowired
     public void setAuthenticationSuccessHandler(MusicportalAuthenticationSuccessHandler authenticationSuccessHandler) {
         this.authenticationSuccessHandler = authenticationSuccessHandler;

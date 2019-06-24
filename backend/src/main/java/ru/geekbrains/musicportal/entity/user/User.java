@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.geekbrains.musicportal.entity.AbstractEntity;
+import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 import ru.geekbrains.musicportal.entity.track.MusicGroup;
 
@@ -21,14 +21,14 @@ import java.util.stream.Collectors;
 @Table(name = "app_users")
 @EqualsAndHashCode(callSuper = true)
 @SecondaryTables({
-        @SecondaryTable(name = "user_membership")
+        @SecondaryTable(name = "app_user_membership")
 })
 public class User extends AbstractEntity implements UserDetails {
 
-    @Column(name = "user_name")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "password_salt")
@@ -46,10 +46,10 @@ public class User extends AbstractEntity implements UserDetails {
     @AttributeOverrides({
             @AttributeOverride(
                     name = "street",
-                    column = @Column(table = "user_membership")),
+                    column = @Column(table = "app_user_membership")),
             @AttributeOverride(
                     name = "building",
-                    column = @Column(table = "user_membership"))
+                    column = @Column(table = "app_user_membership"))
     })
     private UserMembership userMembership;
 
@@ -101,8 +101,8 @@ public class User extends AbstractEntity implements UserDetails {
     private UserProfile userProfile;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
-    private MusicGroup group;
+    @JoinColumn(name = "music_group_id")
+    private MusicGroup musicGroup;
 
     @OneToMany(
             fetch = FetchType.LAZY,
