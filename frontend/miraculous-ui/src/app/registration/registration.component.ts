@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-registration',
+  selector: 'registration-component',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })

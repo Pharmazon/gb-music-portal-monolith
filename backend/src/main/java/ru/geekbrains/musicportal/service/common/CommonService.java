@@ -1,6 +1,6 @@
 package ru.geekbrains.musicportal.service.common;
 
-import ru.geekbrains.musicportal.entity.AbstractEntity;
+import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 
 import java.util.Optional;
 

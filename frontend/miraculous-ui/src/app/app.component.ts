@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'miraculous-ui';
+
+  currentYear: Date = new Date();
+
+
+  showLoginForm(){
+     
+  }
+
+  showRegistrationForm(){
+
+    let registrationButton = document.getElementsByClassName("register-button");
+
+  }
 }

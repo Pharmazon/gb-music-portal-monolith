@@ -1,0 +1,43 @@
+.featured-artists-signature {
+
+  color: #3bc8e7;
+  font-family: "JosephinSansSemiBold";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 50px;
+  margin-left: 48px;
+  position: relative;
+  margin-top: 20px;
+}
+
+.featured-artists-signature:after {
+
+  content: " ";
+  position: absolute;
+  background-image: url("../../../assets/images/blue-divider.png");
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 2px;
+  bottom: 0;
+  left: -15px;
+}
+
+.featured-artist-picture {
+
+  width: 333px;
+  border-radius: 5px;
+  height: 333px;
+}
+
+.left-arrow, .right-arrow {
+
+  outline: none;
+  cursor: pointer;
+}
+
+.artist-name {
+
+  font-family: JosephinSansBold;
+  color: #ffffff;
+}
+

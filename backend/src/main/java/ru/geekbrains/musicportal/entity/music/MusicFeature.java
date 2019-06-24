@@ -3,7 +3,7 @@ package ru.geekbrains.musicportal.entity.music;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.AbstractEntity;
+import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.track.Track;
 
 import javax.persistence.*;

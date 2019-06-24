@@ -1,24 +1,20 @@
-package ru.geekbrains.musicportal.entity;
+package ru.geekbrains.musicportal.entity.common;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @MappedSuperclass
 @NoArgsConstructor
 public abstract class AbstractEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private String id = UUID.randomUUID().toString();
+    private Long id;
 
     @Column(name = "name")
     private String name;

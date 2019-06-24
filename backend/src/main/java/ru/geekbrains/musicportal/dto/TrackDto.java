@@ -16,7 +16,7 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 public class TrackDto extends AbstractDto {
 
-    private MusicGroup group;
+    private MusicGroup musicGroup;
 
     private Collection<Category> categories;
 
@@ -26,7 +26,7 @@ public class TrackDto extends AbstractDto {
         super.setId(track.getId());
         super.setName(track.getName());
         super.setDescription(track.getDescription());
-        group = track.getGroup();
+        musicGroup = track.getMusicGroup();
         categories = track.getCategories();
         fileLink = track.getFileLink();
     }
