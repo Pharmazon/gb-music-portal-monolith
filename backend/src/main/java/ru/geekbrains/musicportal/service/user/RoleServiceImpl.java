@@ -33,7 +33,7 @@ public class RoleServiceImpl implements RoleService {
     public void fillTableByAll() {
         for (UserRoleEnum role : UserRoleEnum.values()) {
             Role newRole = new Role();
-            newRole.setName(role.name());
+            newRole.setName(role.getName());
             newRole.setCreationDate(LocalDateTime.now());
             newRole.setLastUpdate(LocalDateTime.now());
             roleRepository.save(newRole);

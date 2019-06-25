@@ -5,6 +5,8 @@ import ru.geekbrains.musicportal.dto.UserDto;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;
 
+import java.util.Collection;
+
 public interface UserService extends UserDetailsService {
 
     User findByUserName(String username);
@@ -15,12 +17,15 @@ public interface UserService extends UserDetailsService {
 
     UserDto getDtoByUsername(String username);
 
-    boolean changePassword(String userName, String oldPsw, String newPsw);
+    boolean changePassword(
+            String userName,
+            String oldPsw,
+            String newPsw);
 
     void registerUser(
             String username,
             String password,
-            UserRoleEnum role);
+            Collection<UserRoleEnum> role);
 
     boolean changePasswordByPasswordAnswer(
             String userName,
