@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 
 @Repository
-public interface PlaylistRepository extends CrudRepository<Playlist, String> {
+public interface PlaylistRepository extends CrudRepository<Playlist, Long> {
 
 }

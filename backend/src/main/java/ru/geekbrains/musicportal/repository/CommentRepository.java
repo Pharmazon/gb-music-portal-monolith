@@ -2,8 +2,10 @@ package ru.geekbrains.musicportal.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.geekbrains.musicportal.entity.user.UserProfile;
+import ru.geekbrains.musicportal.entity.blog.Comment;
+
+
 
 @Repository
-public interface UserProfileRepository extends CrudRepository<UserProfile, Long> {
+public interface CommentRepository extends CrudRepository<Comment, Long> {
 }

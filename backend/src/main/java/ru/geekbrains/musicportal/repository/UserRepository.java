@@ -6,7 +6,7 @@ import ru.geekbrains.musicportal.dto.UserDto;
 import ru.geekbrains.musicportal.entity.user.User;
 
 @Repository
-public interface UserRepository extends PagingAndSortingRepository<User, String> {
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     User findOneByUsername(String username);
 

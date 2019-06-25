@@ -23,7 +23,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public Optional<UserProfile> findById(String id) {
+    public Optional<UserProfile> findById(Long id) {
         return userProfileRepository.findById(id);
     }
 }

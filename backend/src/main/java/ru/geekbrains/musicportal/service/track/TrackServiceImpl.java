@@ -23,7 +23,7 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Optional<Track> findById(String id) {
+    public Optional<Track> findById(Long id) {
         return trackRepository.findById(id);
     }
 }
