@@ -1,1 +1,0 @@
-CREATE SEQUENCE IF NOT EXISTS music_portal_sequence;
