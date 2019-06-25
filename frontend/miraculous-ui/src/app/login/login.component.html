@@ -1,0 +1,18 @@
+<div class="login-form-block">
+  <div class="login-form-headphones-pic"></div>
+  <div class="login-form-contents">
+    <h5 class="login-signature">Login / Sign in</h5>
+    <form class="login-form">
+      <input type="text" name="login-name-input" placeholder="EnterYour Email" class="login-name-input">
+      <input type="email" name="login-email-input" placeholder="Enter Password" class="login-email-input">
+      <div class="login-remember-me-checkbox-block">
+        <input type="checkbox" name="login-remember-me-checkbox" id="login-remember-me-checkbox">
+        <label for="login-remember-me-checkbox" class="login-remember-me-checkbox-label">Keep Me Signed In</label>
+      </div>
+      <input type="submit" name="login-submit-button" class="login-submit-button" value="LOGIN">
+    </form>
+    <a class="forgot-password-link" href="#">Forgot Password?</a>
+    <p class="register-link">Don't have an account? <a href="#">Register Here</a></p>
+  </div>
+  <a class="close-button" (click)="closeLoginComponent()"><img src="assets/icons/close-button.png"></a>
+</div>
