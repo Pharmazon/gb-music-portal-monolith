@@ -116,16 +116,17 @@ public class UserServiceImpl implements UserService {
         return res;
     }
 
-    public void registerUser(String username, String password, UserRoleEnum role) {
+    public void registerUser(String username, String password, Collection<UserRoleEnum> rolesEnum) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setCreationDate(LocalDateTime.now());
         user.setLastUpdate(LocalDateTime.now());
-
-        Role roleFromDb = roleRepository.findOneByName(role.name());
         List<Role> roles = new ArrayList<>();
-        roles.add(roleFromDb);
+        for (UserRoleEnum roleEnum : rolesEnum) {
+            Role role = roleRepository.findOneByName(roleEnum.getName());
+            roles.add(role);
+        }
         user.setRoles(roles);
         userRepository.save(user);
     }
