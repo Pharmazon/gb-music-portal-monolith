@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.geekbrains.musicportal.dto.UserDto;
 import ru.geekbrains.musicportal.service.user.UserServiceImpl;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
