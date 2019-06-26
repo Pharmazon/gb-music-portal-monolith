@@ -90,7 +90,7 @@ const appRoutes: Routes = [
     FavouritesComponent,
     HistoryComponent,
     CreatePlaylistComponent,
-    RegistrationComponent
+    RegistrationComponent,
 
   ],
   imports: [
