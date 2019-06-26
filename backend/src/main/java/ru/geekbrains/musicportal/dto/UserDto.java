@@ -6,7 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
+import ru.geekbrains.musicportal.validation.PasswordMatches;
+import ru.geekbrains.musicportal.validation.ValidEmail;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 
@@ -14,16 +19,35 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@PasswordMatches
 public class UserDto extends AbstractDto {
 
+    @NotNull
+    @NotEmpty
+    @Size(min = 6, max = 25)
     private String username;
 
+    @NotNull
+    @NotEmpty
+    @Size(min = 8, message = "пароль должен состоять как минимум из 8 символов!")
     private String password;
+    private String matchingPassword;
 
+    @NotNull
+    @NotEmpty
+    @ValidEmail
+    private String email;
+
+    @NotNull
+    @NotEmpty
     private String passwordQuestion;
 
+    @NotNull
+    @NotEmpty
     private String passwordAnswer;
 
+    @NotNull
+    @NotEmpty
     private String comment;
 
     private boolean approved;

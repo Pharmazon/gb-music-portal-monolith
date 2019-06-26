@@ -52,23 +52,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().authenticated()
-//                .antMatchers("/register/**").permitAll()
-//                .antMatchers("/products/**").hasRole("ADMIN")
-//                .antMatchers("/shop/order/**").authenticated()
-//                .antMatchers("/profile/**").authenticated()
+        http
+                    .authorizeRequests()
+                    .anyRequest().authenticated()
+    //                .antMatchers("/register/**").permitAll()
+    //                .antMatchers("/products/**").hasRole("ADMIN")
+    //                .antMatchers("/shop/order/**").authenticated()
+    //                .antMatchers("/profile/**").authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/authenticateTheUser")
-                .successHandler(authenticationSuccessHandler)
-                //               .failureHandler()
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/authenticateTheUser")
+                    .successHandler(authenticationSuccessHandler)
+                    //               .failureHandler()
+                    .permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/login")
-                .permitAll();
+                    .logout()
+                    .logoutSuccessUrl("/login")
+                    .permitAll();
     }
 
     @Bean
