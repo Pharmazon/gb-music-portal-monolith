@@ -13,7 +13,6 @@ import { FeaturedAlbumsComponent } from './common-components/featured-albums/fea
 import { SearchComponent } from './search/search.component';
 import { DownloadAppLinkComponent } from './discover/download-app-link/download-app-link.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ArtistProfileComponent } from './artist-profile/artist-profile.component';
 import { FeaturedArtistsComponent } from './common-components/featured-artists/featured-artists.component';
@@ -32,6 +31,7 @@ import { PurchasedMusicComponent } from './purchased-music/purchased-music.compo
 import { FavouritesComponent } from './favourites/favourites.component';
 import { HistoryComponent } from './history/history.component';
 import { CreatePlaylistComponent } from './create-playlist/create-playlist.component';
+import {RegistrationComponent} from "./registration/registration.component";
 
 
 const appRoutes: Routes = [
@@ -73,7 +73,6 @@ const appRoutes: Routes = [
     SearchComponent,
     DownloadAppLinkComponent,
     LoginComponent,
-    RegisterComponent,
     UserProfileComponent,
     ArtistProfileComponent,
     FeaturedArtistsComponent,
@@ -90,7 +89,8 @@ const appRoutes: Routes = [
     PurchasedMusicComponent,
     FavouritesComponent,
     HistoryComponent,
-    CreatePlaylistComponent
+    CreatePlaylistComponent,
+    RegistrationComponent
 
   ],
   imports: [

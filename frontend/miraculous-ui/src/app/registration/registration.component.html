@@ -1,35 +1,15 @@
-<div class="container">
-  <div class="row content justify-content-center align-items-center">
-    <div class="col reg-form">
-      <div class="row">
-        <div class="col">
-          <img class="photo" src="../../assets/reg-head-phones.png" alt="head-phones-photo">
-        </div>
-        <div class="col form">
-          <h3>Register / Sign Up</h3>
-          <div class="divider">
-            <img src="../../assets/Divider.png" alt="divider">
-          </div>
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-control" id="inputName" placeholder="Enter Your Name">
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control" id="inputEmail" placeholder="Enter Your Email">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="inputCheck" placeholder="Confirm Password">
-            </div>
-            <button type="submit" class="btn btn-primary">Register Now</button>
-            <p class="already-have-p">Already Have An Account? <a href="#">Login Here</a></p>
-          </form>
-        </div>
-      </div>
-    </div>
+<div class="registration-form-block">
+  <div class="registration-form-headphones-pic"></div>
+  <div class="registration-form-contents">
+    <h5 class="registration-signature">Register / Sign Up</h5>
+    <form class="registration-form">
+      <input type="text" name="registration-name-input" placeholder="Enter Your Name" class="registration-name-input">
+      <input type="email" name="registration-email-input" placeholder="Enter Your Email" class="registration-email-input">
+      <input type="password" name="registration-password-input" placeholder="Enter Your Password" class="registration-password-input">
+      <input type="password" name="registration-confirm-password-input" placeholder="Confirm Your Password" class="registration-confirm-password-input">
+      <input type="submit" name="registration-submit-button" class="registration-submit-button" value="Register Now">
+    </form>
+    <p class="login-link">Already Have An Account?<button (click)="switchToLoginComponent()">Login Here</button></p>
   </div>
-
-
+  <a class="close-button" (click)="closeRegistrationComponent()"><img src="assets/icons/close-button.png"></a>
 </div>

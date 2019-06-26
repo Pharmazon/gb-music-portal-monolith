@@ -35,5 +35,6 @@ body {
   min-height: 900px;
   display: flex;
   background-color: #14182a;
+  width: 100%;
 
 }

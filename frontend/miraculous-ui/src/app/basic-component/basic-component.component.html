@@ -1,4 +1,5 @@
-<div class="navigation-panel">
+<div #container>
+<div class="navigation-panel" #navigationPanel>
   <a href="#" class="navigation-panel-logo"><img src="assets/images/miraculous-logo.png"></a>
   <ul class="navigation-upper-link-list">
     <li><a routerLink="discover" (click)="navigate('discover')"><img src="assets/icons/discover-icon.svg" title="Discover"></a></li>
@@ -27,7 +28,7 @@
     <h5 class="trending-songs-signature"><span>Trending songs: </span></h5>
     <a class="languages-signature" href="#">Languages
       <img src="assets/icons/language-icon.png" class="language-icon" ></a>
-    <button class="register-button">Register</button>
+    <button class="register-button" (click)="showRegistrationComponent()">Register</button>
     <button class="login-button" (click)="showLoginComponent()">Login</button>
   </div>
   <div class="content">
@@ -100,7 +101,10 @@
         Miraculous </span>All rights reserved.</p>
     </div>
   </footer>
-  <login-component class="login-component" (closedLoginComponent)="closeLoginComponent()"></login-component>
-  <div class="darkening-overflow"></div>
+  <login-component class="login-component" (closedLoginComponent)="closeLoginComponent()" #loginComponent (switchedToRegistrationComponent)="switchToRegistrationForm()"></login-component>
+  <registration-component class="registration-component" #registrationComponent (closedRegistrationComponent)="closeRegistrationComponent()"
+  (switchedToLoginComponent)="switchToLoginForm()"></registration-component>
+  <div class="darkening-overflow" #darkeningOverflow></div>
+</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
