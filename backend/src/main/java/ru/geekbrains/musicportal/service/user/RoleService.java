@@ -7,4 +7,6 @@ public interface RoleService extends CommonService<Role> {
 
     void fillTableByAll();
 
+    boolean isExist(String name);
+
 }

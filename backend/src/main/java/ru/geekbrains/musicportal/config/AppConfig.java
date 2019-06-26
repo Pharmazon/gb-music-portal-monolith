@@ -35,12 +35,13 @@ public class AppConfig implements WebMvcConfigurer {
 //                .permitAll().and()
 //                .build();
 //    }
-@Bean
-public LocaleResolver localeResolver() {
-    CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
-    cookieLocaleResolver.setDefaultLocale(new Locale("ru"));
-    return cookieLocaleResolver;
-}
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+        cookieLocaleResolver.setDefaultLocale(new Locale("ru"));
+        return cookieLocaleResolver;
+    }
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
@@ -53,4 +54,5 @@ public LocaleResolver localeResolver() {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
+
 }
