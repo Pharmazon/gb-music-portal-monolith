@@ -102,9 +102,9 @@
     </div>
   </footer>
   <login-component class="login-component" (closedLoginComponent)="closeLoginComponent()" #loginComponent (switchedToRegistrationComponent)="switchToRegistrationForm()"></login-component>
-  <registration-component class="registration-component" #registrationComponent (closedRegistrationComponent)="closeRegistrationComponent()"
-  (switchedToLoginComponent)="switchToLoginForm()"></registration-component>
+  <registration-component class="registration-component" #registrationComponent (closedRegistrationComponent)="closeRegistrationComponent()" (switchedToLoginComponent)="switchToLoginForm()"></registration-component>
   <div class="darkening-overflow" #darkeningOverflow></div>
 </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+

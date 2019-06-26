@@ -38,3 +38,13 @@ body {
   width: 100%;
 
 }
+
+app-root {
+
+  opacity: 0;
+}
+
+html {
+
+  background-color: #14182a;
+}
