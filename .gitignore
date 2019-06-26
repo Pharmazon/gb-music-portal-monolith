@@ -1,7 +1,4 @@
-/backend/target/
-/backend/*.iml
-/backend/target/*.class
-/target/
+**/target/
 !.mvn/wrapper/maven-wrapper.jar
 /mvn/
 mvnw.cmd
@@ -19,11 +16,8 @@ mvnw
 
 ### IntelliJ IDEA ###
 /.idea/
-/backend/*.iml
-/backend/.idea/
 *.iml
 *.iws
-*.iml
 *.ipr
 
 ### NetBeans ###
@@ -34,3 +28,47 @@ mvnw
 /.nb-gradle/
 /build/
 /backend/.idea
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
+
+# dependencies
+**/node_modules/
+
+# profiling files
+chrome-profiler-events.json
+speed-measure-plugin.json
+
+# IDEs and editors
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db

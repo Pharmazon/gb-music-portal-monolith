@@ -1,0 +1,129 @@
+.audiotrack {
+
+  width: 510px;
+  height: 50px;
+  display: flex;
+  position: relative;
+  background-color: #14182a;
+  align-items: center;
+
+}
+
+.audiotrack-sound {
+
+  display: none;
+}
+
+.audiotrack:after {
+
+  content: " ";
+  position: absolute;
+  background-image: url(../../assets/images/underlining.png);
+  width: 510px;
+  height: 1px;
+  top: 83px;
+
+}
+
+.audiotrack-number {
+
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+  text-shadow: 0 0 10px rgba(4, 4, 4, 0.2);
+  color: #2f375d;
+  font-family: "JosephinSansBold";
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+
+}
+
+.audiotrack-picture {
+
+  width: 70px;
+  height: 50px;
+  background-color: #868891;
+  border-radius: 5px;
+  margin-left: 85px;
+  cursor: pointer;
+  background-image: url(../../assets/images/armin.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.audiotrack-picture:hover {
+
+  background-image: url(../../assets/images/giphy.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+}
+
+
+.audiotrack-information {
+
+  font-family: "JosephinSansRegular";
+  margin-left: 19px;
+  width: 200px;
+  color: #ffffff;
+}
+
+.audiotrack-title {
+
+  font-size: 16px;
+  font-weight: 700;
+
+}
+
+.audiotrack-length {
+
+  color: #ffffff;
+  font-family: "JosephinSansRegular";
+  font-size: 15px;
+  font-weight: 400;
+
+}
+
+.audiotrack-more-options-button {
+
+  margin-left: 30px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.audiotrack-options-popup {
+
+  padding-top: 20px;
+  background-color: grey;
+  width: 178px;
+  height: 208px;
+  border-radius: 15px;
+  list-style: none;
+  margin-left: 100px;
+  font-family: "JosephinSansRegular";
+  display: none;
+  position: absolute;
+  top: -20px;
+
+}
+
+.audiotrack-more-options-button:hover .audiotrack-options-popup {
+
+  display: block;
+
+}
+
+.audiotrack-options-popup li {
+
+  margin-left: 20px;
+  margin-top: 7px;
+  color: #ffffff;
+
+}
