@@ -150,3 +150,15 @@
   top: -5px;
   cursor: pointer;
 }
+
+.register-link button {
+
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-family: "JosephinSansSemiBold";
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+}

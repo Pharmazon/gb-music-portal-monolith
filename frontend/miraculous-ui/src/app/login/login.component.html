@@ -12,7 +12,7 @@
       <input type="submit" name="login-submit-button" class="login-submit-button" value="LOGIN">
     </form>
     <a class="forgot-password-link" href="#">Forgot Password?</a>
-    <p class="register-link">Don't have an account? <a href="#">Register Here</a></p>
+    <p class="register-link">Don't have an account? <button (click)="switchToRegistrationComponent()">Register Here</button></p>
   </div>
   <a class="close-button" (click)="closeLoginComponent()"><img src="assets/icons/close-button.png"></a>
 </div>

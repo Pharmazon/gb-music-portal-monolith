@@ -10,6 +10,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class LoginComponent implements OnInit {
 
   @Output() closedLoginComponent = new EventEmitter<any>();
+  @Output() switchedToRegistrationComponent = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
@@ -17,5 +18,9 @@ export class LoginComponent implements OnInit {
 
   closeLoginComponent() {
       this.closedLoginComponent.emit();
+  }
+
+  switchToRegistrationComponent() {
+    this.switchedToRegistrationComponent.emit();
   }
 }

@@ -1,78 +1,138 @@
-.container {
-  min-height: 100%;
+.registration-form-block {
+
   display: flex;
-  flex-direction: column;
-  font-family: 'Josefin Sans', sans-serif;
-}
-
-.content {
-  flex: 1;
-}
-
-.reg-form {
-  max-width: 930px;
+  width: 930px;
   height: 510px;
   border-radius: 10px;
   background-color: #000000;
   background-image: linear-gradient(to left, #3bc8e7 0%, #20a7c4 100%);
+  position: relative;
 }
 
-.photo {
-  margin: 58px 0 0 36px;
+.registration-form-headphones-pic {
+
+  width: 368px;
+  height: 395px;
+  margin-left: 51px;
+  margin-top: 58px;
+  background-image: url(~src/assets/images/headphones.png);
 }
 
-h3 {
-  color: #ffffff;
+.registration-form-contents {
+
+  margin-left: 51px;
+  display: flex;
+  width: 410px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.registration-signature {
+
+  font-family: "JosephinSansRegular";
   font-size: 24px;
   font-weight: 700;
-  /*line-height: 50px;*/
-  margin-top: 60px;
-  margin-bottom: 0;
-  width: 410px;
+  line-height: 50px;
+  color: #ffffff;
 }
 
-.form {
-  text-align: center;
+.registration-signature:after {
+
+  position: absolute;
+  content: " ";
+  background-image: url(~src/assets/images/divider.png);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+  margin-top: 50px;
+  margin-left: -120px;
 }
 
-.form-group {
-  margin-bottom: 20px;
+.registration-form {
+
+  display: flex;
+  flex-direction: column;
+  font-family: "JosephinSansRegular";
+  align-items: center;
 }
 
-form {
-  width: 410px;
-}
+.registration-submit-button {
 
-.form input {
-  height: 40px;
-  border-radius: 5px;
-  background-color: #ffffff;
-  margin-top: 18px;
-}
-
-.divider {
-  width: 410px;
-}
-
-button {
   width: 160px;
   height: 40px;
   border-radius: 20px;
   border: 1px solid #ffffff;
   background-color: #3bc8e7;
-  margin-top: 10px;
+  color: #ffffff;
+  font-family: "JosephinSansRegular";
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+}
+
+.registration-name-input, .registration-email-input, .registration-password-input ,
+.registration-confirm-password-input{
+
+  color: #777777;
+  font-family: "JosephinSansBold";
+  font-size: 15px;
+  font-weight: 400;
+  width: 410px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 20px;
   margin-bottom: 20px;
 }
 
-.already-have-p {
-  height: 15px;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 400;
+.registration-form:after {
+
+  position: absolute;
+  content: " ";
+  background-image: url(~src/assets/icons/envelop-pic.png);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+  margin-left: 225px;
+  margin-top: 15px;
+
+}
+.registration-form:before {
+
+  position: absolute;
+  content: " ";
+  background-image: url(~src/assets/icons/lock-pic.png);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+  margin-left: 225px;
+  margin-top: 83px;
+
 }
 
-.already-have-p a {
-  font-weight: 600;
-  font-style: italic;
+
+.login-link, .login-link button {
+
   color: #ffffff;
+  font-family: "JosephinSansSemiBold";
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+  background: none;
+  border: none;
+}
+
+.login-link button {
+
+  cursor: pointer;
+}
+
+.close-button {
+
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  cursor: pointer;
 }
