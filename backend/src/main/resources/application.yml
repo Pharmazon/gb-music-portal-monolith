@@ -1,19 +1,20 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?useUnicode=true&characterEncoding=utf8
-    driverClassName: org.postgresql.Driver
-    username: postgres
-    password: postgres
-    #continue-on-error: false
 
-    #Datasource Tomcat details
+  #Datasource
+  datasource:
+    url: jdbc:postgresql://localhost:5432/musicportal?useUnicode=true&characterEncoding=utf8
+    driverClassName: org.postgresql.Driver
+    username: musicportal
+    password: musicportal
+
+    #Tomcat
     tomcat:
       max-wait: 20000
       max-active: 50
       max-idle: 20
       min-idle: 15
 
-  #Hibernate properties
+  #Hibernate
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
@@ -28,7 +29,7 @@ spring:
           fetch_size: 50
           batch_size: 10
 
-#Logging properties
+#Logging
 logging:
   level:
     org:
@@ -38,3 +39,6 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+    ru:
+      geekbrains:
+        musicportal: DEBUG

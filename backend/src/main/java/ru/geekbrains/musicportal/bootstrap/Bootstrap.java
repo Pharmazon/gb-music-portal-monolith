@@ -23,8 +23,8 @@ public class Bootstrap implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         roleService.fillTableByAll();
-        userService.registerUser("admin", "admin", UserRoleEnum.getUserAdministrator());
-        userService.registerUser("user", "user", UserRoleEnum.getUser());
-        userService.registerUser("artist", "artist", UserRoleEnum.getUserArtist());
+        userService.registerUser("admin", "admin", "admin@mp.com", UserRoleEnum.getUserAdministrator());
+        userService.registerUser("user", "user", "user@milo.com", UserRoleEnum.getUser());
+        userService.registerUser("artist", "artist", "artist@aol.com", UserRoleEnum.getUserArtist());
     }
 }

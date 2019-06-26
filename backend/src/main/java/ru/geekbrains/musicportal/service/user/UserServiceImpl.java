@@ -123,10 +123,11 @@ public class UserServiceImpl implements UserService {
         return res;
     }
 
-    public void registerUser(String username, String password, Collection<UserRoleEnum> rolesEnum) {
+    public void registerUser(String username, String password, String email, Collection<UserRoleEnum> rolesEnum) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setEmail(email);
         user.setCreationDate(LocalDateTime.now());
         user.setLastUpdate(LocalDateTime.now());
         List<Role> roles = new ArrayList<>();

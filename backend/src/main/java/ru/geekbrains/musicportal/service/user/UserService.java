@@ -25,6 +25,7 @@ public interface UserService extends UserDetailsService {
     void registerUser(
             String username,
             String password,
+            String email,
             Collection<UserRoleEnum> role);
 
     boolean changePasswordByPasswordAnswer(
