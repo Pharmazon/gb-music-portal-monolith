@@ -4,6 +4,7 @@ package ru.geekbrains.musicportal.entity.blog;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.entity.Comment;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.user.User;
 
@@ -25,11 +26,6 @@ public class Article extends AbstractEntity {
 
     @Column(name = "content")
     private String content;
-
-    @OneToMany(
-            mappedBy = "article",
-            fetch = FetchType.LAZY)
-    private Collection<Comment> comments;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")

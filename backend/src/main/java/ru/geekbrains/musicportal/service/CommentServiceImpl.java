@@ -1,9 +1,9 @@
-package ru.geekbrains.musicportal.service.blog;
+package ru.geekbrains.musicportal.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.entity.blog.Comment;
+import ru.geekbrains.musicportal.entity.Comment;
 import ru.geekbrains.musicportal.repository.CommentRepository;
 
 import java.util.Optional;
