@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.geekbrains.musicportal.entity.blog.Article;
-import ru.geekbrains.musicportal.entity.blog.Comment;
+import ru.geekbrains.musicportal.entity.Comment;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 import ru.geekbrains.musicportal.entity.track.MusicGroup;
