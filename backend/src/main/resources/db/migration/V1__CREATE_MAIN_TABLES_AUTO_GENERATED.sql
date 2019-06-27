@@ -250,4 +250,3 @@ ALTER TABLE "join_track_category" ADD CONSTRAINT "fkch26sawigosjm9ctqd6te8b7x" F
 ALTER TABLE "join_track_category" ADD CONSTRAINT "fk1d2rau3dcxnl6caffx5rv00km" FOREIGN KEY ("track_id") REFERENCES "app_track" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "join_user_roles" ADD CONSTRAINT "fke9fjrjnmtpwunxmcob6axpy7v" FOREIGN KEY ("role_id") REFERENCES "app_roles" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "join_user_roles" ADD CONSTRAINT "fkhvrvspq4nallqheld0hq8x4g0" FOREIGN KEY ("user_id") REFERENCES "app_users" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
