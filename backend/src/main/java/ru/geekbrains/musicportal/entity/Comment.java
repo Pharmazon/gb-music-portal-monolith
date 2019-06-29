@@ -4,14 +4,10 @@ package ru.geekbrains.musicportal.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.blog.Article;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
-import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Optional;
 
 @Data
 @Entity

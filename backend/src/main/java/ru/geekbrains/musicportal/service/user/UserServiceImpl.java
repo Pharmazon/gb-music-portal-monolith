@@ -123,7 +123,15 @@ public class UserServiceImpl implements UserService {
         return res;
     }
 
+    @Override
+    public boolean isAccountExist(String username) {
+        User fromDb = findByUserName(username);
+        return fromDb != null;
+    }
+
     public void registerUser(String username, String password, String email, Collection<UserRoleEnum> rolesEnum) {
+        if (isAccountExist(username)) return;
+
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);

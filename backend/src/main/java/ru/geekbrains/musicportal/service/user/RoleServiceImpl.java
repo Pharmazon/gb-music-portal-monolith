@@ -32,11 +32,19 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void fillTableByAll() {
         for (UserRoleEnum role : UserRoleEnum.values()) {
+            if (isExist(role.getName())) continue;
+
             Role newRole = new Role();
             newRole.setName(role.getName());
             newRole.setCreationDate(LocalDateTime.now());
             newRole.setLastUpdate(LocalDateTime.now());
             roleRepository.save(newRole);
         }
+    }
+
+    @Override
+    public boolean isExist(String name) {
+        Role role = roleRepository.findOneByName(name);
+        return role != null;
     }
 }

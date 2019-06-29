@@ -5,10 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.entity.common.SpecFeature;
-import ru.geekbrains.musicportal.entity.track.TrackSpec;
 import ru.geekbrains.musicportal.entity.track.Track;
+import ru.geekbrains.musicportal.entity.track.TrackSpec;
+import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.repository.CategoryRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
 

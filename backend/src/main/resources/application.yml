@@ -1,19 +1,12 @@
 spring:
-
   #Datasource
   datasource:
-    url: jdbc:postgresql://localhost:5432/musicportal?useUnicode=true&characterEncoding=utf8
-    driverClassName: org.postgresql.Driver
-    username: musicportal
-    password: musicportal
-
-    #Tomcat
+    #Embedded Tomcat
     tomcat:
       max-wait: 20000
       max-active: 50
       max-idle: 20
       min-idle: 15
-
   #Hibernate
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -28,7 +21,6 @@ spring:
         jdbc:
           fetch_size: 50
           batch_size: 10
-
 #Logging
 logging:
   level:
