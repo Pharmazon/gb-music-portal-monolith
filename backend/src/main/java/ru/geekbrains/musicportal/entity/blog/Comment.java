@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.entity;
+package ru.geekbrains.musicportal.entity.blog;
 
 
 import lombok.Data;

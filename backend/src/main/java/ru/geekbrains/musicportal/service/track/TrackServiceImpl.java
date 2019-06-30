@@ -5,12 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.entity.common.SpecFeature;
 import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.entity.track.TrackSpec;
 import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
+import ru.geekbrains.musicportal.pojo.SpecFeature;
 import ru.geekbrains.musicportal.repository.CategoryRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
+import ru.geekbrains.musicportal.util.TrackUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +19,7 @@ import java.util.Optional;
 public class TrackServiceImpl implements TrackService {
 
     private TrackRepository trackRepository;
+
     private CategoryRepository categoryRepository;
 
     @Autowired
@@ -39,13 +40,13 @@ public class TrackServiceImpl implements TrackService {
 
     public Page<Track> getTrackWithPagingAndFiltering(int pageNumber, int pageSize, List<SpecFeature> specFeatures) {
         Specification<Track> trackSpecification = Specification.where(null);
-        for (SpecFeature specFeature: specFeatures) {
-            if (specFeature.getJoinType() == FilterJoinTypeEnum.AND){
-                trackSpecification = trackSpecification.and(TrackSpec.getSpecification(specFeature));
-            }else if (specFeature.getJoinType() == FilterJoinTypeEnum.OR){
-                trackSpecification = trackSpecification.or(TrackSpec.getSpecification(specFeature));
-            }else{
-                trackSpecification = trackSpecification.and(TrackSpec.getSpecification(specFeature));
+        for (SpecFeature specFeature : specFeatures) {
+            if (specFeature.getJoinType() == FilterJoinTypeEnum.AND) {
+                trackSpecification = trackSpecification.and(TrackUtil.getSpecification(specFeature));
+            } else if (specFeature.getJoinType() == FilterJoinTypeEnum.OR) {
+                trackSpecification = trackSpecification.or(TrackUtil.getSpecification(specFeature));
+            } else {
+                trackSpecification = trackSpecification.and(TrackUtil.getSpecification(specFeature));
             }
         }
         return trackRepository.findAll(trackSpecification, PageRequest.of(pageNumber, pageSize));

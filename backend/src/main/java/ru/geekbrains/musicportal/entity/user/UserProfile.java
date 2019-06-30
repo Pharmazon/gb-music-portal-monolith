@@ -28,7 +28,6 @@ public class UserProfile extends AbstractEntity {
     private String email;
 
     @Column(name = "birth_date")
-//    @CreationTimestamp
     private LocalDateTime birthDate;
 
     @Column(name = "mobile_phone")

@@ -33,5 +33,5 @@ public interface UserService extends UserDetailsService {
             String newPsw,
             String passwordAnswer);
 
-    boolean isAccountExist(String username);
+    boolean isExistsByName(String username);
 }

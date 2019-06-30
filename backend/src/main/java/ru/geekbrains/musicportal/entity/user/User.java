@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.geekbrains.musicportal.entity.Comment;
 import ru.geekbrains.musicportal.entity.blog.Article;
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
-import ru.geekbrains.musicportal.entity.track.MusicGroup;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -22,9 +22,6 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Table(name = "app_users")
 @EqualsAndHashCode(callSuper = true)
-@SecondaryTables({
-        @SecondaryTable(name = "app_user_membership")
-})
 public class User extends AbstractEntity implements UserDetails {
 
     @Column(name = "username", nullable = false, unique = true)
@@ -33,7 +30,7 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "password_salt")
@@ -48,15 +45,42 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "password_answer")
     private String passwordAnswer;
 
-    @AttributeOverrides({
-            @AttributeOverride(
-                    name = "street",
-                    column = @Column(table = "app_user_membership")),
-            @AttributeOverride(
-                    name = "building",
-                    column = @Column(table = "app_user_membership"))
-    })
-    private UserMembership userMembership;
+    @Column(name = "is_approved")
+    private boolean isApproved;
+
+    @Column(name = "is_locked_out")
+    private boolean isLockedOut;
+
+    @Column(name = "last_login_date")
+    private LocalDateTime lastLoginDate;
+
+    @Column(name = "last_lockout_date")
+    private LocalDateTime lastLockoutDate;
+
+    @Column(name = "last_password_change_date")
+    private LocalDateTime lastPasswordChangeDate;
+
+    @Column(name = "failed_password_attempt_count")
+    private int failedPasswordAttemptCount;
+
+    @Column(name = "failed_password_attempt_window_start")
+    private LocalDateTime failedPasswordAttemptWindowStart;
+
+    @Column(name = "failed_password_answer_attempt_count")
+    private int failedPasswordAnswerAttemptCount;
+
+    @Column(name = "failed_password_answer_attempt_window_start")
+    private LocalDateTime failedPasswordAnswerAttemptWindowStart;
+
+    @Column(name = "comment")
+    private String comment;
+
+    @JsonBackReference
+    @OneToOne(
+            mappedBy = "user",
+            cascade = CascadeType.DETACH,
+            fetch = FetchType.EAGER)
+    private UserProfile userProfile;
 
     @JsonBackReference
     @ManyToMany(
@@ -68,46 +92,14 @@ public class User extends AbstractEntity implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
-
-    @Override
-    public String getUsername() {
-        return username.toLowerCase();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return !userMembership.isLockedOut();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return userMembership.isApproved();
-    }
-
-    @JsonBackReference
-    @OneToOne(
-            mappedBy = "user",
+    @ManyToMany(
             cascade = CascadeType.DETACH,
-            fetch = FetchType.EAGER)
-    private UserProfile userProfile;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "music_group_id")
-    private MusicGroup musicGroup;
+            fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "join_user_music_groups",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_group_id"))
+    private Collection<MusicGroup> musicGroups;
 
     @OneToMany(
             fetch = FetchType.LAZY,
@@ -123,5 +115,40 @@ public class User extends AbstractEntity implements UserDetails {
             fetch = FetchType.LAZY,
             mappedBy = "id")
     private Collection<Comment> comments;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    @Override
+    public String getUsername() {
+        return username.toLowerCase();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !isLockedOut();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isApproved();
+    }
+
+    public String getEmail() {
+        return email.toLowerCase();
+    }
+
 }
 

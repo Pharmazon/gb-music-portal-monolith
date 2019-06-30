@@ -7,6 +7,7 @@ import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.group.Category;
 import ru.geekbrains.musicportal.entity.music.MusicFeature;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
+import ru.geekbrains.musicportal.entity.user.MusicGroup;
 
 import javax.persistence.*;
 import java.util.Collection;

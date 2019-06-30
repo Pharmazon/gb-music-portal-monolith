@@ -1,9 +1,8 @@
-package ru.geekbrains.musicportal.entity;
+package ru.geekbrains.musicportal.entity.blog;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.common.AbstractEntity;
+import org.hibernate.annotations.CreationTimestamp;
 import ru.geekbrains.musicportal.entity.user.User;
 
 import javax.persistence.*;
@@ -14,10 +13,15 @@ import java.util.Collection;
 @Entity
 @NoArgsConstructor
 @Table(name = "app_likes")
-@EqualsAndHashCode(callSuper = true)
-public class Like extends AbstractEntity {
+public class Like {
 
-    @Column(name = "create_date")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, updatable = false)
+    private Long id;
+
+    @CreationTimestamp
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private LocalDateTime creationDate;
 
     @ManyToMany(fetch = FetchType.LAZY)

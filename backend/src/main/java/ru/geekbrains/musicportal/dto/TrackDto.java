@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.group.Category;
-import ru.geekbrains.musicportal.entity.track.MusicGroup;
 import ru.geekbrains.musicportal.entity.track.Track;
+import ru.geekbrains.musicportal.entity.user.MusicGroup;
 
 import java.util.Collection;
 
