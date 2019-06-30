@@ -1,7 +1,7 @@
-package ru.geekbrains.musicportal.service;
+package ru.geekbrains.musicportal.service.like;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.geekbrains.musicportal.entity.Like;
+import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.repository.LikeRepository;
 
 import java.util.Optional;

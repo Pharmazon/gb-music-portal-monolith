@@ -13,8 +13,8 @@ import ru.geekbrains.musicportal.service.user.UserService;
 
 import java.time.LocalDateTime;
 
-@Setter
 @Slf4j
+@Setter
 @NoArgsConstructor
 public final class MusicportalAuthenticationProvider implements AuthenticationProvider {
 
@@ -50,17 +50,17 @@ public final class MusicportalAuthenticationProvider implements AuthenticationPr
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                         user, null, user.getAuthorities());
 
-                user.getUserMembership().setLastLoginDate(LocalDateTime.now());
-                user.getUserMembership().setFailedPasswordAnswerAttemptCount(0);
-                user.getUserMembership().setFailedPasswordAnswerAttemptWindowStart(null);
+                user.setLastLoginDate(LocalDateTime.now());
+                user.setFailedPasswordAnswerAttemptCount(0);
+                user.setFailedPasswordAnswerAttemptWindowStart(null);
                 userService.save(user);
 
                 log.info("authenticate " + userName);
                 return token;
             } else {
-                user.getUserMembership().setFailedPasswordAnswerAttemptCount(
-                        user.getUserMembership().getFailedPasswordAnswerAttemptCount() + 1);
-                user.getUserMembership().setFailedPasswordAnswerAttemptWindowStart(LocalDateTime.now());
+                user.setFailedPasswordAnswerAttemptCount(
+                        user.getFailedPasswordAnswerAttemptCount() + 1);
+                user.setFailedPasswordAnswerAttemptWindowStart(LocalDateTime.now());
                 userService.save(user);
 
                 log.error("Password does not match. UserName=" + userName);

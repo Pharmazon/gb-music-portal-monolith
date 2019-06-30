@@ -9,7 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:connection.properties")
+@PropertySource("classpath:postgres.properties")
 public class DbConfig {
 
     @Bean

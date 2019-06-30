@@ -12,13 +12,13 @@ import ru.geekbrains.musicportal.dto.UserDto;
 import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;
-import ru.geekbrains.musicportal.exception.UserAlreadyExistException;
+import ru.geekbrains.musicportal.exception.UserAlreadyExistsException;
+import ru.geekbrains.musicportal.message.UserMessage;
 import ru.geekbrains.musicportal.repository.RoleRepository;
 import ru.geekbrains.musicportal.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,17 +42,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public User findByUserName(String username) {
         return userRepository.findOneByUsername(username);
     }
 
     @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userRepository.findOneByUsername(userName.toLowerCase());
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findOneByUsername(username.toLowerCase());
         if (user == null) {
-            throw new UsernameNotFoundException("Invalid username");
+            throw new UsernameNotFoundException(UserMessage.INVALID_USERNAME.getText());
         }
 //        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 //                mapRolesToAuthorities(user.getRoles()));
@@ -63,88 +61,55 @@ public class UserServiceImpl implements UserService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    /**
-     * Закаментил этот метод ниже написал свой вариант попроще
-     * @param user
-     * @return
-     */
-//    //переписать метод целиком
-//    @Override
-//    @Transactional
-//    public User save(UserDto dto) {
-//        User entity = null;
-//        if(dto == null) return entity;
-//        if(dto.getId() == null) {
-//            //Создаем нового пользователя
-//            entity = new User();
-//            entity.setUsername(dto.getUsername());
-//            entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-//            entity.getUserMembership().setCreateDate(LocalDateTime.now());
-//            entity.getUserMembership().setLastPasswordChangeDate(LocalDateTime.now());
-//            entity.getUserMembership().setLastLoginDate(LocalDateTime.now());
-////            if(!dto.getRoles().isEmpty()){
-////                dto.getRoles().forEach(role -> addUserInRole(dto.getUsername(), role.getName()));
-////            }
-//        } else {
-//            entity = userRepository.findOneByUsername(dto.getUsername().toLowerCase());
-//            if (entity == null) {
-//                return entity;
-//            }
-//        }
-//        entity.setPasswordQuestion(dto.getPasswordQuestion());
-//        entity.setPasswordAnswer(dto.getPasswordAnswer());
-//        entity.getUserMembership().setApproved(dto.isApproved());
-//        entity.getUserMembership().setComment(dto.getComment());
-//        return userRepository.save(entity);
-//    }
-
     @Override
     public User save(User user) {
         return userRepository.save(user);
     }
 
-    public boolean changePassword(String userName, String oldPsw, String newPsw) {
-        boolean res = true;
-        User user = userRepository.findOneByUsername(userName);
+    public boolean changePassword(String username, String oldPsw, String newPsw) {
+        boolean result = true;
+        User user = userRepository.findOneByUsername(username);
         if(user == null || !passwordEncoder.matches(oldPsw, user.getPassword())) return false;
         user.setPassword(passwordEncoder.encode(newPsw));
-        user.getUserMembership().setLastPasswordChangeDate(LocalDateTime.now());
-        userRepository.save(user);
-        return res;
+        user.setLastPasswordChangeDate(LocalDateTime.now());
+        save(user);
+        return result;
     }
 
-    public boolean changePasswordByPasswordAnswer(String userName, String newPsw, String passwordAnswer) {
+    public boolean changePasswordByPasswordAnswer(String username, String newPsw, String passwordAnswer) {
         boolean res = true;
-        User user = userRepository.findOneByUsername(userName);
+        User user = userRepository.findOneByUsername(username);
         if(user == null || !passwordEncoder.matches(user.getPasswordAnswer(), passwordAnswer)) return false;
         user.setPassword(passwordEncoder.encode(newPsw));
-        user.getUserMembership().setLastPasswordChangeDate(LocalDateTime.now());
-        userRepository.save(user);
+        user.setLastPasswordChangeDate(LocalDateTime.now());
+        save(user);
         return res;
     }
 
     @Override
-    public boolean isAccountExist(String username) {
+    public boolean isExistsByName(String username) {
         User fromDb = findByUserName(username);
         return fromDb != null;
     }
 
-    public void registerUser(String username, String password, String email, Collection<UserRoleEnum> rolesEnum) {
-        if (isAccountExist(username)) return;
+    @Override
+    @Transactional
+    public void registerUser(
+            String username,
+            String password,
+            String email,
+            Collection<UserRoleEnum> rolesEnum) throws UserAlreadyExistsException {
+        if (isExistsByName(username)) {
+            throw new UserAlreadyExistsException(username);
+        }
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
-        user.setCreationDate(LocalDateTime.now());
-        user.setLastUpdate(LocalDateTime.now());
-        List<Role> roles = new ArrayList<>();
-        for (UserRoleEnum roleEnum : rolesEnum) {
-            Role role = roleRepository.findOneByName(roleEnum.getName());
-            roles.add(role);
-        }
+        Collection<Role> roles = getRolesFromEnum(rolesEnum);
         user.setRoles(roles);
-        userRepository.save(user);
+        save(user);
     }
 
     @Override
@@ -158,31 +123,38 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public User save(UserDto userDto) {
-        if (userEmailExists(userDto.getUsername())) {
-            throw new UserAlreadyExistException("Пользователь с таким email email уже существует: " + userDto.getEmail());
+    public User save(UserDto userDto) throws UserAlreadyExistsException {
+        String username = userDto.getUsername();
+        if (isExistsByName(userDto.getUsername())) {
+            throw new UserAlreadyExistsException(username);
         }
+
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setEmail(userDto.getEmail().toLowerCase());
-        user.getUserMembership().setCreateDate(LocalDateTime.now());
-        user.getUserMembership().setLastPasswordChangeDate(LocalDateTime.now());
-        user.getUserMembership().setLastLoginDate(LocalDateTime.now());
-        user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_USER")));
+        user.setEmail(userDto.getEmail());
+        user.setLastPasswordChangeDate(LocalDateTime.now());
+        user.setLastLoginDate(LocalDateTime.now());
+        Collection<Role> roles = getRolesFromEnum(UserRoleEnum.getUser());
+        user.setRoles(roles);
         user.setPasswordQuestion(userDto.getPasswordQuestion());
         user.setPasswordAnswer(userDto.getPasswordAnswer());
-        user.getUserMembership().setApproved(userDto.isApproved());
-        user.getUserMembership().setComment(userDto.getComment());
+        user.setApproved(userDto.isApproved());
+        save(user);
         return user;
     }
 
-    private boolean userEmailExists(String email) {
-        User user = userRepository.findOneByEmail(email);
-        if(user != null) {
-            return true;
+    /**
+     * Конвертирует enum ролей в список ролей из БД
+     * @param roleEnums - коллекция enum ролей
+     * @return - коллекция ролей из базы
+     */
+    private Collection<Role> getRolesFromEnum(Collection<UserRoleEnum> roleEnums) {
+        List<Role> roles = new ArrayList<>();
+        for (UserRoleEnum roleEnum : roleEnums) {
+            Role fromDb = roleRepository.findOneByName(roleEnum.getName());
+            roles.add(fromDb);
         }
-        return false;
+        return roles;
     }
-
 }

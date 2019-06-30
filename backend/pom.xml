@@ -2,27 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.BUILD-SNAPSHOT</version>
-        <relativePath/>
+        <groupId>ru.geekbrains.musicportal</groupId>
+        <artifactId>musicportal</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
+
     <groupId>ru.geekbrains</groupId>
     <artifactId>musicportal</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>musicportal</name>
-
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <lombok.version>RELEASE</lombok.version>
-        <jetbrains.version>17.0.0</jetbrains.version>
-        <postgresql.version>42.2.5</postgresql.version>
-        <modelmapper.version>2.3.4</modelmapper.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -92,52 +82,10 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
                 <configuration>
-                    <url>jdbc:postgresql://localhost:5432/musicportal</url>
-                    <user>musicportal</user>
-                    <password>musicportal</password>
+                    <configFile>src/main/resources/flyway.conf</configFile>
                 </configuration>
-                <dependencies>
-                    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-                    <dependency>
-                        <groupId>org.postgresql</groupId>
-                        <artifactId>postgresql</artifactId>
-                        <version>${postgresql.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>

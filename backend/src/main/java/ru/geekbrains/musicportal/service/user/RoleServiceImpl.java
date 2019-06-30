@@ -6,7 +6,6 @@ import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;
 import ru.geekbrains.musicportal.repository.RoleRepository;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -30,20 +29,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void fillTableByAll() {
-        for (UserRoleEnum role : UserRoleEnum.values()) {
-            if (isExist(role.getName())) continue;
-
-            Role newRole = new Role();
-            newRole.setName(role.getName());
-            newRole.setCreationDate(LocalDateTime.now());
-            newRole.setLastUpdate(LocalDateTime.now());
-            roleRepository.save(newRole);
-        }
-    }
-
-    @Override
-    public boolean isExist(String name) {
+    public boolean isExistsByName(String name) {
         Role role = roleRepository.findOneByName(name);
         return role != null;
     }

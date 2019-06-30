@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.track.MusicGroup;
-import ru.geekbrains.musicportal.entity.user.User;
+import ru.geekbrains.musicportal.entity.user.MusicGroup;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,10 +27,5 @@ public class GroupDto extends AbstractDto {
             participants = new ArrayList<>();
         }
 
-        ArrayList<User> participantsTmp = (ArrayList<User>) group.getParticipants();
-        for (User user : participantsTmp) {
-            UserDto userDTO = new UserDto(user);
-            participants.add(userDTO);
-        }
     }
 }

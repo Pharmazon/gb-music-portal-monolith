@@ -5,8 +5,6 @@ import ru.geekbrains.musicportal.service.common.CommonService;
 
 public interface RoleService extends CommonService<Role> {
 
-    void fillTableByAll();
-
-    boolean isExist(String name);
+    boolean isExistsByName(String name);
 
 }

@@ -65,4 +65,12 @@ public class UserDto extends AbstractDto {
         comment = "";
         approved = false;
     }
+
+    public String getEmail() {
+        return email.toLowerCase();
+    }
+
+    public String getUsername() {
+        return username.toLowerCase();
+    }
 }

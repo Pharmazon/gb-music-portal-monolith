@@ -1,7 +1,6 @@
 package ru.geekbrains.musicportal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +16,6 @@ import javax.validation.Valid;
  * дто проходит валидацию и передается в метод save юзерсервиса.
  * На фронт возвращается сообщение success.
  */
-@Controller
 @RestController
 public class RegistrationRestController {
     private UserServiceImpl userService;

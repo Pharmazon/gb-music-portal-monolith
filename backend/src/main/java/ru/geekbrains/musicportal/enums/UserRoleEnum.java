@@ -17,14 +17,14 @@ public enum UserRoleEnum {
 
     private static List<UserRoleEnum> listUserArtist = new ArrayList<>();
     private static List<UserRoleEnum> listUser = new ArrayList<>();
-    private static List<UserRoleEnum> listUserAdministrator = new ArrayList<>();
+    private static List<UserRoleEnum> listUserAdmin = new ArrayList<>();
 
     static {
         listUser.add(USER);
         listUserArtist.add(USER);
         listUserArtist.add(ARTIST);
-        listUserAdministrator.add(USER);
-        listUserAdministrator.add(ADMINISTRATOR);
+        listUserAdmin.add(USER);
+        listUserAdmin.add(ADMINISTRATOR);
     }
 
     private String name;
@@ -34,7 +34,7 @@ public enum UserRoleEnum {
     }
 
     public static Collection<UserRoleEnum> getUserAdministrator() {
-        return listUserAdministrator;
+        return listUserAdmin;
     }
 
     public static Collection<UserRoleEnum> getUser() {
