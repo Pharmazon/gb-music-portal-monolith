@@ -3,7 +3,6 @@ package ru.geekbrains.musicportal.service.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.entity.user.Role;
-import ru.geekbrains.musicportal.enums.UserRoleEnum;
 import ru.geekbrains.musicportal.repository.RoleRepository;
 
 import java.util.Optional;

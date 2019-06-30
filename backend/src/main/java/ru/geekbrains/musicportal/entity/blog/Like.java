@@ -7,7 +7,6 @@ import ru.geekbrains.musicportal.entity.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 @Data
 @Entity
@@ -24,9 +23,9 @@ public class Like {
     @Column(name = "creation_date", nullable = false, updatable = false)
     private LocalDateTime creationDate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private Collection<User> user;
+    private User user;
 
     @Column(name = "entity")
     private String typeLikedEntity;

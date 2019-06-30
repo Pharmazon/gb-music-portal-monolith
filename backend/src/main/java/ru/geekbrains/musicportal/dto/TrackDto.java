@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.group.Category;
 import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.entity.user.MusicGroup;
+import ru.geekbrains.musicportal.entity.user.Band;
 
 import java.util.Collection;
 
@@ -16,7 +16,7 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 public class TrackDto extends AbstractDto {
 
-    private MusicGroup musicGroup;
+    private Band band;
 
     private Collection<Category> categories;
 
@@ -26,7 +26,7 @@ public class TrackDto extends AbstractDto {
         super.setId(track.getId());
         super.setName(track.getName());
         super.setDescription(track.getDescription());
-        musicGroup = track.getMusicGroup();
+        band = track.getBand();
         categories = track.getCategories();
         fileLink = track.getFileLink();
     }

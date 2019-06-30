@@ -14,7 +14,7 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_playlist_feature_type")
+@Table(name = "app_playlist_feature_types")
 @EqualsAndHashCode(callSuper = true)
 public class PlaylistFeatureType extends AbstractEntity {
 
