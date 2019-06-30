@@ -12,21 +12,21 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_music_group")
+@Table(name = "app_bands")
 @EqualsAndHashCode(callSuper = true)
-public class MusicGroup extends AbstractEntity {
+public class Band extends AbstractEntity {
 
     @ManyToMany(
             cascade = CascadeType.DETACH,
             fetch = FetchType.EAGER)
     @JoinTable(
-            name = "join_user_music_groups",
-            joinColumns = @JoinColumn(name = "music_group_id"),
+            name = "join_user_bands",
+            joinColumns = @JoinColumn(name = "band_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Collection<User> users;
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "musicGroup")
+            mappedBy = "band")
     private Collection<Track> tracks;
 }

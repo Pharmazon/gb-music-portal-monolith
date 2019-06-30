@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
-import ru.geekbrains.musicportal.entity.track.Track;
+import ru.geekbrains.musicportal.entity.track.PlaylistTrack;
 import ru.geekbrains.musicportal.entity.user.User;
 
 import javax.persistence.*;
@@ -13,7 +13,7 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_playlist")
+@Table(name = "app_playlists")
 @EqualsAndHashCode(callSuper = true)
 public class Playlist extends AbstractEntity {
 
@@ -21,16 +21,14 @@ public class Playlist extends AbstractEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "join_playlist_track",
-            joinColumns = @JoinColumn(name = "playlist_id"),
-            inverseJoinColumns = @JoinColumn(name = "track_id"))
-    private Collection<Track> tracks;
+    @OneToMany(
+            mappedBy = "playlist",
+            fetch = FetchType.LAZY)
+    private Collection<PlaylistFeature> playlistFeatures;
 
     @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "playlist")
-    private Collection<PlaylistFeature> playlistFeatures;
+            mappedBy = "playlist",
+            fetch = FetchType.LAZY)
+    private Collection<PlaylistTrack> playlistTracks;
 
 }

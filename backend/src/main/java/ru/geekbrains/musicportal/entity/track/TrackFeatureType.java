@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.entity.music;
+package ru.geekbrains.musicportal.entity.track;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,13 +14,13 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_music_feature_type")
+@Table(name = "app_track_feature_types")
 @EqualsAndHashCode(callSuper = true)
-public class MusicFeatureType extends AbstractEntity {
+public class TrackFeatureType extends AbstractEntity {
 
     @OneToMany(
-            mappedBy = "musicFeatureType",
+            mappedBy = "trackFeatureType",
             fetch = FetchType.LAZY)
-    private Collection<MusicFeature> musicFeatures;
+    private Collection<TrackFeature> trackFeatures;
 
 }

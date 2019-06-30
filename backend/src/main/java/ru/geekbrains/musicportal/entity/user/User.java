@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.geekbrains.musicportal.entity.blog.Article;
 import ru.geekbrains.musicportal.entity.blog.Comment;
+import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 
@@ -96,10 +97,10 @@ public class User extends AbstractEntity implements UserDetails {
             cascade = CascadeType.DETACH,
             fetch = FetchType.LAZY)
     @JoinTable(
-            name = "join_user_music_groups",
+            name = "join_user_bands",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "music_group_id"))
-    private Collection<MusicGroup> musicGroups;
+            inverseJoinColumns = @JoinColumn(name = "band_id"))
+    private Collection<Band> bands;
 
     @OneToMany(
             fetch = FetchType.LAZY,
@@ -115,6 +116,11 @@ public class User extends AbstractEntity implements UserDetails {
             fetch = FetchType.LAZY,
             mappedBy = "id")
     private Collection<Comment> comments;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "user")
+    private Collection<Like> likes;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

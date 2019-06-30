@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_playlist_feature")
+@Table(name = "app_playlist_features")
 @EqualsAndHashCode(callSuper = true)
 public class PlaylistFeature extends AbstractEntity {
 

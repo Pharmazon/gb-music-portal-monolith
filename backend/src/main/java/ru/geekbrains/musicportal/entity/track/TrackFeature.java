@@ -1,26 +1,25 @@
-package ru.geekbrains.musicportal.entity.music;
+package ru.geekbrains.musicportal.entity.track;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
-import ru.geekbrains.musicportal.entity.track.Track;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_music_feature")
+@Table(name = "app_track_features")
 @EqualsAndHashCode(callSuper = true)
-public class MusicFeature extends AbstractEntity {
+public class TrackFeature extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "track_id")
     private Track track;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "music_feature_type_id")
-    private MusicFeatureType musicFeatureType;
+    @JoinColumn(name = "track_feature_type_id")
+    private TrackFeatureType trackFeatureType;
 
 }

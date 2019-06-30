@@ -21,7 +21,7 @@ public class Comment extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User author;
 
     @Column (name = "entity")
     private String typeCommentedEntity;

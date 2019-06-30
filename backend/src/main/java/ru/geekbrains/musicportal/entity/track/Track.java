@@ -5,9 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.group.Category;
-import ru.geekbrains.musicportal.entity.music.MusicFeature;
-import ru.geekbrains.musicportal.entity.playlist.Playlist;
-import ru.geekbrains.musicportal.entity.user.MusicGroup;
+import ru.geekbrains.musicportal.entity.user.Band;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -15,7 +13,7 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_track")
+@Table(name = "app_tracks")
 @EqualsAndHashCode(callSuper = true)
 public class Track extends AbstractEntity {
 
@@ -23,8 +21,8 @@ public class Track extends AbstractEntity {
     private String fileLink;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "music_group_id")
-    private MusicGroup musicGroup;
+    @JoinColumn(name = "band_id")
+    private Band band;
 
     @ManyToMany
     @JoinTable(
@@ -36,13 +34,11 @@ public class Track extends AbstractEntity {
     @OneToMany(
             mappedBy = "track",
             fetch = FetchType.LAZY)
-    private Collection<MusicFeature> musicFeatures;
+    private Collection<TrackFeature> trackFeatures;
 
-    @ManyToMany
-    @JoinTable(
-            name = "join_playlist_track",
-            joinColumns = @JoinColumn(name = "track_id"),
-            inverseJoinColumns = @JoinColumn(name = "playlist_id"))
-    private Collection<Playlist> tracks;
+    @OneToMany(
+            mappedBy = "track",
+            fetch = FetchType.LAZY)
+    private Collection<PlaylistTrack> playlistTracks;
 
 }
