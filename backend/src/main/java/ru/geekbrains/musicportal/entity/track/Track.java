@@ -13,7 +13,7 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "app_tracks")
+@Table(name = "app_track")
 @EqualsAndHashCode(callSuper = true)
 public class Track extends AbstractEntity {
 
@@ -21,7 +21,7 @@ public class Track extends AbstractEntity {
     private String fileLink;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "band_id")
+    @JoinColumn(name = "music_group_id")
     private Band band;
 
     @ManyToMany
