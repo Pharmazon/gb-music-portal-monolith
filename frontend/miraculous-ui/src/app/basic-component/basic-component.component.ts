@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-basic-component',
@@ -26,7 +27,10 @@ export class BasicComponentComponent implements OnInit{
   @ViewChild("registrationComponent", {read: ElementRef})
   registrationComponent: ElementRef;
 
-  constructor(private router: Router) { }
+  @ViewChild("internalizationPanelComponent", {read: ElementRef})
+  internalizationComponent: ElementRef;
+
+  constructor(private router: Router, private translator: TranslateService) { }
 
   ngOnInit() {
 
@@ -39,7 +43,7 @@ export class BasicComponentComponent implements OnInit{
   hideOtherComponents(){
 
     this.darkeningOverflow.nativeElement.style = "display: block";
-    this.navigationPanel.nativeElement.style = "opacity: 0.5";
+    this.navigationPanel.nativeElement.style = "opacity: 0.5; transition: 2s";
     this.basicComponentContainer.nativeElement.style = "pointer-events: none";
   }
 
@@ -52,30 +56,30 @@ export class BasicComponentComponent implements OnInit{
 
   showLoginComponent(){
 
-    this.hideOtherComponents();
-    this.loginComponent.nativeElement.style = "opacity: 1; pointer-events: all; transition: 2s; position: fixed; width: 930px; height: 510px;";
 
+    this.loginComponent.nativeElement.style = "z-index: 1000000 ;opacity: 1; pointer-events: all; transition: 1s; position: fixed; width: 930px; height: 510px; top:25%";
+    this.hideOtherComponents();
 
   }
   closeLoginComponent() {
 
-    this.showOtherComponents();
-    this.loginComponent.nativeElement.style = "opacity:0; position: absolute; width: 0; height: 0; pointer-events: none";
 
+    this.loginComponent.nativeElement.style = "z-index: -1000000; opacity:0; position: absolute; width: 0; height: 0; pointer-events: none; top: 0%";
+    this.showOtherComponents();
   }
 
   showRegistrationComponent(){
 
-     this.registrationComponent.nativeElement.style = "opacity: 1; transition: 2s; pointer-events: all; position: fixed; width: 930px; height: 510px;";
+     this.registrationComponent.nativeElement.style = "z-index: 1000000; opacity: 1; transition: 1s; pointer-events: all; position: fixed; width: 930px; height: 510px; top: 25%";
      this.hideOtherComponents();
 
   }
 
   closeRegistrationComponent(){
 
-    this.showOtherComponents();
-    this.registrationComponent.nativeElement.style = "opacity:0; position: absolute; width: 0; height: 0; pointer-events: none";
 
+    this.registrationComponent.nativeElement.style = "z-index: -1000000;opacity:0; position: absolute; width: 0; height: 0; pointer-events: none; top: 0%";
+    this.showOtherComponents();
   }
 
   switchToLoginForm(){
@@ -88,5 +92,20 @@ export class BasicComponentComponent implements OnInit{
   switchToRegistrationForm() {
     this.showRegistrationComponent();
     this.closeLoginComponent();
+  }
+
+  showInternalizationPanel() {
+    this.hideOtherComponents();
+    this.internalizationComponent.nativeElement.style = "display: block;transition: 2s; opacity: 1; width: 500px; height: 500px; position: fixed; pointer-events: all; z-index: 100000";
+  }
+
+  closeInternalizationPanel() {
+    this.showOtherComponents();
+    this.internalizationComponent.nativeElement.style= "display: none ;opacity:0; position: absolute; width: 0; height: 0; pointer-events: none;";
+  }
+
+
+  changeLanguage() {
+
   }
 }
