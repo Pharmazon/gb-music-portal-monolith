@@ -1,18 +1,28 @@
 package ru.geekbrains.musicportal.service.like;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.entity.blog.Like;
+import ru.geekbrains.musicportal.dto.TrackDto;
 import ru.geekbrains.musicportal.repository.LikeRepository;
+import ru.geekbrains.musicportal.repository.TrackRepository;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Service
 public class LikeServiceImpl implements LikeService {
 
-    LikeRepository likeRepository;
+    private final LikeRepository likeRepository;
+    private final TrackRepository trackRepository;
 
     @Autowired
-    public void setLikeRepository(LikeRepository likeRepository) {
+    public LikeServiceImpl(LikeRepository likeRepository, TrackRepository trackRepository) {
         this.likeRepository = likeRepository;
+        this.trackRepository = trackRepository;
     }
 
     @Override
