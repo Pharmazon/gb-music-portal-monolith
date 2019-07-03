@@ -17,4 +17,5 @@ public interface TrackService extends CommonService<Track, TrackDto> {
 //    Collection<TrackDto> findAllByPlaylistIdAndBandId(Long playlistId, Long bandId);
 
 //    TrackDto findOneByIdAndPlaylistTrackIdAndBandId(Long id, Long playlistId, Long bandId);
+    List<TrackDto> getTopTracks(int topMax);
 }
