@@ -14,6 +14,8 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class PlaylistFeature extends AbstractEntity {
 
+    private String value;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "playlist_feature_type_id")
     private PlaylistFeatureType playlistFeatureType;
