@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadMusicComponent } from './upload-music.component';
+import { UploadAlbumComponent } from './upload-album.component';
 
-describe('UploadMusicComponent', () => {
-  let component: UploadMusicComponent;
-  let fixture: ComponentFixture<UploadMusicComponent>;
+describe('UploadAlbumComponent', () => {
+  let component: UploadAlbumComponent;
+  let fixture: ComponentFixture<UploadAlbumComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadMusicComponent ]
+      declarations: [ UploadAlbumComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadMusicComponent);
+    fixture = TestBed.createComponent(UploadAlbumComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

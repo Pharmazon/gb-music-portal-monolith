@@ -1,7 +1,7 @@
 .track-page-container{
 
   min-height: 820px;
-  background-image: url("~src/assets/images/track-page-background-picture.jpg");
+  background-image: url("../../../assets/images/track-page-background-picture.jpg");
   background-repeat: no-repeat;
   background-position-y: inherit;
   width: 100%;
@@ -153,7 +153,7 @@
 
   content: " ";
   position: absolute;
-  background-image: url(~src/assets/images/blue-divider.png);
+  background-image: url(../../../assets/images/blue-divider.png);
   background-repeat: no-repeat;
   width: 100px;
   height: 2px;

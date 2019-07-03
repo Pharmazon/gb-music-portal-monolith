@@ -1,4 +1,4 @@
-.registration-form-block {
+.login-form-block {
 
   display: flex;
   width: 930px;
@@ -9,25 +9,26 @@
   position: relative;
 }
 
-.registration-form-headphones-pic {
+.login-form-headphones-pic {
 
   width: 368px;
   height: 395px;
   margin-left: 51px;
   margin-top: 58px;
-  background-image: url(~src/assets/images/headphones.png);
+  background-image: url(../../../assets/images/headphones.png);
 }
 
-.registration-form-contents {
+.login-form-contents {
 
   margin-left: 51px;
+  margin-top: 58px;
   display: flex;
   width: 410px;
   align-items: center;
   flex-direction: column;
 }
 
-.registration-signature {
+.login-signature {
 
   font-family: "JosephinSansRegular";
   font-size: 24px;
@@ -36,11 +37,11 @@
   color: #ffffff;
 }
 
-.registration-signature:after {
+.login-signature:after {
 
   position: absolute;
   content: " ";
-  background-image: url(~src/assets/images/divider.png);
+  background-image: url(../../../assets/images/divider.png);
   background-repeat: no-repeat;
   width: 100px;
   height: 100px;
@@ -48,7 +49,7 @@
   margin-left: -120px;
 }
 
-.registration-form {
+.login-form {
 
   display: flex;
   flex-direction: column;
@@ -56,7 +57,7 @@
   align-items: center;
 }
 
-.registration-submit-button {
+.login-submit-button {
 
   width: 160px;
   height: 40px;
@@ -66,12 +67,12 @@
   color: #ffffff;
   font-family: "JosephinSansRegular";
   cursor: pointer;
+  margin-top: 30px;
   text-align: center;
   outline: none;
 }
 
-.registration-name-input, .registration-email-input, .registration-password-input ,
-.registration-confirm-password-input{
+.login-name-input, .login-email-input {
 
   color: #777777;
   font-family: "JosephinSansBold";
@@ -87,11 +88,11 @@
   margin-bottom: 20px;
 }
 
-.registration-form:after {
+.login-form:after {
 
   position: absolute;
   content: " ";
-  background-image: url(~src/assets/icons/envelop-pic.png);
+  background-image: url(../../../assets/icons/envelop-pic.png);
   background-repeat: no-repeat;
   width: 100px;
   height: 100px;
@@ -99,11 +100,11 @@
   margin-top: 15px;
 
 }
-.registration-form:before {
+.login-form:before {
 
   position: absolute;
   content: " ";
-  background-image: url(~src/assets/icons/lock-pic.png);
+  background-image: url(../../../assets/icons/envelop-pic.png);
   background-repeat: no-repeat;
   width: 100px;
   height: 100px;
@@ -112,21 +113,34 @@
 
 }
 
+.login-remember-me-checkbox-block {
 
-.login-link, .login-link button {
+  display: flex;
+  align-self: flex-start;
+}
+
+.login-remember-me-checkbox-label {
+
+  color: #ffffff;
+  font-family: "JosephinSans";
+  font-size: 15px;
+  font-weight: 400;
+
+}
+
+.forgot-password-link {
+
+  margin-top: 30px;
+
+}
+
+.forgot-password-link, .register-link, .register-link a {
 
   color: #ffffff;
   font-family: "JosephinSansSemiBold";
   font-size: 16px;
   font-weight: 400;
   text-decoration: none;
-  background: none;
-  border: none;
-}
-
-.login-link button {
-
-  cursor: pointer;
 }
 
 .close-button {
@@ -135,4 +149,16 @@
   right: -5px;
   top: -5px;
   cursor: pointer;
+}
+
+.register-link button {
+
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-family: "JosephinSansSemiBold";
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
 }

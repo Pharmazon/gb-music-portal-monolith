@@ -26,8 +26,22 @@
       <button class="search-panel-search-form-submit-button"><a routerLink="/search"><img src="assets/icons/loupe-icon.png"></a></button>
     </form>
     <h5 class="trending-songs-signature"><span>Trending songs: </span></h5>
-    <a class="languages-signature" href="#">Languages
-      <img src="assets/icons/language-icon.png" class="language-icon" ></a>
+    <figure class="languages-signature" (click)="showInternalizationPanel()" style="cursor: pointer">Languages
+      <img src="assets/icons/language-icon.png" class="language-icon" ></figure>
+    <figure class="user-profile-circle">
+      <ul class="profile-dropdown-list">
+        <li><a routerLink="user-profile" (click)="navigate('user-profile')">Profile</a></li>
+        <li><a href="edit-profile" (click)="navigate('edit-profile')">Settings</a></li>
+        <li><a href="logout" (click)="navigate('logout')">Logout</a></li>
+      </ul>
+    </figure>
+    <figure class="upload-music-signature">
+      Upload Music
+      <ul class="dropdown-list">
+        <li class="dropdown-list-item"><a type="button" (click)="navigate('upload-track')">Upload Track</a></li>
+        <li class="dropdown-list-item"><a type="button" (click)="navigate('upload-album')">Upload Album</a></li>
+      </ul>
+    </figure>
     <button class="register-button" (click)="showRegistrationComponent()">Register</button>
     <button class="login-button" (click)="showLoginComponent()">Login</button>
   </div>
@@ -101,6 +115,7 @@
         Miraculous </span>All rights reserved.</p>
     </div>
   </footer>
+  <internalization-panel class="internalization-component" (closedInternalizationPanel)="closeInternalizationPanel()" #internalizationPanelComponent (appliedLanguage)="changeLanguage()"></internalization-panel>
   <login-component class="login-component" (closedLoginComponent)="closeLoginComponent()" #loginComponent (switchedToRegistrationComponent)="switchToRegistrationForm()"></login-component>
   <registration-component class="registration-component" #registrationComponent (closedRegistrationComponent)="closeRegistrationComponent()" (switchedToLoginComponent)="switchToLoginForm()"></registration-component>
   <div class="darkening-overflow" #darkeningOverflow></div>

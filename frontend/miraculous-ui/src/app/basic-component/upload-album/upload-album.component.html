@@ -1,0 +1,55 @@
+<div class="track-information-form-block">
+  <p class="track-information-signature">Upload Your New Album</p>
+  <form class="track-information-form" enctype="multipart/form-data" method="post">
+    <div class="track-information-form-item">
+      <div>
+        <div class="album-cover" #albumCover></div>
+        <label for="album-cover-picture" class="album-cover-picture-label" >Choose Cover Picture</label>
+        <input type="file" name="album-cover-picture" id="album-cover-picture" #albumCoverPicture class="album-cover-picture" accept=".jpg, .svg, .png"
+               (change)="showCoverPicture()">
+      </div>
+      <label for="select-album-genres" class="select-album-genres-label">Choose Genres Of Album</label>
+      <select class="select-album-genres" id="select-album-genres"#selectAlbumGenres style="width: 300px" (change)="addTagToSelectedGenres()">
+        <option value="Rock">Rock</option>
+        <option value="Pop">Pop</option>
+        <option value="Rap">Rap</option>
+        <option value="Instrumental">Instrumental</option>
+        <option value="Trance">Trance</option>
+      </select>
+      <div class="selected-genres" #selectedGenres >
+        <ng-template #selectedGenresVcf></ng-template>
+      </div>
+      <div class="track-duration-and-size-info-block">
+        <p class="album-size-signature">Album size: {{albumSize}} Mbs</p>
+        <p class="album-duration-signature">Album duration: {{albumDuration}} Min</p>
+        <p class="number-of-tracks-signature">Number of tracks : {{numberOfTracks}} </p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="album-title-input" class="album-title-input-label">Add Album Title*</label>
+      <input type="text" name="album-title-input" class="album-title-input" id="album-title-input">
+      <label for="album-description-input" class="album-description-input-label">Add description to your album</label>
+      <textarea class="album-description-input" rows="15" id="album-description-input"></textarea>
+      <label class="release-date-label">Add Album Release Date</label>
+      <input type="date" name="date" class="release-date-input">
+      <select class="select-access-policy" #selectAccessPolicy (change)="togglePriceBlock()">
+        <option>Paid Access</option>
+        <option>Free Access</option>
+      </select>
+      <label for="album-price-input" class="album-price-input-label" #albumPriceInputLabel>Add price for your album in $</label>
+      <input type="number" name="album-price-input" step="0.01" #albumPriceInput class="album-price-input" id="album-price-input" value="0">
+    </div>
+    <div class="added-tracks-block" #addedTracksBlock>
+      <label for="multiple-input" class="multiple-input-label">Select tracks</label>
+      <input type="file" multiple (change)="getListOfTracks()" class="multiple-input" id="multiple-input" accept="audio/*" style="display: none">
+      <ol class="list-of-loaded-tracks" start="01"></ol>
+      <ng-template #addedTracksContainer></ng-template>
+    </div>
+    <div class="form-buttons">
+      <input type="submit" name="upload-button" class="track-information-form-button" value="Upload">
+      <input type="submit" name="cancel-button" class="track-information-form-button" value="Cancel">
+    </div>
+  </form>
+  <button class="add-new-track-to-album-button" (click)="createNewAlbumTrack()">Add new track</button>
+</div>
+<script src="frontend/miraculous-ui/src/assets/js/upload-albums-script.js"></script>
