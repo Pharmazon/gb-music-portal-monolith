@@ -1,12 +1,14 @@
 package ru.geekbrains.musicportal.entity.track;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 
 import javax.persistence.*;
 
 @Data
+@Getter
 @Entity
 @NoArgsConstructor
 @Table(name = "join_playlist_track")

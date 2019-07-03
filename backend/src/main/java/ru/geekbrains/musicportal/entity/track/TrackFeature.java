@@ -14,6 +14,9 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class TrackFeature extends AbstractEntity {
 
+    @Column(name = "value")
+    private String value;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "track_id")
     private Track track;

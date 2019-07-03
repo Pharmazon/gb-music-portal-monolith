@@ -2,10 +2,11 @@ package ru.geekbrains.musicportal.service.images;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.dto.ImageDto;
+import ru.geekbrains.musicportal.dto.image.ImageDto;
 import ru.geekbrains.musicportal.entity.image.Image;
 import ru.geekbrains.musicportal.repository.ImageRepository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,16 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Optional<Image> findById(Long id) {
         return Optional.of(imageRepository.findById(id,Image.class));
+    }
+
+    @Override
+    public Collection findAll() {
+        return null;
+    }
+
+    @Override
+    public Image convertToEntity(ImageDto dto) {
+        return null;
     }
 
     public Optional<ImageDto> findByIdDTO(Long id) {

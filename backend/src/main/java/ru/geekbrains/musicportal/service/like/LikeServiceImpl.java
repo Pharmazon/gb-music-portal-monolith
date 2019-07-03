@@ -2,7 +2,7 @@ package ru.geekbrains.musicportal.service.like;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.dto.LikeDto;
+import ru.geekbrains.musicportal.dto.blog.LikeDto;
 import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.repository.LikeRepository;
 
@@ -14,7 +14,7 @@ public class LikeServiceImpl implements LikeService {
     LikeRepository likeRepository;
 
     @Autowired
-    public void setLikeRepository(LikeRepository likeRepository) {
+    public LikeServiceImpl(LikeRepository likeRepository) {
         this.likeRepository = likeRepository;
     }
 

@@ -1,9 +1,11 @@
-package ru.geekbrains.musicportal.dto;
+package ru.geekbrains.musicportal.dto.blog;
 
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.dto.common.AbstractDto;
+import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.entity.blog.Like;
 
 @Data

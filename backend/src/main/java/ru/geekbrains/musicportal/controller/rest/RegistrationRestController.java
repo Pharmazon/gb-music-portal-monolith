@@ -1,11 +1,8 @@
-package ru.geekbrains.musicportal.controller;
+package ru.geekbrains.musicportal.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import ru.geekbrains.musicportal.dto.UserDto;
+import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.service.user.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +13,11 @@ import javax.validation.Valid;
  * дто проходит валидацию и передается в метод save юзерсервиса.
  * На фронт возвращается сообщение success.
  */
+@CrossOrigin
 @RestController
+@RequestMapping("/user")
 public class RegistrationRestController {
+
     private UserServiceImpl userService;
 
     @Autowired
@@ -25,13 +25,14 @@ public class RegistrationRestController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/user/registerForm")
+    @GetMapping("registerForm")
     public UserDto getUserDto() {
         return new UserDto();
     }
 
-    @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
-    public String registerUserAccount(@Valid UserDto userDto, HttpServletRequest request) {
+    @PostMapping("registration")
+    public String registerUserAccount(@Valid UserDto userDto,
+                                      HttpServletRequest request) {
         userService.save(userDto);
         return "Success";
     }

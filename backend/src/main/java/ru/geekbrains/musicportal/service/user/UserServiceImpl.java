@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.geekbrains.musicportal.dto.UserDto;
+import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;

@@ -1,12 +1,12 @@
 package ru.geekbrains.musicportal.service.comment;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.dto.CommentDto;
+import ru.geekbrains.musicportal.dto.blog.CommentDto;
 import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.repository.CommentRepository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -15,7 +15,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
 
     @Autowired
-    public void setCommentRepository(CommentRepository commentRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 
@@ -33,8 +33,13 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findById(id);
     }
 
-    public Iterable<Comment> findAll() {
-        return commentRepository.findAll();
+    public Collection<CommentDto> findAll() {
+        return null;
+    }
+
+    @Override
+    public Comment convertToEntity(CommentDto dto) {
+        return null;
     }
 
     public Comment save(CommentDto commentDto) {

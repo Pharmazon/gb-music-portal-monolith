@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.controller;
+package ru.geekbrains.musicportal.controller.user;
 
 
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.geekbrains.musicportal.dto.UserDto;
+import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.service.user.UserServiceImpl;
 
@@ -22,25 +22,25 @@ import javax.validation.Valid;
  * последующей валидацие ДТО.
  */
 @Controller
-@RequestMapping(value = "/register")
+@RequestMapping("/register")
 public class RegistrationController {
 
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping(value = "/login")
+    @GetMapping("login")
     public String showLoginPage() {
         return "index";
     }
 
-    @GetMapping(value = "/showRegistrationForm")
+    @GetMapping("showRegistrationForm")
     public String showRegisterForm(Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("userRegistrationDto", userDto);
         return "registration";
     }
 
-    @PostMapping("/processRegistrationForm")
+    @PostMapping("processRegistrationForm")
     public String processRegistrationForm(@Valid @ModelAttribute("userDto") UserDto userDto,
                                           BindingResult theBindingResult, Model theModel) {
         String userName = userDto.getUsername();

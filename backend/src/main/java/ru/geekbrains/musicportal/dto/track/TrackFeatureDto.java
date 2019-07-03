@@ -1,9 +1,10 @@
-package ru.geekbrains.musicportal.dto;
+package ru.geekbrains.musicportal.dto.track;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.dto.common.AbstractDto;
 import ru.geekbrains.musicportal.entity.track.TrackFeature;
 
 @Data
@@ -12,15 +13,14 @@ import ru.geekbrains.musicportal.entity.track.TrackFeature;
 @EqualsAndHashCode(callSuper = true)
 public class TrackFeatureDto extends AbstractDto {
 
-    private String musicFeatureType;
-
+    private String trackFeatureType;
     private String value;
 
-    public void MusicFeatureDto(TrackFeature feature){
+    public TrackFeatureDto(TrackFeature feature){
         super.setId(feature.getId());
         super.setName(feature.getName());
         super.setDescription(feature.getDescription());
-        musicFeatureType = feature.getTrackFeatureType().getDescription();
+        trackFeatureType = feature.getTrackFeatureType().getDescription();
         value = feature.getName();
     }
 }

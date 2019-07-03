@@ -1,9 +1,11 @@
-package ru.geekbrains.musicportal.dto;
+package ru.geekbrains.musicportal.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.dto.common.AbstractDto;
+import ru.geekbrains.musicportal.dto.image.ImageDto;
 import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.validation.PasswordMatches;
@@ -57,6 +59,8 @@ public class UserDto extends AbstractDto {
     private ImageDto image;
 
     public UserDto(User user){
+        if (user == null) return;
+
         super.setId(user.getId());
         super.setName(user.getName());
         super.setDescription(user.getDescription());
@@ -64,16 +68,9 @@ public class UserDto extends AbstractDto {
         password = user.getPassword();
         passwordQuestion = user.getPasswordQuestion();
         passwordAnswer = user.getPasswordAnswer();
-        comment = "";
-        approved = false;
+        comment = user.getComment();
+        approved = user.isApproved();
         image = new ImageDto(user.getImage());
     }
 
-    public String getEmail() {
-        return email.toLowerCase();
-    }
-
-    public String getUsername() {
-        return username.toLowerCase();
-    }
 }

@@ -1,21 +1,27 @@
 package ru.geekbrains.musicportal.service.blog;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.musicportal.dto.blog.ArticleDto;
 import ru.geekbrains.musicportal.entity.blog.Article;
 import ru.geekbrains.musicportal.repository.ArticleRepository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
     private ArticleRepository articleRepository;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public void setArticleRepository(ArticleRepository articleRepository) {
+    public ArticleServiceImpl(ArticleRepository articleRepository,
+                              ModelMapper modelMapper) {
         this.articleRepository = articleRepository;
+        this.modelMapper = modelMapper;
     }
 
     public void deleteById(Long id) {
@@ -48,5 +54,15 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Optional<Article> findById(Long id) {
         return articleRepository.findById(id);
+    }
+
+    @Override
+    public Collection<ArticleDto> findAll() {
+        return null;
+    }
+
+    @Override
+    public Article convertToEntity(ArticleDto dto) {
+        return modelMapper.map(dto, Article.class);
     }
 }

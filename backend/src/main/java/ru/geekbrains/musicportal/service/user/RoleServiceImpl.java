@@ -1,5 +1,6 @@
 package ru.geekbrains.musicportal.service.user;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.entity.user.Role;
@@ -11,10 +12,13 @@ import java.util.Optional;
 public class RoleServiceImpl implements RoleService {
 
     private RoleRepository roleRepository;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository,
+                           ModelMapper modelMapper) {
         this.roleRepository = roleRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override

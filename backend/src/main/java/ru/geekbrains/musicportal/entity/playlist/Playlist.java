@@ -3,6 +3,7 @@ package ru.geekbrains.musicportal.entity.playlist;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.entity.band.Band;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.image.Image;
 import ru.geekbrains.musicportal.entity.track.PlaylistTrack;
@@ -17,6 +18,10 @@ import java.util.Collection;
 @Table(name = "app_playlists")
 @EqualsAndHashCode(callSuper = true)
 public class Playlist extends AbstractEntity {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "band_id")
+    private Band band;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
