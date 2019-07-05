@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.blog.ArticleDto;
 import ru.geekbrains.musicportal.entity.blog.Article;
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.repository.ArticleRepository;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -57,7 +57,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Collection<ArticleDto> findAll() {
+    public Iterable<Comment> findAll() {
         return null;
     }
 

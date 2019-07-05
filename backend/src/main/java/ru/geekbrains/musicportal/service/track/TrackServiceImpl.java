@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
-import ru.geekbrains.musicportal.entity.blog.Like;
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.track.Track;
 import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.pojo.SpecFeature;
@@ -48,7 +48,7 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Collection<TrackDto> findAll() {
+    public Iterable<Comment> findAll() {
         return null;
     }
 

@@ -4,10 +4,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.group.CategoryDto;
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.group.Category;
 import ru.geekbrains.musicportal.repository.CategoryRepository;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -42,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Collection<CategoryDto> findAll() {
+    public Iterable<Comment> findAll() {
         return null;
     }
 

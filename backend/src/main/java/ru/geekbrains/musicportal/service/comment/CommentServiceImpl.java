@@ -1,22 +1,26 @@
 package ru.geekbrains.musicportal.service.comment;
 
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.blog.CommentDto;
 import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.repository.CommentRepository;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
     private CommentRepository commentRepository;
+    private ModelMapper modelMapper;
+
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, ModelMapper modelMapper) {
         this.commentRepository = commentRepository;
+        this.modelMapper = modelMapper;
     }
 
     public void deleteById(Long id) {
@@ -33,13 +37,8 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findById(id);
     }
 
-    public Collection<CommentDto> findAll() {
-        return null;
-    }
-
-    @Override
-    public Comment convertToEntity(CommentDto dto) {
-        return null;
+    public Iterable<Comment> findAll() {
+        return commentRepository.findAll();
     }
 
     public Comment save(CommentDto commentDto) {
@@ -51,8 +50,18 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.save(comment);
     }
 
-    public Comment update(CommentDto commentDto, Long id) {
-//        return commentRepository.updateById(id, commentDto);
-        return null;
+    public Comment update(CommentDto commentDto) {
+        Comment comment = convertToEntity(commentDto);
+        return commentRepository.save(comment);
+    }
+
+    public Comment convertToEntity(CommentDto commentDto) {
+        Comment comment = modelMapper.map(commentDto, Comment.class);
+        comment.setId(commentDto.getId());
+        comment.setAuthor(commentDto.getAuthor());
+        comment.setEntityId(commentDto.getEntityId());
+        comment.setTypeCommentedEntity(commentDto.getEntity());
+        comment.setContent(commentDto.getContent());
+        return comment;
     }
 }

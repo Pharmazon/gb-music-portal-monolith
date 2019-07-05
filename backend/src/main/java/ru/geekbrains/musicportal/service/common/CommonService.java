@@ -1,8 +1,8 @@
 package ru.geekbrains.musicportal.service.common;
 
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 
-import java.util.Collection;
 import java.util.Optional;
 
 public interface CommonService<T extends AbstractEntity, D> {
@@ -11,7 +11,7 @@ public interface CommonService<T extends AbstractEntity, D> {
 
     Optional<T> findById(Long id);
 
-    Collection<D> findAll();
+    Iterable<Comment> findAll();
 
     T convertToEntity(D dto);
 }

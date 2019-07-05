@@ -3,10 +3,10 @@ package ru.geekbrains.musicportal.service.images;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.image.ImageDto;
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.image.Image;
 import ru.geekbrains.musicportal.repository.ImageRepository;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -30,7 +30,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Collection findAll() {
+    public Iterable<Comment> findAll() {
         return null;
     }
 

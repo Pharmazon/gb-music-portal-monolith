@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.band.BandDto;
 import ru.geekbrains.musicportal.entity.band.Band;
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.repository.BandRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -38,7 +38,7 @@ public class BandServiceImpl implements BandService {
     }
 
     @Override
-    public Collection<BandDto> findAll() {
+    public Iterable<Comment> findAll() {
         return bandRepository.findAllByNameNotNull();
     }
 

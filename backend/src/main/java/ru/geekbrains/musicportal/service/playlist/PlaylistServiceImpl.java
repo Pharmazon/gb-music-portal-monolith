@@ -4,10 +4,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.playlist.PlaylistDto;
+import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 import ru.geekbrains.musicportal.repository.PlaylistRepository;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -34,7 +34,7 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
-    public Collection<PlaylistDto> findAll() {
+    public Iterable<Comment> findAll() {
         return playlistRepository.findAllByIdNotNull();
     }
 
