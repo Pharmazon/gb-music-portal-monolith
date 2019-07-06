@@ -10,30 +10,29 @@ import ru.geekbrains.musicportal.service.like.LikeServiceImpl;
 import javax.validation.Valid;
 import java.util.Optional;
 
-@RestController
 @CrossOrigin
-@RequestMapping (value = "api/miraculous/like")
-public class LikeController {
+@RestController
+@RequestMapping("/api/miraculous/like")
+public class LikeRestController {
 
     private LikeServiceImpl likeService;
 
     @Autowired
-    public LikeController(LikeServiceImpl likeService) {
+    public LikeRestController(LikeServiceImpl likeService) {
         this.likeService = likeService;
     }
-
 
     @GetMapping
     public Iterable<Like> likes() {
         return likeService.findAll();
     }
 
-    @GetMapping(value = "{id}")
+    @GetMapping("{id}")
     public Optional<Like> getLike(@PathVariable Long id) {
         return likeService.findById(id);
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping("{id}")
     public String deleteLike(@PathVariable Long id) {
         likeService.deleteById(id);
         return "Like Deleted";
