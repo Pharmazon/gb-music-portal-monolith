@@ -6,12 +6,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.dto.TrackDto;
+import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
 import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.pojo.SpecFeature;
 import ru.geekbrains.musicportal.repository.CategoryRepository;
-import ru.geekbrains.musicportal.repository.LikeRepository;
 import ru.geekbrains.musicportal.repository.LikeRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
 import ru.geekbrains.musicportal.util.TrackUtil;
@@ -75,16 +74,6 @@ public class TrackServiceImpl implements TrackService {
         trackRepository.deleteById(id);
     }
 
-//    @Override
-//    public Collection<TrackDto> findAllByPlaylistIdAndBandId(Long playlistId, Long bandId) {
-//        return trackRepository.findAllByPlaylistTrackIdAndBandId(playlistId, bandId);
-//    }
-//
-//    @Override
-//    public TrackDto findOneByIdAndPlaylistTrackIdAndBandId(Long id, Long playlistId, Long bandId) {
-//        return trackRepository.findOneByIdAndPlaylistTrackIdAndBandId(id, playlistId, bandId);
-//    }
-
     @Override
     public Track convertToEntity(TrackDto dto) {
         return modelMapper.map(dto, Track.class);
@@ -95,7 +84,7 @@ public class TrackServiceImpl implements TrackService {
      * @param topMax Максимальное количество треков в рейтинге
      * @return Коллекция объектов TrackDto
      */
-    public List<TrackDto> getTopTracks(int topMax){
+    public Collection<TrackDto> getTopTracks(int topMax){
         return likeRepository.getTop15("TRACK", PageRequest.of(0, topMax))
                 .stream()
                 .sorted(Comparator.comparingLong(o -> (Long) o[1]))

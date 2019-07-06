@@ -6,6 +6,7 @@ import ru.geekbrains.musicportal.entity.track.Track;
 import ru.geekbrains.musicportal.pojo.SpecFeature;
 import ru.geekbrains.musicportal.service.common.CommonService;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface TrackService extends CommonService<Track, TrackDto> {
@@ -14,8 +15,5 @@ public interface TrackService extends CommonService<Track, TrackDto> {
 
     void deleteById(Long id);
 
-//    Collection<TrackDto> findAllByPlaylistIdAndBandId(Long playlistId, Long bandId);
-
-//    TrackDto findOneByIdAndPlaylistTrackIdAndBandId(Long id, Long playlistId, Long bandId);
-    List<TrackDto> getTopTracks(int topMax);
+    Collection<TrackDto> getTopTracks(int topMax);
 }

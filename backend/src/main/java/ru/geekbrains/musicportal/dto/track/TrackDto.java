@@ -39,6 +39,13 @@ public class TrackDto extends AbstractDto {
 
     private Collection<PlaylistDto> playlists;
 
+    private Long liked;
+
+    public TrackDto(Track track, Long liked) {
+        this(track);
+        this.liked = liked;
+    }
+
     public TrackDto(Track track) {
         super.setId(track.getId());
         super.setName(track.getName());
@@ -55,4 +62,5 @@ public class TrackDto extends AbstractDto {
                 .map(CategoryDto::new)
                 .collect(Collectors.toList());
     }
+
 }
