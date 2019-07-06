@@ -1,7 +1,7 @@
 package ru.geekbrains.musicportal.service.user;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import ru.geekbrains.musicportal.dto.UserDto;
+import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;
 

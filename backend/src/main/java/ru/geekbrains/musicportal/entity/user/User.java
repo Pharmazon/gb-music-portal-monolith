@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.geekbrains.musicportal.entity.band.Band;
 import ru.geekbrains.musicportal.entity.blog.Article;
 import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.blog.Like;
@@ -47,10 +48,10 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "password_answer")
     private String passwordAnswer;
 
-    @Column(name = "is_approved")
+    @Column(name = "is_approved", nullable = false)
     private boolean isApproved;
 
-    @Column(name = "is_locked_out")
+    @Column(name = "is_locked_out", nullable = false)
     private boolean isLockedOut;
 
     @Column(name = "last_login_date")
@@ -94,6 +95,7 @@ public class User extends AbstractEntity implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
+    @JsonBackReference
     @ManyToMany(
             cascade = CascadeType.DETACH,
             fetch = FetchType.LAZY)
@@ -155,10 +157,6 @@ public class User extends AbstractEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isApproved();
-    }
-
-    public String getEmail() {
-        return email.toLowerCase();
     }
 
 }

@@ -1,8 +1,9 @@
-package ru.geekbrains.musicportal.dto;
+package ru.geekbrains.musicportal.dto.blog;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.dto.common.AbstractDto;
 
 @Data
 @NoArgsConstructor

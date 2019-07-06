@@ -2,7 +2,7 @@ package ru.geekbrains.musicportal.validation;
 
 
 
-import ru.geekbrains.musicportal.dto.UserDto;
+import ru.geekbrains.musicportal.dto.user.UserDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

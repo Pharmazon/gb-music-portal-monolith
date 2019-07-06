@@ -1,9 +1,9 @@
-package ru.geekbrains.musicportal.controller;
+package ru.geekbrains.musicportal.controller.rest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.musicportal.dto.LikeDto;
+import ru.geekbrains.musicportal.dto.blog.LikeDto;
 import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.service.like.LikeServiceImpl;
 

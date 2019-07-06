@@ -6,4 +6,5 @@ import ru.geekbrains.musicportal.entity.blog.Like;
 
 @Repository
 public interface LikeRepository extends CrudRepository<Like,Long> {
+
 }

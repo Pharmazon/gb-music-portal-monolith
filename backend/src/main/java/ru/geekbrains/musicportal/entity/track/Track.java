@@ -3,9 +3,9 @@ package ru.geekbrains.musicportal.entity.track;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.entity.band.Band;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.group.Category;
-import ru.geekbrains.musicportal.entity.user.Band;
 
 import javax.persistence.*;
 import java.util.Collection;
