@@ -60,8 +60,6 @@ export class UploadAlbumComponent implements OnInit, AfterViewInit {
   @ViewChild("addedTracksContainer", {read: ViewContainerRef})
   addedTracksContainer: ViewContainerRef;
 
-
-
   constructor(private componentFactoryResolver: ComponentFactoryResolver ) {
 
   }
@@ -70,17 +68,10 @@ export class UploadAlbumComponent implements OnInit, AfterViewInit {
 
   }
 
-
-
   updateAlbumDuration(){
 
     let addedTracksBlock = document.querySelector(".added-tracks-block");
     this.numberOfTracks = addedTracksBlock.children.length;
-
-  }
-
-  updateAlbumSize(){
-
 
   }
 
@@ -127,6 +118,11 @@ export class UploadAlbumComponent implements OnInit, AfterViewInit {
     let tagFactory = this.componentFactoryResolver.resolveComponentFactory(TagComponent);
     let componentRef = this.selectedGenresVcf.createComponent(tagFactory);
     componentRef.instance.tagText = selectedGenre;
+    componentRef.location.nativeElement.style = "width: 70px";
+    componentRef.instance.closedElement.subscribe(()=>{
+      componentRef.destroy();
+    })
+
   }
 
 
@@ -208,13 +204,6 @@ export class UploadAlbumComponent implements OnInit, AfterViewInit {
     }, false);
 
   }
-
-  checkIfValid(e){
-    if (!e.key.match(/[0-9\.]/i)) {
-      e.preventDefault();
-    }
-  }
-
 
   getListOfTracks() {
     let multipleInput = <HTMLInputElement>document.querySelector(".multiple-input");

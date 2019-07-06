@@ -1,0 +1,60 @@
+.artist-page-comment {
+
+  width: 270px;
+  margin: 0;
+  background-color: #1b2039;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+.artist-page-comment-content {
+
+  color: white;
+  font-family: "JosephinSansRegular";
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 25px;
+  margin-left: 10px;
+}
+
+.artist-page-comment-author-data{
+
+  display: flex;
+}
+
+.artist-page-comment-author-image {
+
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: 60px 60px;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
+  background-color: lightgrey;
+}
+
+.artist-page-comment-author-and-date-block {
+
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.artist-page-comment-author-name {
+
+  margin-right: 10px;
+  color: #ffffff;
+  font-family: "JosephinSansSemiBold";
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.artist-page-comment-date {
+
+  color: #ffffff;
+  font-family: "JosephinSansSemiBold";
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+}

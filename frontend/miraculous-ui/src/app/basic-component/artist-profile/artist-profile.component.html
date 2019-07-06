@@ -1,3 +1,66 @@
-<p>
-  artist-profile works!
-</p>
+<section class="artist-profile-block">
+  <figure class="artist-profile-picture"></figure>
+  <figure class="artist-profile-info">
+    <p class="artist-profile-info-login">Login</p>
+    <p class="artist-profile-info-registration-date">Been around since: 16.06.2019</p>
+    <p class="artist-profile-info-location">Location: Moscow</p>
+    <p class="artist-profile-info-favourite-genres">Genres: Pop, Indie, Rock, Instrumental</p>
+    <p class="artist-profile-info-description">Like the init daemon, systemd is a daemon that manages other daemons, which, including systemd itself, are background processes. systemd is the first daemon to start during booting and the last daemon to terminate during shutdown. The systemd daemon serves as the root of the user space's process tree; the first process (PID 1) has a special role on Unix systems, as it replaces the parent of a process when the original parent terminates. Therefore, the first process is particularly well suited for the purpose of monitoring daemons; systemd attempts to improve in that particular area over the traditional approach, which would usually not restart daemons automatically but only launch them once without further monitoring.
+    </p>
+  </figure>
+  <section class="upcoming-events-section">
+    <h5 class="section-heading">Upcoming Events:</h5>
+    <artist-event></artist-event>
+    <artist-event></artist-event>
+    <artist-event></artist-event>
+    <artist-event></artist-event>
+  </section>
+  <section class="artist-music-section">
+    <h5 class="section-heading">Music</h5>
+    <section class="artist-albums-section">
+      <p class="music-section-heading">Albums:</p>
+      <artist-album></artist-album>
+      <artist-album></artist-album>
+      <artist-album></artist-album>
+      <artist-album></artist-album>
+      <artist-album></artist-album>
+    </section>
+    <section class="artist-tracks-block">
+      <p class="music-section-heading">Tracks:</p>
+      <artist-track></artist-track>
+      <artist-track></artist-track>
+      <artist-track></artist-track>
+      <artist-track></artist-track>
+      <artist-track></artist-track>
+    </section>
+    <section class="artist-free-music">
+      <p class="music-section-heading">Free music:</p>
+      <artist-album></artist-album>
+      <artist-album></artist-album>
+      <artist-track></artist-track>
+      <artist-track></artist-track>
+    </section>
+  </section>
+  <section class="comments-section">
+    <h5 class="section-heading">Comments</h5>
+    <form class="comment-form">
+      <h6 class="leave-comment-heading">Leave your comment...</h6>
+      <textarea class="comment-textarea" placeholder="Enter Your Comment Here..."></textarea>
+      <input type="submit" class="submit-comment-button" value="Send comment">
+    </form>
+    <div class="comments-block">
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+      <artist-comment></artist-comment>
+    </div>
+  </section>
+</section>

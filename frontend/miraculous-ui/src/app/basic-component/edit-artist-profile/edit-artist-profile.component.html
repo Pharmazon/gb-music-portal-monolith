@@ -1,0 +1,51 @@
+<form class="edit-profile-form">
+  <account-deletion-confirmation #accountDeletionConfirmationComponent class="account-deletion-confirmation-component" (onClosedAccountDeletion)="closeAccountDeletionBlock()"></account-deletion-confirmation>
+  <h1 class="edit-profile-signature">Edit Profile</h1>
+  <div class="user-profile-picture" #userProfilePicture>
+    <div class="user-profile-picture-update-picture-block">
+      <label class="user-profile-picture-update-picture-button" for="user-photo">Update Picture</label>
+      <input type="file" name="user-photo" class="user-photo" id="user-photo" accept=".jpg,.png,.svg" #userPhotoInput (change)="changeUserPicture()">
+    </div>
+  </div>
+  <div class="group-of-inputs">
+    <div class="liked-music-privacy-checkbox-block">
+      <label for="liked-music-privacy-checkbox" class="liked-music-privacy-checkbox-label">Allow comments on your profile page:
+        <input type="checkbox" name="liked-music-privacy-checkbox" id="liked-music-privacy-checkbox" class="liked-music-privacy-checkbox">
+        <span class="liked-music-privacy-fake-checkbox"></span>
+      </label>
+    </div>
+    <div class="favourite-genres-block">
+      <div class="favourite-genres-block-genres-block">
+        <p class="favourite-genres-text">Genres:</p>
+        <div class="favourite-genres-block-selected-genres" #favouriteGenres>
+          <ng-template #favouriteGenresVsf></ng-template>
+        </div>
+      </div>
+      <div>
+        <p class="favourite-genres-text">Add New Genres</p>
+        <select class="select-genres" (change)="addTagToSelectedGenres()" #selectFavouriteGenres>
+          <option>Rock</option>
+          <option>Pop</option>
+          <option>Trance</option>
+          <option>Instrumental</option>
+          <option>Indie</option>
+        </select>
+      </div>
+    </div>
+    <label for="user-login-input">Change Login</label>
+    <input type="text" name="user-login-input" class="user-login-input" id="user-login-input">
+    <label for="user-email-input">Change Email</label>
+    <input type="email" name="user-email-input" id="user-email-input">
+    <label for="user-password-input">Change Password</label>
+    <input type="password" name="new-password-input" id="user-password-input">
+    <label for="user-confirm-password-input">Confirm Password Change</label>
+    <input type="password" name="new-password-confirm-input" id="user-confirm-password-input">
+    <label for="user-description">Change Description</label>
+    <textarea class="user-profile-description-textarea" id="user-description"></textarea>
+  </div>
+  <div class="form-buttons-group">
+    <input type="submit" name="" value="Save Changes" class="form-submit-button">
+    <button class="cancel-form-button">Cancel</button>
+  </div>
+  <button class="delete-profile-button" (click)="showAccountDeletionBlock()">Delete My Account</button>
+</form>

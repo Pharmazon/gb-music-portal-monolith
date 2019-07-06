@@ -41,6 +41,15 @@ import {CommonModule} from "@angular/common";
 import { AudiotrackWithDetailsComponent } from './basic-component/upload-album/audiotrack-with-details/audiotrack-with-details.component';
 import {FormsModule} from "@angular/forms";
 import { FileInputDirective } from './basic-component/upload-album/file-input.directive';
+import { LastUserLikedTracksComponent } from './basic-component/user-profile/last-user-liked-tracks/last-user-liked-tracks.component';
+import { LastUserLikedAlbumsComponent } from './basic-component/user-profile/last-user-liked-albums/last-user-liked-albums.component';
+import { EditUserProfileComponent } from './basic-component/edit-user-profile/edit-user-profile.component';
+import { EditArtistProfileComponent } from './basic-component/edit-artist-profile/edit-artist-profile.component';
+import { AccountDeletionConfirmationComponent } from './basic-component/edit-user-profile/account-deletion-confirmation/account-deletion-confirmation.component';
+import { ArtistEventComponent } from './basic-component/artist-profile/artist-event/artist-event.component';
+import { ArtistTrackComponent } from './basic-component/artist-profile/artist-track/artist-track.component';
+import { ArtistAlbumComponent } from './basic-component/artist-profile/artist-album/artist-album.component';
+import { ArtistCommentComponent } from './basic-component/artist-profile/artist-comment/artist-comment.component';
 
 
 const appRoutes: Routes = [
@@ -65,7 +74,9 @@ const appRoutes: Routes = [
       {path:'upload-album', component: UploadAlbumComponent},
       {path:'upload-track', component: UploadTrackComponent},
       {path:'user-profile/:id', component: UserProfileComponent},
-      {path:'artist-profile/:id', component: ArtistProfileComponent}
+      {path:'artist-profile/:id', component: ArtistProfileComponent},
+      {path:'edit-user-profile/:id',component: EditUserProfileComponent},
+      {path:'edit-artist-profile/:id', component: EditArtistProfileComponent}
     ]},
 
   {path:'admin', component: AdminPageComponent},
@@ -110,6 +121,15 @@ const appRoutes: Routes = [
     TagComponent,
     AudiotrackWithDetailsComponent,
     FileInputDirective,
+    LastUserLikedTracksComponent,
+    LastUserLikedAlbumsComponent,
+    EditUserProfileComponent,
+    EditArtistProfileComponent,
+    AccountDeletionConfirmationComponent,
+    ArtistEventComponent,
+    ArtistTrackComponent,
+    ArtistAlbumComponent,
+    ArtistCommentComponent,
 
   ],
   entryComponents: [TagComponent, AudiotrackComponent, AudiotrackWithDetailsComponent],

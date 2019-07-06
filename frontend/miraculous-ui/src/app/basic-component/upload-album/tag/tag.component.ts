@@ -17,6 +17,6 @@ export class TagComponent implements OnInit {
   }
 
   closeElement() {
-    this.closedElement.emit();
+    this.closedElement.emit(event);
   }
 }
