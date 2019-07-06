@@ -1,0 +1,62 @@
+.artist-event {
+
+  width: 250px;
+  margin: 0;
+  background-color: #1b2039;
+  border-radius: 7px;
+  margin-left: 35px;
+}
+
+.artist-event-description {
+
+  color: white;
+  font-family: "JosephinSansRegular";
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 25px;
+  margin-left: 10px
+}
+
+.artist-event-data{
+
+  display: flex;
+}
+
+.artist-event-cover {
+
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+  background-size: 60px 60px ;
+  background-image:url(~src/assets/images/armin.jpg);
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.artist-event-title-location-date-block {
+
+  margin-left: 20px;
+
+}
+
+.artist-event-title {
+
+  margin-right: 10px;
+  color: #3bc8e7;
+  font-family: "JosephinSansSemiBold";
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.artist-event-date, .artist-event-location {
+
+  color: #3bc8e7;
+  font-family: "JosephinSansSemiBold";
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 5px;
+}

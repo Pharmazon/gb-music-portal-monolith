@@ -141,6 +141,9 @@ export class UploadTrackComponent implements OnInit, AfterViewInit, OnChanges, A
     let tagFactory = this.componentFactoryResolver.resolveComponentFactory(TagComponent);
     let componentRef = this.selectedGenresVcf.createComponent(tagFactory);
     componentRef.instance.tagText = selectedGenre;
+    componentRef.instance.closedElement.subscribe(()=>{
+      componentRef.destroy();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

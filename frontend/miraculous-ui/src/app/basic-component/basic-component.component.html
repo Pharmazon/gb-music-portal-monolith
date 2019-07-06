@@ -1,6 +1,6 @@
 <div #container>
 <div class="navigation-panel" #navigationPanel>
-  <a href="#" class="navigation-panel-logo"><img src="assets/images/miraculous-logo.png"></a>
+  <a routerLink="discover" (click)="navigate('discover')" class="navigation-panel-logo"><img src="assets/images/miraculous-logo.png"></a>
   <ul class="navigation-upper-link-list">
     <li><a routerLink="discover" (click)="navigate('discover')"><img src="assets/icons/discover-icon.svg" title="Discover"></a></li>
     <li><a routerLink="albums" (click)="navigate('albums')"><img src="assets/icons/albums-icon.png" title="Albums"></a></li>
@@ -30,8 +30,10 @@
       <img src="assets/icons/language-icon.png" class="language-icon" ></figure>
     <figure class="user-profile-circle">
       <ul class="profile-dropdown-list">
-        <li><a routerLink="user-profile" (click)="navigate('user-profile')">Profile</a></li>
-        <li><a href="edit-profile" (click)="navigate('edit-profile')">Settings</a></li>
+        <li><a routerLink="user-profile" (click)="navigate('user-profile/1')">Profile (user)</a></li>
+        <li><a routerLink="user-profile" (click)="navigate('artist-profile/1')">Profile (artist)</a></li>
+        <li><a routerLink="edit-user-profile" (click)="navigate('edit-user-profile/1')">Settings (user)</a></li>
+        <li><a routerLink="edit-artist-profile" (click)="navigate('edit-artist-profile/1')">Settings (artist)</a></li>
         <li><a href="logout" (click)="navigate('logout')">Logout</a></li>
       </ul>
     </figure>
