@@ -8,17 +8,16 @@ import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.service.comment.CommentServiceImpl;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
-@RestController
 @CrossOrigin
-@RequestMapping (value = "api/miraculous/comment")
-public class CommentController {
+@RestController
+@RequestMapping("/api/miraculous/comment")
+public class CommentRestController {
 
     private CommentServiceImpl commentService;
 
     @Autowired
-    public CommentController(CommentServiceImpl commentService) {
+    public CommentRestController(CommentServiceImpl commentService) {
         this.commentService = commentService;
     }
 
@@ -32,12 +31,13 @@ public class CommentController {
         return commentService.save(commentDto);
     }
 
-    @PutMapping(value = "{id}")
-    public Comment updateComment(@PathVariable Long id, @Valid CommentDto commentDto) {
+    @PutMapping("{id}")
+    public Comment updateComment(@PathVariable Long id,
+                                 @Valid CommentDto commentDto) {
         return commentService.update(commentDto, id);
     }
 
-    @DeleteMapping(value = "{id}")
+    @DeleteMapping("{id}")
     public String deleteComment(@PathVariable Long id) {
         commentService.deleteById(id);
         return "Comment Deleted";
