@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
+import ru.geekbrains.musicportal.entity.images.Image;
 import ru.geekbrains.musicportal.entity.track.PlaylistTrack;
 import ru.geekbrains.musicportal.entity.user.User;
 
@@ -31,4 +32,7 @@ public class Playlist extends AbstractEntity {
             fetch = FetchType.LAZY)
     private Collection<PlaylistTrack> playlistTracks;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id")
+    private Image image;
 }

@@ -17,7 +17,9 @@ public class BandDto extends AbstractDto {
 
     private Collection<UserDto> participants;
 
-    public void GroupDto(Band band) {
+    private ImageDto image;
+
+    public BandDto(Band band) {
         super.setId(band.getId());
         super.setName(band.getName());
         super.setDescription(band.getDescription());
@@ -26,6 +28,7 @@ public class BandDto extends AbstractDto {
         } else {
             participants = new ArrayList<>();
         }
+        image = new ImageDto(band.getImage());
 
     }
 }

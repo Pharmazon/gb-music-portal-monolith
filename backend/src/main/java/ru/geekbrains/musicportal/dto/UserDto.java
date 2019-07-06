@@ -54,6 +54,8 @@ public class UserDto extends AbstractDto {
 
     private List<Role> roles;
 
+    private ImageDto image;
+
     public UserDto(User user){
         super.setId(user.getId());
         super.setName(user.getName());
@@ -64,6 +66,7 @@ public class UserDto extends AbstractDto {
         passwordAnswer = user.getPasswordAnswer();
         comment = "";
         approved = false;
+        image = new ImageDto(user.getImage());
     }
 
     public String getEmail() {

@@ -11,6 +11,7 @@ import ru.geekbrains.musicportal.entity.blog.Article;
 import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
+import ru.geekbrains.musicportal.entity.images.Image;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 
 import javax.persistence.*;
@@ -121,6 +122,10 @@ public class User extends AbstractEntity implements UserDetails {
             fetch = FetchType.LAZY,
             mappedBy = "user")
     private Collection<Like> likes;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id")
+    private Image image;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
