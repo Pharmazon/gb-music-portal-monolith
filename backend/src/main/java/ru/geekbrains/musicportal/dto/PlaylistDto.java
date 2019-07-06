@@ -23,13 +23,16 @@ public class PlaylistDto extends AbstractDto {
 
     private Map<String, String> features;
 
+    private ImageDto image;
+
     private int currentTrack = 0;
 
-    public void PlaylistDto(Playlist playlist){
+    public PlaylistDto(Playlist playlist){
         super.setId(playlist.getId());
         super.setName(playlist.getName());
         super.setDescription(playlist.getDescription());
         owner = new UserDto(playlist.getUser());
+        image = new ImageDto(playlist.getImage());
     }
 
 }
