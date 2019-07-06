@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.entity.images;
+package ru.geekbrains.musicportal.entity.image;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,15 +10,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "images")
+@Table(name = "app_images")
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Image extends AbstractEntity {
+
     @Column
     private String imgLink;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
 
 }

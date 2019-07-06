@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.images.Image;
+import ru.geekbrains.musicportal.entity.image.Image;
 
 @Data
 @NoArgsConstructor
