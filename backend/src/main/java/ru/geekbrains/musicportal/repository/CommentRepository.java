@@ -7,5 +7,6 @@ import ru.geekbrains.musicportal.entity.blog.Comment;
 
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
-    Comment updateById(Long id, CommentDto comment);
+
+//    Comment updateById(Long id, CommentDto comment);
 }

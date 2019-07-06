@@ -47,6 +47,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public Comment update(CommentDto commentDto, Long id) {
-        return commentRepository.updateById(id, commentDto);
+//        return commentRepository.updateById(id, commentDto);
+        return null;
     }
 }

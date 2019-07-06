@@ -34,7 +34,8 @@ public class CommentRestController {
     @PutMapping("{id}")
     public Comment updateComment(@PathVariable Long id,
                                  @Valid CommentDto commentDto) {
-        return commentService.update(commentDto, id);
+//        return commentService.update(commentDto, id);
+        return null;
     }
 
     @DeleteMapping("{id}")
