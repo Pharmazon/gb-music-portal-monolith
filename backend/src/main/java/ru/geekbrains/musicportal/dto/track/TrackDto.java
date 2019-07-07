@@ -28,6 +28,8 @@ public class TrackDto extends AbstractDto {
 
     private Long bandId;
 
+    private Long liked;
+
     @JsonIgnore
     private String fileLink;
 
@@ -38,6 +40,11 @@ public class TrackDto extends AbstractDto {
     private Collection<CategoryDto> categories;
 
     private Collection<PlaylistDto> playlists;
+
+    public TrackDto(Track track, Long liked) {
+        this(track);
+        this.liked = liked;
+    }
 
     public TrackDto(Track track) {
         super.setId(track.getId());
