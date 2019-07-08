@@ -75,9 +75,6 @@ public class User extends AbstractEntity implements UserDetails {
     @Column(name = "failed_password_answer_attempt_window_start")
     private LocalDateTime failedPasswordAnswerAttemptWindowStart;
 
-    @Column(name = "comment")
-    private String comment;
-
     @JsonBackReference
     @OneToOne(
             mappedBy = "user",
