@@ -619,3 +619,12 @@ li:hover {
   height: 100%;
   display: none;
 }
+
+.player {
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100000;
+  width: 100%;
+}

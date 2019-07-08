@@ -1,0 +1,33 @@
+<figure class="player-block">
+  <figure class="playing-track-info-block">
+    <p class="playing-track-info-title">{{playerService.tracks[playerService.currentTrackIndex].title}}</p>
+    <p class="playing-track-info-artist">{{playerService.tracks[playerService.currentTrackIndex].artist}}</p>
+  </figure>
+  <audio [src]="playerService.tracks[playerService.currentTrackIndex].url" crossorigin="anonymous" #audio (ended)="startNextTrack()" (timeupdate)="updateProgressBar()"></audio>
+  <figure class="audioplayer">
+    <a  type="button" class="turn-on-previous-track-button" (click)="changeCurrentTrackToPrevious()">
+    </a>
+    <a type="button" class="play-button" (click)="playTrack()" *ngIf="!isPlaying"></a>
+    <a type="button" class="pause-button" (click)="pauseTrack()" *ngIf="isPlaying"></a>
+    <a class="turn-on-next-track-button" (click)="changeCurrentTrackToNext()"></a>
+  </figure>
+  <figure class="track-progress-bar">
+    <figure class="progress-fill"></figure>
+    <figure class="track-handle"></figure>
+  </figure>
+  <a type="button" class="volume-control">
+    <ul class="volume-list">
+      <li><a type="button" (click)="audio.volume=0.1;">10%</a></li>
+      <li><a type="button" (click)="audio.volume=0.3">30%</a></li>
+      <li><a type="button" (click)="audio.volume=0.5">50%</a></li>
+      <li><a type="button" (click)="audio.volume=0.7">70%</a></li>
+      <li><a type="button" (click)="audio.volume=0.9">90%</a></li>
+      <li><a type="button" (click)="audio.volume=1">100%</a></li>
+    </ul>
+  </a>
+  <a type="button" class="shuffle-button" alt="shuffle" style="display: none"></a>
+  <a type="button" class="repeat-button" alt="repeat" [ngClass]="onRepeat? 'repeat-button-hovered':'repeat-button'" (click)="toggleOnRepeat()"></a>
+  <a type="button" class="open-music-queue-button" (click)="showTracksQueue()">Show Queue</a>
+  <app-tracks-queue class="tracks-queue" (onClosedTracksQueuePanel)="hideTracksQueue()" #tracksQueue (onPlayTrack)="playTrack()"></app-tracks-queue>
+  <a type="button" class="toggle-player-block-button" (click)="togglePlayerBlock()"></a>
+</figure>

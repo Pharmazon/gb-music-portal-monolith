@@ -50,6 +50,9 @@ import { ArtistEventComponent } from './basic-component/artist-profile/artist-ev
 import { ArtistTrackComponent } from './basic-component/artist-profile/artist-track/artist-track.component';
 import { ArtistAlbumComponent } from './basic-component/artist-profile/artist-album/artist-album.component';
 import { ArtistCommentComponent } from './basic-component/artist-profile/artist-comment/artist-comment.component';
+import { PlayerComponent } from './basic-component/player/player.component';
+import { TracksQueueComponent } from './basic-component/player/tracks-queue/tracks-queue.component';
+import { TracksQueueItemComponent } from './basic-component/player/tracks-queue/tracks-queue-item/tracks-queue-item.component';
 
 
 const appRoutes: Routes = [
@@ -130,6 +133,9 @@ const appRoutes: Routes = [
     ArtistTrackComponent,
     ArtistAlbumComponent,
     ArtistCommentComponent,
+    PlayerComponent,
+    TracksQueueComponent,
+    TracksQueueItemComponent,
 
   ],
   entryComponents: [TagComponent, AudiotrackComponent, AudiotrackWithDetailsComponent],
