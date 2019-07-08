@@ -29,7 +29,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     public void changeTitleById(Long id, String newTitle) {
-        Optional<Article> optional = findById(id);
+        Optional<Article> optional = findOneEntityById(id);
         if (optional.isPresent()) {
             Article article = optional.get();
             article.setTitle(newTitle);
@@ -38,7 +38,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     public void addContent(Long id, String content) {
-        Optional<Article> optional = findById(id);
+        Optional<Article> optional = findOneEntityById(id);
         if (optional.isPresent()) {
             Article article = optional.get();
             article.setContent(content);
@@ -52,13 +52,18 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Optional<Article> findById(Long id) {
+    public Optional<Article> findOneEntityById(Long id) {
         return articleRepository.findById(id);
     }
 
     @Override
-    public Collection<ArticleDto> findAll() {
+    public Collection<ArticleDto> findAllDto() {
         return null;
+    }
+
+    @Override
+    public ArticleDto findOneDtoById(Long id) {
+        return articleRepository.findOneById(id);
     }
 
     @Override

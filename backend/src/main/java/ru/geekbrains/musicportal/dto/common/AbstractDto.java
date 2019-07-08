@@ -1,6 +1,5 @@
 package ru.geekbrains.musicportal.dto.common;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +21,9 @@ public abstract class AbstractDto implements Serializable {
     @JsonView(CommonViews.General.class)
     private String description;
 
-    @JsonIgnore
+    @JsonView(CommonViews.All.class)
     private LocalDateTime lastUpdate;
 
-    @JsonIgnore
+    @JsonView(CommonViews.All.class)
     private LocalDateTime creationDate;
 }

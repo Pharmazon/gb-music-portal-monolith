@@ -29,13 +29,18 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public Optional<UserProfile> findById(Long id) {
+    public Optional<UserProfile> findOneEntityById(Long id) {
         return userProfileRepository.findById(id);
     }
 
     @Override
-    public Collection<UserProfileDto> findAll() {
+    public Collection<UserProfileDto> findAllDto() {
         return null;
+    }
+
+    @Override
+    public UserProfileDto findOneDtoById(Long id) {
+        return userProfileRepository.findOneById(id);
     }
 
     @Override

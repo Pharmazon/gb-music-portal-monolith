@@ -24,7 +24,7 @@ public class CommentRestController {
 
     @GetMapping
     public Collection<CommentDto> comments() {
-        return commentService.findAll();
+        return commentService.findAllDto();
     }
 
     @PostMapping

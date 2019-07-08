@@ -5,13 +5,15 @@ import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface CommonService<T extends AbstractEntity, D> {
+public interface CommonService<ENTITY extends AbstractEntity, DTO> {
 
-    T save(T entity);
+    ENTITY save(ENTITY entity);
 
-    Optional<T> findById(Long id);
+    Optional<ENTITY> findOneEntityById(Long id);
 
-    Collection<D> findAll();
+    Collection<DTO> findAllDto();
 
-    T convertToEntity(D dto);
+    DTO findOneDtoById(Long id);
+
+    ENTITY convertToEntity(DTO dto);
 }

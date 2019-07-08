@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
-import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.entity.track.Track;
 import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.pojo.SpecFeature;
@@ -43,13 +42,8 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Optional<Track> findById(Long id) {
+    public Optional<Track> findOneEntityById(Long id) {
         return trackRepository.findById(id);
-    }
-
-    @Override
-    public Collection<TrackDto> findAll() {
-        return null;
     }
 
     public Page<Track> getTrackWithPagingAndFiltering(int pageNumber, int pageSize, List<SpecFeature> specFeatures) {
@@ -71,16 +65,6 @@ public class TrackServiceImpl implements TrackService {
         trackRepository.deleteById(id);
     }
 
-//    @Override
-//    public Collection<TrackDto> findAllByPlaylistIdAndBandId(Long playlistId, Long bandId) {
-//        return trackRepository.findAllByPlaylistTrackIdAndBandId(playlistId, bandId);
-//    }
-//
-//    @Override
-//    public TrackDto findOneByIdAndPlaylistTrackIdAndBandId(Long id, Long playlistId, Long bandId) {
-//        return trackRepository.findOneByIdAndPlaylistTrackIdAndBandId(id, playlistId, bandId);
-//    }
-
     @Override
     public Track convertToEntity(TrackDto dto) {
         return modelMapper.map(dto, Track.class);
@@ -101,5 +85,15 @@ public class TrackServiceImpl implements TrackService {
                     return new TrackDto(track, (Long)objects[1]);
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<TrackDto> findAllDto() {
+        return trackRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public TrackDto findOneDtoById(Long id) {
+        return trackRepository.findOneById(id);
     }
 }

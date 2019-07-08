@@ -29,13 +29,18 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
-    public Optional<Playlist> findById(Long id) {
+    public Optional<Playlist> findOneEntityById(Long id) {
         return playlistRepository.findById(id);
     }
 
     @Override
-    public Collection<PlaylistDto> findAll() {
+    public Collection<PlaylistDto> findAllDto() {
         return playlistRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public PlaylistDto findOneDtoById(Long id) {
+        return playlistRepository.findOneById(id);
     }
 
     @Override
@@ -43,8 +48,4 @@ public class PlaylistServiceImpl implements PlaylistService {
         return modelMapper.map(dto, Playlist.class);
     }
 
-    @Override
-    public PlaylistDto findOneByIdAndBandId(Long id, Long bandId) {
-        return playlistRepository.findOneByIdAndBandId(id, bandId);
-    }
 }

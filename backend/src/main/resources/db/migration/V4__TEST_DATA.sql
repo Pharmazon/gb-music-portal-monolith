@@ -82,14 +82,14 @@ INSERT INTO app_track_features (id, creation_date, description, last_update, nam
   VALUES (19, to_timestamp('2019-01-05', 'yyyy-mm-dd'),'TRUE', to_timestamp('2019-01-30', 'yyyy-mm-dd'), 'TRUE', 6, 14);
 
 -- пользователи
-INSERT INTO app_users (id, creation_date, last_update, name, password, password_answer, password_question, failed_password_answer_attempt_count, is_locked_out, is_approved, last_login_date, last_password_change_date, username, email, image_id)
-VALUES(20, to_timestamp('2019-01-30', 'yyyy-mm-dd'), current_timestamp, 'Билл Гейтс', '123456', 'Мне сказали, у меня скитлстрянка', 'Ты какой-то странный, Билли?', 3, FALSE, TRUE, to_timestamp('2019-03-30', 'yyyy-mm-dd'), to_timestamp('2019-02-18', 'yyyy-mm-dd'), 'billy', 'bolli@skittles.kz', 1);
-INSERT INTO app_users (id, creation_date, last_update, name, password, password_answer, password_question, failed_password_answer_attempt_count, is_locked_out, is_approved, last_login_date, last_password_change_date, username, email, image_id)
-VALUES(21, to_timestamp('2019-05-11', 'yyyy-mm-dd'), current_timestamp, 'Иван Иванов', '123123', 'Я Бэтман', 'Кто ты?', 3, FALSE, TRUE, to_timestamp('2019-05-30', 'yyyy-mm-dd'), to_timestamp('2019-06-15', 'yyyy-mm-dd'), 'Ivan', 'ivan@gmail.com', 2);
-INSERT INTO app_users (id, creation_date, last_update, name, password, password_answer, password_question, failed_password_answer_attempt_count, is_locked_out, is_approved, last_login_date, last_password_change_date, username, email, image_id)
-VALUES(22, to_timestamp('2019-06-11', 'yyyy-mm-dd'), current_timestamp, 'Марина', '654321', 'Отличная', 'Как погодка?', 3, TRUE, TRUE, to_timestamp('2019-06-12', 'yyyy-mm-dd'), to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'marina', 'marina@mail.ru', 3);
-INSERT INTO app_users (id, creation_date, last_update, name, password, password_answer, password_question, failed_password_answer_attempt_count, is_locked_out, is_approved, last_login_date, last_password_change_date, username, email, image_id)
-VALUES(23, to_timestamp('2019-06-11', 'yyyy-mm-dd'), current_timestamp, 'Вероника', '121212', 'Иванова', 'Девчья фамилия матери?', 3, FALSE, TRUE, to_timestamp('2019-06-12', 'yyyy-mm-dd'), to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'nika', 'nika@protonmail.com', 4);
+INSERT INTO app_users (id, creation_date, last_update, name, password, password_answer, password_question, failed_password_answer_attempt_count, is_locked_out, is_approved, last_login_date, last_password_change_date, username, email, image_id, failed_password_attempt_count)
+VALUES(20, to_timestamp('2019-01-30', 'yyyy-mm-dd'), current_timestamp, 'Билл Гейтс', '123456', 'Мне сказали, у меня скитлстрянка', 'Ты какой-то странный, Билли?', 3, FALSE, TRUE, to_timestamp('2019-03-30', 'yyyy-mm-dd'), to_timestamp('2019-02-18', 'yyyy-mm-dd'), 'billy', 'bolli@skittles.kz', 1, 0);
+INSERT INTO app_users (id, creation_date, last_update, name, password, password_answer, password_question, failed_password_answer_attempt_count, is_locked_out, is_approved, last_login_date, last_password_change_date, username, email, image_id, failed_password_attempt_count)
+VALUES(21, to_timestamp('2019-05-11', 'yyyy-mm-dd'), current_timestamp, 'Иван Иванов', '123123', 'Я Бэтман', 'Кто ты?', 3, FALSE, TRUE, to_timestamp('2019-05-30', 'yyyy-mm-dd'), to_timestamp('2019-06-15', 'yyyy-mm-dd'), 'Ivan', 'ivan@gmail.com', 2, 0);
+INSERT INTO app_users (id, creation_date, last_update, name, password, password_answer, password_question, failed_password_answer_attempt_count, is_locked_out, is_approved, last_login_date, last_password_change_date, username, email, image_id, failed_password_attempt_count)
+VALUES(22, to_timestamp('2019-06-11', 'yyyy-mm-dd'), current_timestamp, 'Марина', '654321', 'Отличная', 'Как погодка?', 3, TRUE, TRUE, to_timestamp('2019-06-12', 'yyyy-mm-dd'), to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'marina', 'marina@mail.ru', 3, 0);
+INSERT INTO app_users (id, creation_date, last_update, name, password, password_answer, password_question, failed_password_answer_attempt_count, is_locked_out, is_approved, last_login_date, last_password_change_date, username, email, image_id, failed_password_attempt_count)
+VALUES(23, to_timestamp('2019-06-11', 'yyyy-mm-dd'), current_timestamp, 'Вероника', '121212', 'Иванова', 'Девчья фамилия матери?', 3, FALSE, TRUE, to_timestamp('2019-06-12', 'yyyy-mm-dd'), to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'nika', 'nika@protonmail.com', 4, 0);
 
 --пользователь - группа
 INSERT INTO join_user_bands (USER_ID, BAND_ID) values (20, 2);
@@ -103,10 +103,13 @@ INSERT INTO app_user_profiles (id, creation_date, last_update, birth_date, city,
   VALUES (24, current_timestamp, current_timestamp, to_timestamp('1990-01-05', 'yyyy-mm-dd'), 'Москва', 'Россия', '111@222.ru', 'Билл', 'Прыжки с парашютом', 'Гейтс', '8-909-111-11-11', NULL, NULL, 20 );
 
 --плейлисты
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id)
-    VALUES (25, current_timestamp, 'Любимый плейлист Вероники', current_timestamp, 'хиты', 22);
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id)
-    VALUES (26, current_timestamp, 'Билл слушает на работе', current_timestamp, 'работа', 23);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, band_id)
+    VALUES (25, current_timestamp, 'Любимый плейлист Вероники', current_timestamp, 'хиты', 22, 1);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, band_id)
+    VALUES (26, current_timestamp, 'Билл слушает на работе', current_timestamp, 'работа', 23, 1);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, band_id)
+    VALUES (27, current_timestamp, 'Вилли слушает на природе', current_timestamp, 'Домашний', 23, 1);
+
 --плейлист-трек
 INSERT INTO join_playlist_track (track_id, playlist_id, position) VALUES(14,25,1);
 INSERT INTO join_playlist_track (track_id, playlist_id, position) VALUES(15,25,2);

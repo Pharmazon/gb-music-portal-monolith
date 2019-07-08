@@ -29,12 +29,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Optional<Comment> findById(Long id) {
+    public Optional<Comment> findOneEntityById(Long id) {
         return commentRepository.findById(id);
     }
 
-    public Collection<CommentDto> findAll() {
-        return null;
+    public Collection<CommentDto> findAllDto() {
+        return commentRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public CommentDto findOneDtoById(Long id) {
+        return commentRepository.findOneById(id);
     }
 
     @Override

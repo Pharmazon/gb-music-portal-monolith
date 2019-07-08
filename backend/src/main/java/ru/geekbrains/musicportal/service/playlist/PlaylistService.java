@@ -6,5 +6,4 @@ import ru.geekbrains.musicportal.service.common.CommonService;
 
 public interface PlaylistService extends CommonService<Playlist, PlaylistDto> {
 
-    PlaylistDto findOneByIdAndBandId(Long id, Long bandId);
 }

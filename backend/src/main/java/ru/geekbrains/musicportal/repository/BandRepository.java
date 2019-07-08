@@ -5,10 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.geekbrains.musicportal.dto.band.BandDto;
 import ru.geekbrains.musicportal.entity.band.Band;
 
-import java.util.Collection;
-
 @Repository
-public interface BandRepository extends CrudRepository<Band, Long> {
+public interface BandRepository extends CommonRepository<BandDto>, CrudRepository<Band, Long> {
 
-    Collection<BandDto> findAllByNameNotNull();
 }

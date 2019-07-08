@@ -14,6 +14,8 @@ public class CategoryDto extends AbstractDto {
     private CategoryDto parent;
 
     public CategoryDto(Category category) {
+        if (category == null) return;
+
         super.setId(category.getId());
         super.setName(category.getName());
         super.setDescription(category.getDescription());

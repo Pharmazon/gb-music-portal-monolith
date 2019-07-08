@@ -37,13 +37,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findById(Long id) {
+    public Optional<Category> findOneEntityById(Long id) {
         return categoryRepository.findById(id);
     }
 
     @Override
-    public Collection<CategoryDto> findAll() {
+    public Collection<CategoryDto> findAllDto() {
         return null;
+    }
+
+    @Override
+    public CategoryDto findOneDtoById(Long id) {
+        return categoryRepository.findOneById(id);
     }
 
     @Override

@@ -33,13 +33,8 @@ public class BandServiceImpl implements BandService {
     }
 
     @Override
-    public Optional<Band> findById(Long id) {
+    public Optional<Band> findOneEntityById(Long id) {
         return bandRepository.findById(id);
-    }
-
-    @Override
-    public Collection<BandDto> findAll() {
-        return bandRepository.findAllByNameNotNull();
     }
 
     @Override
@@ -47,4 +42,13 @@ public class BandServiceImpl implements BandService {
         return modelMapper.map(dto, Band.class);
     }
 
+    @Override
+    public Collection<BandDto> findAllDto() {
+        return bandRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public BandDto findOneDtoById(Long id) {
+        return bandRepository.findOneById(id);
+    }
 }

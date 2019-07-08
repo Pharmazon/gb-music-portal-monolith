@@ -48,10 +48,6 @@ public class UserDto extends AbstractDto {
     @NotEmpty
     private String passwordAnswer;
 
-    @NotNull
-    @NotEmpty
-    private String comment;
-
     private boolean approved;
 
     private List<Role> roles;
@@ -68,7 +64,6 @@ public class UserDto extends AbstractDto {
         password = user.getPassword();
         passwordQuestion = user.getPasswordQuestion();
         passwordAnswer = user.getPasswordAnswer();
-        comment = user.getComment();
         approved = user.isApproved();
         image = new ImageDto(user.getImage());
     }

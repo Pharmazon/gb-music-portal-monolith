@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.musicportal.entity.blog.Like;
 
-import java.util.Collection;
 import java.util.List;
 
 @Repository

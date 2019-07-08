@@ -25,13 +25,19 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Optional<Image> findById(Long id) {
+    public Optional<Image> findOneEntityById(Long id) {
         return Optional.of(imageRepository.findById(id,Image.class));
     }
 
     @Override
-    public Collection findAll() {
-        return null;
+    public Collection<ImageDto> findAllDto() {
+        return imageRepository.findAllByIdNotNull();
+    }
+
+
+    @Override
+    public ImageDto findOneDtoById(Long id) {
+        return imageRepository.findOneById(id);
     }
 
     @Override
