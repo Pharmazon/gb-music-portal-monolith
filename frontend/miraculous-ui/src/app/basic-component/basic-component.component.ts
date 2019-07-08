@@ -10,6 +10,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class BasicComponentComponent implements OnInit{
 
   currentYear: Date = new Date();
+  isPlayerHidden: boolean = false;
 
   @ViewChild("navigationPanel")
   navigationPanel: ElementRef;
@@ -104,8 +105,19 @@ export class BasicComponentComponent implements OnInit{
     this.internalizationComponent.nativeElement.style= "display: none ;opacity:0; position: absolute; width: 0; height: 0; pointer-events: none;";
   }
 
+  showOrHidePlayer() {
 
-  changeLanguage() {
+    if (this.isPlayerHidden == true){
+      document.querySelector(".player").setAttribute("style", "height: 75px");
+      document.querySelector(".queue-panel-block").setAttribute("style","display: flex");
+      document.querySelector(".toggle-player-block-button").setAttribute("style","background-image: url(../../../assets/images/chevron-down.png);");
+      this.isPlayerHidden = false;
+    } else {
+      document.querySelector(".player").setAttribute("style", "height: 0.1px");
+      document.querySelector(".queue-panel-block").setAttribute("style","display: none");
+      document.querySelector(".toggle-player-block-button").setAttribute("style","background-image: url(../../../assets/images/chevron-up.png);");
+      this.isPlayerHidden = true;
+    }
 
   }
 }
