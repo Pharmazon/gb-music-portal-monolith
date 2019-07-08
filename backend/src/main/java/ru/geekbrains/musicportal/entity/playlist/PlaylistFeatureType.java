@@ -1,22 +1,27 @@
 package ru.geekbrains.musicportal.entity.playlist;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "app_playlist_feature_types")
-@EqualsAndHashCode(callSuper = true)
-public class PlaylistFeatureType extends AbstractEntity {
+public class PlaylistFeatureType {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, updatable = false)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(
             fetch = FetchType.LAZY,
