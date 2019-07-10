@@ -57,7 +57,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public Comment update(CommentDto commentDto, Long id) {
-//        return commentRepository.updateById(id, commentDto);
+        Comment comment = convertToEntity(commentRepository.findOneById(id));
+        if (comment != null) {
+            save(commentDto);
+        }
         return null;
     }
 }
