@@ -35,7 +35,7 @@ CREATE TABLE "app_comments" (
 "name" varchar(255) COLLATE "default",
 "comment_content" varchar(255) COLLATE "default",
 "author_id" int8,
-"article_id" int8,
+"entity_id" int8,
 CONSTRAINT "app_comments_pkey" PRIMARY KEY ("id")
 )
 WITHOUT OIDS;
@@ -242,7 +242,6 @@ ALTER TABLE "app_images" OWNER TO "musicportal";
 ALTER TABLE "app_articles" ADD CONSTRAINT "fk_articles_author" FOREIGN KEY ("author_id") REFERENCES "app_users" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_bands" ADD CONSTRAINT "fk_band_image" FOREIGN KEY ("image_id") REFERENCES "app_images" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_categories" ADD CONSTRAINT "fk_cat_parent_cat" FOREIGN KEY ("parent_id") REFERENCES "app_categories" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "app_comments" ADD CONSTRAINT "fk_comment_article" FOREIGN KEY (entity_id) REFERENCES "app_articles" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_comments" ADD CONSTRAINT "fk_comment_user" FOREIGN KEY ("author_id") REFERENCES "app_users" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_track_features" ADD CONSTRAINT "fk_feature_track" FOREIGN KEY ("track_id") REFERENCES "app_tracks" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_track_features" ADD CONSTRAINT "fk_tr_feature_tr_type" FOREIGN KEY ("track_feature_type_id") REFERENCES "app_track_feature_types" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
