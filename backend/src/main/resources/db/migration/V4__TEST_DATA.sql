@@ -137,9 +137,9 @@ INSERT INTO app_articles (id, creation_date, description, last_update, name, con
   VALUES (32, current_timestamp, 'Описание описание', current_timestamp, NULL , 'Предложение предложение предложение предложение', NULL , 'Название 2', 20);
 
 --Комментарии к статье
-INSERT INTO app_comments (id, creation_date, description, last_update, name, comment_content, author_id,  article_id)
+INSERT INTO app_comments (id, creation_date, description, last_update, name, comment_content, author_id,  entity_id)
   VALUES (33, current_timestamp, '', current_timestamp, 'Название комментария 1', 'слово слово слово слово слово слово слово слово слово ', 21, 31);
-INSERT INTO app_comments (id, creation_date, description, last_update, name, comment_content, author_id, article_id)
+INSERT INTO app_comments (id, creation_date, description, last_update, name, comment_content, author_id, entity_id)
   VALUES (34, current_timestamp, '', current_timestamp, 'Название комментария 2', 'Предложение предложение', 22, 31);
 
 --роли
