@@ -88,6 +88,11 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
+    public Track findTrackById(Long id) {
+        return trackRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Collection<TrackDto> findAllDto() {
         return trackRepository.findAllByIdNotNull();
     }
