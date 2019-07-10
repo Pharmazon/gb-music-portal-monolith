@@ -16,13 +16,20 @@ import ru.geekbrains.musicportal.entity.track.Track;
 @EqualsAndHashCode(callSuper = true)
 public class TrackDto extends AbstractDto {
 
-    @JsonView(TrackViews.All.class)
+    // Временная переменная, пока не будет понятно как url прокинуть в Dto
+    private String serverUrl = "http://localhost:8080/api/miraculous/tracks/play/";
+
+    @JsonView(TrackViews.List.class)
     private String bandName;
 
-    @JsonView(TrackViews.All.class)
+    @JsonView(TrackViews.List.class)
     private Long bandId;
 
+    @JsonView(TrackViews.List.class)
     private Long liked;
+
+    @JsonView(TrackViews.List.class)
+    private String url;
 
     @JsonIgnore
     private String fileLink;
@@ -41,5 +48,6 @@ public class TrackDto extends AbstractDto {
         bandId = track.getBand().getId();
         bandName = track.getBand().getName();
         fileLink = track.getFileLink();
+        url = serverUrl + track.getId();
     }
 }
