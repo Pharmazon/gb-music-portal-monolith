@@ -17,4 +17,6 @@ public interface TrackService extends CommonService<Track, TrackDto> {
 
     Collection<TrackDto> getTopTracks(int topMax);
 
+    Track findTrackById(Long id);
+
 }
