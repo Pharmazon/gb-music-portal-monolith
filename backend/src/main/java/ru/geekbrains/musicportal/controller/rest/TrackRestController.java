@@ -37,7 +37,7 @@ public class TrackRestController {
      * Контроллер выдаёт топ треков (по колличеству лайков)
      * @return
      */
-    @JsonView(TrackViews.List.class)
+    @JsonView(TrackViews.All.class)
     @GetMapping("/top/{max}")
     public Collection<TrackDto> getTopByLikes(@PathVariable(name = "max", required = false) Integer max) {
         if (max == null || max > 100 || max < 1) max = 15;
