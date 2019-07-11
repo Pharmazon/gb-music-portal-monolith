@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.dto.common.AbstractDto;
 import ru.geekbrains.musicportal.dto.marker.TrackViews;
 import ru.geekbrains.musicportal.entity.track.Track;
+import ru.geekbrains.musicportal.util.ConfigUrl;
+import sun.security.krb5.Config;
 
 @Data
 @NoArgsConstructor
@@ -22,10 +24,14 @@ public class TrackDto extends AbstractDto {
     @JsonView(TrackViews.All.class)
     private Long bandId;
 
+    @JsonView(TrackViews.All.class)
     private Long liked;
 
     @JsonIgnore
     private String fileLink;
+
+    @JsonView(TrackViews.All.class)
+    private String url;
 
     public TrackDto(Track track, Long liked) {
         this(track);
@@ -41,5 +47,6 @@ public class TrackDto extends AbstractDto {
         bandId = track.getBand().getId();
         bandName = track.getBand().getName();
         fileLink = track.getFileLink();
+        url = ConfigUrl.serverUrl + ConfigUrl.apiPath + ConfigUrl.trackPath + track.getId();
     }
 }
