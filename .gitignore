@@ -2,7 +2,6 @@
 /backend/*.iml
 /backend/target/*.class
 /target/
-/storage/*.mp3
 !.mvn/wrapper/maven-wrapper.jar
 /mvn/
 mvnw.cmd
