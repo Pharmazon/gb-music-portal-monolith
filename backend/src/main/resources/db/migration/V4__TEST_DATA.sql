@@ -55,13 +55,13 @@ INSERT INTO app_categories (id, creation_date, description, last_update, name, p
 
 --треки
 INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
-VALUES (14, current_timestamp, 'Песня о жизни', current_timestamp, 'О жизни', 'c:\tracks\1', 2);
+VALUES (14, current_timestamp, 'Песня о жизни', current_timestamp, 'О жизни', '14.mp3', 2);
 
 INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
-VALUES (15, current_timestamp, 'Юмор', current_timestamp, 'На лабутенах', 'c:\tracks\2', 3);
+VALUES (15, current_timestamp, 'Юмор', current_timestamp, 'На лабутенах', '15.mp3', 3);
 
 INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
-VALUES (16, current_timestamp, 'Поем вечные хиты', current_timestamp, 'Unforgiven', 'c:\tracks\3', 3);
+VALUES (16, current_timestamp, 'Поем вечные хиты', current_timestamp, 'Unforgiven', '16.mp3', 3);
 
 --трек-категория
 INSERT INTO join_track_category (track_id, category_id)
