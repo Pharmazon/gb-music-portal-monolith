@@ -52,16 +52,17 @@ INSERT INTO app_categories (id, creation_date, description, last_update, name, p
 INSERT INTO app_categories (id, creation_date, description, last_update, name, parent_id)
   VALUES (13, to_timestamp('2019-06-05', 'yyyy-mm-dd'), '', to_timestamp('2019-06-01', 'yyyy-mm-dd'), 'METALL', null);
 
-
 --треки
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id) 
+    VALUES (14, current_timestamp, 'Песня о жизни', current_timestamp, 'О жизни', '14.mp3', 2);
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id) 
+    VALUES (15, current_timestamp, 'Юмор', current_timestamp, 'На лабутенах', '15.mp3', 3);
 INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
-VALUES (14, current_timestamp, 'Песня о жизни', current_timestamp, 'О жизни', '14.mp3', 2);
-
+    VALUES (16, current_timestamp, 'Поем вечные хиты', current_timestamp, 'Unforgiven', '16.mp3', 3);
 INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
-VALUES (15, current_timestamp, 'Юмор', current_timestamp, 'На лабутенах', '15.mp3', 3);
-
+    VALUES (17, current_timestamp, '', current_timestamp, 'Zebra crossing the street', '17.mp3', 3);
 INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
-VALUES (16, current_timestamp, 'Поем вечные хиты', current_timestamp, 'Unforgiven', '16.mp3', 3);
+    VALUES (18, current_timestamp, '', current_timestamp, 'Coldwater Canyon', '18.mp3', 2);
 
 --трек-категория
 INSERT INTO join_track_category (track_id, category_id)
@@ -163,4 +164,14 @@ INSERT INTO join_user_roles (user_id, role_id)
     VALUES(23, 36);
 INSERT INTO join_user_roles (user_id, role_id)
     VALUES(23, 37);
+
+--лайки
+INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (1, current_timestamp, 20, 'TRACK', 14);
+INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (2, current_timestamp, 21, 'TRACK', 14);
+INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (3, current_timestamp, 20, 'TRACK', 15);
+INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (4, current_timestamp, 22, 'TRACK', 14);
+INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (5, current_timestamp, 20, 'TRACK', 18);
+INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (6, current_timestamp, 23, 'TRACK', 16);
+INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (7, current_timestamp, 20, 'TRACK', 16);
+INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (8, current_timestamp, 23, 'TRACK', 14);
 
