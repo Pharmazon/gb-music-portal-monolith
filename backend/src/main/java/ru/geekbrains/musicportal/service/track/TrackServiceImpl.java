@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
+import ru.geekbrains.musicportal.enums.EntityLikeEnum;
 import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.pojo.SpecFeature;
 import ru.geekbrains.musicportal.repository.LikeRepository;
@@ -76,7 +77,7 @@ public class TrackServiceImpl implements TrackService {
      * @return Коллекция объектов TrackDto
      */
     public Collection<TrackDto> getTopTracks(int topMax){
-        return likeRepository.getTopTracks("TRACK", PageRequest.of(0, topMax))
+        return likeRepository.getTopTracks(EntityLikeEnum.TRACK, PageRequest.of(0, topMax))
                 .stream()
                 .sorted(Comparator.comparingLong(o -> (Long) o[1]))
                 .map(objects -> {
