@@ -1,6 +1,7 @@
 package ru.geekbrains.musicportal.controller.rest;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Optional;
 
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/api/miraculous/tracks")
@@ -59,24 +61,36 @@ public class TrackRestController {
         return trackService.getTopTracks(max);
     }
 
+    @JsonView(TrackViews.List.class)
+    @GetMapping
     public String trackPage(Model model,
                             @RequestParam(value = "page") Optional<Integer> page,
                             @RequestParam(value = "bandId", required = false) Long bandId,
-                            @RequestParam(value = "albumId", required = false) Long albumId) {
+                            @RequestParam(value = "albumId", required = false) Long albumId,
+                            @RequestParam(value = "artistName", required = false) String artistName,
+                            @RequestParam(value = "trackName", required = false) String trackName,
+                            @RequestParam(value = "playlistName", required = false) String playlistName,
+                            @RequestParam(value = "genreName", required = false) String genreName) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
         Specification<Track> spec = Specification.where(null);
-        StringBuilder filters = new StringBuilder();
-        if (bandId != null) {
-            spec.and(TrackSpecs.bandIdEquals(bandId));
-            filters.append("&bandId=").append(bandId);
-        }
-        if (albumId != null) {
-            spec.and(TrackSpecs.playlistIdEquals(albumId));
-            filters.append("&albumId=").append(albumId);
-        }
+        if (bandId != null) spec.and(TrackSpecs.bandIdEquals(bandId));
+        if (albumId != null) spec.and(TrackSpecs.playlistIdEquals(albumId));
+        if (artistName != null) spec.and(TrackSpecs.bandNameContains(artistName));
+        if (trackName != null) spec.and(TrackSpecs.trackNameContains(trackName));
+        if (playlistName != null) spec.and(TrackSpecs.playlistNameContains(playlistName));
+        if (genreName != null) spec.and(TrackSpecs.genreNameContains(genreName));
+
         Page<Track> tracks = trackService.getTracksWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
         model.addAttribute("tracks", tracks.getContent());
         model.addAttribute("page", currentPage);
+        model.addAttribute("totalPage", tracks.getTotalPages());
+        model.addAttribute("bandId", bandId);
+        model.addAttribute("albumId", albumId);
+        model.addAttribute("artistName", artistName);
+        model.addAttribute("trackName", trackName);
+        model.addAttribute("playlistName", playlistName);
+        model.addAttribute("genreName", genreName);
         return "Success";
     }
 
@@ -93,7 +107,7 @@ public class TrackRestController {
         try {
             return storage.getTrackFile(track);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            log.error("Трек c id={} не найден", id);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

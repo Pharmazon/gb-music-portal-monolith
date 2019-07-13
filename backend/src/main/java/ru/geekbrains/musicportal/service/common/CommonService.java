@@ -1,11 +1,9 @@
 package ru.geekbrains.musicportal.service.common;
 
-import ru.geekbrains.musicportal.entity.common.AbstractEntity;
-
 import java.util.Collection;
 import java.util.Optional;
 
-public interface CommonService<ENTITY extends AbstractEntity, DTO> {
+public interface CommonService<ENTITY, DTO> {
 
     ENTITY saveOrUpdate(ENTITY entity);
 

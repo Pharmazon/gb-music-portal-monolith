@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.band.Band;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
-import ru.geekbrains.musicportal.entity.group.Category;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -26,10 +25,10 @@ public class Track extends AbstractEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "join_track_category",
+            name = "join_tracks_genres",
             joinColumns = @JoinColumn(name = "track_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Collection<Category> categories;
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Collection<Genre> genres;
 
     @OneToMany(
             mappedBy = "track",

@@ -15,4 +15,23 @@ public class TrackSpecs {
                 criteriaBuilder.equal(root.get("playlist_id"), playlistId);
     }
 
+    public static Specification<Track> bandNameContains(String word) {
+        return (Specification<Track>) (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.like(root.get("name"), "%" + word + "%");
+    }
+
+    public static Specification<Track> trackNameContains(String word) {
+        return (Specification<Track>) (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.like(root.get("name"), "%" + word + "%");
+    }
+
+    public static Specification<Track> playlistNameContains(String word) {
+        return (Specification<Track>) (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.like(root.get("name"), "%" + word + "%");
+    }
+
+    public static Specification<Track> genreNameContains(String word) {
+        return (Specification<Track>) (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.like(root.get("genre_id"), "%" + word + "%");
+    }
 }
