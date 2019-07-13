@@ -14,18 +14,14 @@ WITHOUT OIDS;
 
 ALTER TABLE "app_articles" OWNER TO "musicportal";
 
-CREATE TABLE "app_categories" (
+CREATE TABLE "app_genres" (
 "id" int8 NOT NULL,
-"creation_date" timestamp(6) NOT NULL,
-"description" varchar(255) COLLATE "default",
-"last_update" timestamp(6) NOT NULL,
 "name" varchar(255) COLLATE "default",
-"parent_id" int8,
-CONSTRAINT "app_categories_pkey" PRIMARY KEY ("id")
+CONSTRAINT "app_genres_pkey" PRIMARY KEY ("id")
 )
 WITHOUT OIDS;
 
-ALTER TABLE "app_categories" OWNER TO "musicportal";
+ALTER TABLE "app_genres" OWNER TO "musicportal";
 
 CREATE TABLE "app_comments" (
 "id" int8 NOT NULL,
@@ -210,13 +206,13 @@ WITHOUT OIDS;
 
 ALTER TABLE "join_playlist_track" OWNER TO "musicportal";
 
-CREATE TABLE "join_track_category" (
+CREATE TABLE "join_tracks_genres" (
 "track_id" int8 NOT NULL,
-"category_id" int8 NOT NULL
+"genre_id" int8 NOT NULL
 )
 WITHOUT OIDS;
 
-ALTER TABLE "join_track_category" OWNER TO "musicportal";
+ALTER TABLE "join_tracks_genres" OWNER TO "musicportal";
 
 CREATE TABLE "join_user_roles" (
 "user_id" int8 NOT NULL,
@@ -241,7 +237,6 @@ ALTER TABLE "app_images" OWNER TO "musicportal";
 
 ALTER TABLE "app_articles" ADD CONSTRAINT "fk_articles_author" FOREIGN KEY ("author_id") REFERENCES "app_users" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_bands" ADD CONSTRAINT "fk_band_image" FOREIGN KEY ("image_id") REFERENCES "app_images" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "app_categories" ADD CONSTRAINT "fk_cat_parent_cat" FOREIGN KEY ("parent_id") REFERENCES "app_categories" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_comments" ADD CONSTRAINT "fk_comment_user" FOREIGN KEY ("author_id") REFERENCES "app_users" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_track_features" ADD CONSTRAINT "fk_feature_track" FOREIGN KEY ("track_id") REFERENCES "app_tracks" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_track_features" ADD CONSTRAINT "fk_tr_feature_tr_type" FOREIGN KEY ("track_feature_type_id") REFERENCES "app_track_feature_types" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -255,7 +250,7 @@ ALTER TABLE "app_user_profiles" ADD CONSTRAINT "fk_profile_user" FOREIGN KEY ("u
 ALTER TABLE "app_users" ADD CONSTRAINT "fk4kkl36xb5rkenws4hr2dw98xq" FOREIGN KEY ("image_id") REFERENCES "app_images" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "join_playlist_track" ADD CONSTRAINT "fk_playlist" FOREIGN KEY ("playlist_id") REFERENCES "app_playlists" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "join_playlist_track" ADD CONSTRAINT "fk_track" FOREIGN KEY ("track_id") REFERENCES "app_tracks" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "join_track_category" ADD CONSTRAINT "fk_cat" FOREIGN KEY ("category_id") REFERENCES "app_categories" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "join_track_category" ADD CONSTRAINT "fk_track" FOREIGN KEY ("track_id") REFERENCES "app_tracks" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "join_tracks_genres" ADD CONSTRAINT "fk_genre" FOREIGN KEY ("genre_id") REFERENCES "app_genres" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "join_tracks_genres" ADD CONSTRAINT "fk_track" FOREIGN KEY ("track_id") REFERENCES "app_tracks" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "join_user_roles" ADD CONSTRAINT "fk_role" FOREIGN KEY ("role_id") REFERENCES "app_roles" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "join_user_roles" ADD CONSTRAINT "fk_user" FOREIGN KEY ("user_id") REFERENCES "app_users" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;

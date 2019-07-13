@@ -7,6 +7,7 @@ import lombok.ToString;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.image.Image;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
+import ru.geekbrains.musicportal.entity.track.Genre;
 import ru.geekbrains.musicportal.entity.track.Track;
 import ru.geekbrains.musicportal.entity.user.User;
 
@@ -43,4 +44,11 @@ public class Band extends AbstractEntity {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id")
     private Image image;
+
+    @ManyToMany
+    @JoinTable(
+            name = "join_bands_genres",
+            joinColumns = @JoinColumn(name = "band_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Collection<Genre> genres;
 }

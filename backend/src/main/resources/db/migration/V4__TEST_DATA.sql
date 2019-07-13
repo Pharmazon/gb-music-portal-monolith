@@ -1,4 +1,4 @@
---группы исполнителей
+--исполнители
 INSERT INTO app_bands (id, creation_date, description, last_update, name)
     VALUES (1, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Лучшая группа', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'METALLICA');
 
@@ -9,17 +9,10 @@ INSERT INTO app_bands (id, creation_date, description, last_update, name)
     VALUES (3, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Дуэт', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Иван Иванов и Марина');
 
 --типы свойств треков
-INSERT INTO app_track_feature_types (id, description, name)
-VALUES (4, 'INT', 'Битрейт, кбит/с');
-
-INSERT INTO app_track_feature_types (id, description, name)
-VALUES (5, 'STRING', 'Свойство A');
-
-INSERT INTO app_track_feature_types (id, description, name)
-VALUES (6, 'BOOLEAN', 'Свойство B');
-
-INSERT INTO app_track_feature_types (id, description, name)
-VALUES (7, 'STRING', 'Свойство C');
+INSERT INTO app_track_feature_types (id, description, name) VALUES (4, 'INT', 'Битрейт, кбит/с');
+INSERT INTO app_track_feature_types (id, description, name) VALUES (5, 'STRING', 'Свойство A');
+INSERT INTO app_track_feature_types (id, description, name) VALUES (6, 'BOOLEAN', 'Свойство B');
+INSERT INTO app_track_feature_types (id, description, name) VALUES (7, 'STRING', 'Свойство C');
 
 --картинки
 INSERT INTO app_images (id, creation_date, description, last_update, name, img_link)
@@ -34,23 +27,17 @@ INSERT INTO app_images (id, creation_date, description, last_update, name, img_l
 VALUES (5, current_timestamp, null, current_timestamp, null, '/opt/photos/user05/1');
 
 --жанры
-INSERT INTO app_categories (id, creation_date, description, last_update, name, parent_id)
-  VALUES (8, to_timestamp('2019-04-15', 'yyyy-mm-dd'), '', to_timestamp('2019-06-01', 'yyyy-mm-dd'), 'Эстрада', null);
-
-INSERT INTO app_categories (id, creation_date, description, last_update, name, parent_id)
-  VALUES (9, to_timestamp('2019-04-15', 'yyyy-mm-dd'), '', to_timestamp('2019-06-01', 'yyyy-mm-dd'), 'Джаз', null);
-
-INSERT INTO app_categories (id, creation_date, description, last_update, name, parent_id)
-  VALUES (10, to_timestamp('2019-04-15', 'yyyy-mm-dd'), '', to_timestamp('2019-06-01', 'yyyy-mm-dd'), 'Блюз', null);
-
-INSERT INTO app_categories (id, creation_date, description, last_update, name, parent_id)
-  VALUES (11, to_timestamp('2019-04-15', 'yyyy-mm-dd'), '', to_timestamp('2019-06-01', 'yyyy-mm-dd'), 'Классика', null);
-
-INSERT INTO app_categories (id, creation_date, description, last_update, name, parent_id)
-  VALUES (12, to_timestamp('2019-04-15', 'yyyy-mm-dd'), '', to_timestamp('2019-06-01', 'yyyy-mm-dd'), 'Опера', 11);
-
-INSERT INTO app_categories (id, creation_date, description, last_update, name, parent_id)
-  VALUES (13, to_timestamp('2019-06-05', 'yyyy-mm-dd'), '', to_timestamp('2019-06-01', 'yyyy-mm-dd'), 'METALL', null);
+INSERT INTO app_genres (id, name) VALUES (8, 'Эстрадная');
+INSERT INTO app_genres (id, name) VALUES (9, 'Джаз');
+INSERT INTO app_genres (id, name) VALUES (10, 'Блюз');
+INSERT INTO app_genres (id, name) VALUES (11, 'Классика');
+INSERT INTO app_genres (id, name) VALUES (12, 'Опера');
+INSERT INTO app_genres (id, name) VALUES (13, 'Танцевальная');
+INSERT INTO app_genres (id, name) VALUES (14, 'Поп');
+INSERT INTO app_genres (id, name) VALUES (15, 'Хип-хоп');
+INSERT INTO app_genres (id, name) VALUES (16, 'Рэп');
+INSERT INTO app_genres (id, name) VALUES (17, 'Металл');
+INSERT INTO app_genres (id, name) VALUES (18, 'Рок');
 
 --треки
 INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id) 
@@ -64,15 +51,15 @@ INSERT INTO app_tracks (id, creation_date, description, last_update, name, link,
 INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
     VALUES (18, current_timestamp, '', current_timestamp, 'Coldwater Canyon', '18.mp3', 2);
 
---трек-категория
-INSERT INTO join_track_category (track_id, category_id)
-    VALUES(14, 8);
-INSERT INTO join_track_category (track_id, category_id)
-    VALUES(14, 13);
-INSERT INTO join_track_category (track_id, category_id)
-    VALUES(15, 9);
-INSERT INTO join_track_category (track_id, category_id)
-    VALUES(16, 13);
+--трек-жанр
+INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (14, 8);
+INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (14, 9);
+INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (15, 10);
+INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (16, 11);
+INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (17, 12);
+INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (18, 13);
+INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (15, 14);
+INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (18, 15);
 
 --значения свойств
 INSERT INTO app_track_features (id, creation_date, description, last_update, name, track_feature_type_id, track_id)
@@ -97,7 +84,6 @@ INSERT INTO join_user_bands (USER_ID, BAND_ID) values (20, 2);
 INSERT INTO join_user_bands (USER_ID, BAND_ID) values (21, 3);
 INSERT INTO join_user_bands (USER_ID, BAND_ID) values (22, 2);
 INSERT INTO join_user_bands (USER_ID, BAND_ID) values (23, 1);
-
 
 --пользователь-профиль
 INSERT INTO app_user_profiles (id, creation_date, last_update, birth_date, city, country, email, first_name, hobby, last_name, mobile_phone, site, skype, user_id)
@@ -175,3 +161,18 @@ INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (6,
 INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (7, current_timestamp, 20, 'TRACK', 16);
 INSERT INTO app_likes (id, creation_date, user_id, entity, entity_id) VALUES (8, current_timestamp, 23, 'TRACK', 14);
 
+--плейлист-жанр
+INSERT INTO join_playlists_genres (playlist_id, genre_id) VALUES (25, 8);
+INSERT INTO join_playlists_genres (playlist_id, genre_id) VALUES (25, 9);
+INSERT INTO join_playlists_genres (playlist_id, genre_id) VALUES (26, 10);
+INSERT INTO join_playlists_genres (playlist_id, genre_id) VALUES (26, 11);
+INSERT INTO join_playlists_genres (playlist_id, genre_id) VALUES (27, 12);
+INSERT INTO join_playlists_genres (playlist_id, genre_id) VALUES (27, 13);
+
+--исполнитель-жанр
+INSERT INTO join_bands_genres (band_id, genre_id) VALUES (1, 8);
+INSERT INTO join_bands_genres (band_id, genre_id) VALUES (2, 9);
+INSERT INTO join_bands_genres (band_id, genre_id) VALUES (3, 10);
+INSERT INTO join_bands_genres (band_id, genre_id) VALUES (1, 11);
+INSERT INTO join_bands_genres (band_id, genre_id) VALUES (2, 12);
+INSERT INTO join_bands_genres (band_id, genre_id) VALUES (3, 13);

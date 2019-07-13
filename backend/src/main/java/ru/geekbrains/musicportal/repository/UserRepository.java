@@ -2,12 +2,12 @@ package ru.geekbrains.musicportal.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
-import ru.geekbrains.musicportal.dto.group.CategoryDto;
+import ru.geekbrains.musicportal.dto.track.GenreDto;
 import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.entity.user.User;
 
 @Repository
-public interface UserRepository extends CommonRepository<CategoryDto>,
+public interface UserRepository extends CommonRepository<GenreDto>,
         PagingAndSortingRepository<User, Long> {
 
     User findOneByUsername(String username);
