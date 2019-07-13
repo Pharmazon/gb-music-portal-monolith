@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import ru.geekbrains.musicportal.entity.user.User;
+import ru.geekbrains.musicportal.enums.EntityLikeEnum;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,7 +29,8 @@ public class Like {
     private User user;
 
     @Column(name = "entity")
-    private String typeLikedEntity;
+    @Enumerated(EnumType.STRING)
+    private EntityLikeEnum typeLikedEntity;
 
     @Column (name = "entity_id")
     private Long likedEntity;

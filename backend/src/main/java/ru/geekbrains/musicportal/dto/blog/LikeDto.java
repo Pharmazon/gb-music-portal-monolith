@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.dto.common.AbstractDto;
 import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.entity.blog.Like;
+import ru.geekbrains.musicportal.enums.EntityLikeEnum;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class LikeDto extends AbstractDto {
 
     private Long entityId;
 
-    private String entity;
+    private EntityLikeEnum entity;
 
     public LikeDto(Like like) {
         super.setId(like.getId());

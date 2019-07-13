@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.musicportal.entity.blog.Like;
+import ru.geekbrains.musicportal.enums.EntityLikeEnum;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ import java.util.List;
 public interface LikeRepository extends CrudRepository<Like,Long> {
     // Запрашиваем топ лайков по типу и группировкой по идентификатору сущности
     @Query("select l.likedEntity,count(l.id) from Like l where l.typeLikedEntity=:typeLikedEntity group by l.likedEntity")
-    List<Object[]> getTopTracks(@Param("typeLikedEntity") String typeLikedEntity, Pageable pageable);
+    List<Object[]> getTopTracks(@Param("typeLikedEntity") EntityLikeEnum typeLikedEntity, Pageable pageable);
 }
