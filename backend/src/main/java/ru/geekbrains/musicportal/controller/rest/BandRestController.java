@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.band.BandDto;
 import ru.geekbrains.musicportal.dto.marker.BandViews;
+import ru.geekbrains.musicportal.service.band.BandService;
 import ru.geekbrains.musicportal.service.playlist.PlaylistService;
 import ru.geekbrains.musicportal.service.track.TrackService;
-import ru.geekbrains.musicportal.service.user.BandService;
 
 import java.util.Collection;
 

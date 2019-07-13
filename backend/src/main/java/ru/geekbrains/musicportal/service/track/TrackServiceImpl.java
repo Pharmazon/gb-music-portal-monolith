@@ -10,9 +10,9 @@ import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
 import ru.geekbrains.musicportal.enums.EntityLikeEnum;
 import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
-import ru.geekbrains.musicportal.pojo.SpecFeature;
 import ru.geekbrains.musicportal.repository.LikeRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
+import ru.geekbrains.musicportal.specification.SpecFeature;
 import ru.geekbrains.musicportal.util.TrackUtil;
 
 import java.util.Collection;
@@ -38,7 +38,7 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Track save(Track entity) {
+    public Track saveOrUpdate(Track entity) {
         return trackRepository.save(entity);
     }
 
@@ -101,5 +101,9 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public TrackDto findOneDtoById(Long id) {
         return trackRepository.findOneById(id);
+    }
+
+    public Page<Track> getTracksWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Track> specification) {
+        return trackRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
     }
 }

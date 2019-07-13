@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.pojo;
+package ru.geekbrains.musicportal.specification;
 
 import lombok.Data;
 import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;

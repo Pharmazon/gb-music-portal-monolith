@@ -24,7 +24,7 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
-    public Playlist save(Playlist entity) {
+    public Playlist saveOrUpdate(Playlist entity) {
         return playlistRepository.save(entity);
     }
 
