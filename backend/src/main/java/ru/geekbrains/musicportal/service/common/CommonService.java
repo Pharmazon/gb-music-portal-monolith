@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CommonService<ENTITY extends AbstractEntity, DTO> {
 
-    ENTITY save(ENTITY entity);
+    ENTITY saveOrUpdate(ENTITY entity);
 
     Optional<ENTITY> findOneEntityById(Long id);
 

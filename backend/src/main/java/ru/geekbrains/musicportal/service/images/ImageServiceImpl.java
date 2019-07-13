@@ -20,7 +20,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Image save(Image entity) {
+    public Image saveOrUpdate(Image entity) {
         return imageRepository.save(entity);
     }
 

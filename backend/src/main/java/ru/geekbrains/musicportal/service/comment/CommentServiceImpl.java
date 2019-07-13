@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment save(Comment entity) {
+    public Comment saveOrUpdate(Comment entity) {
         return commentRepository.save(entity);
     }
 

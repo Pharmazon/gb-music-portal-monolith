@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.service.user;
+package ru.geekbrains.musicportal.service.band;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class BandServiceImpl implements BandService {
     }
 
     @Override
-    public Band save(Band entity) {
+    public Band saveOrUpdate(Band entity) {
         return bandRepository.save(entity);
     }
 

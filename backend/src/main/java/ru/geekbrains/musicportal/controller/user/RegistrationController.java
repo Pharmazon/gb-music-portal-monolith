@@ -25,8 +25,12 @@ import javax.validation.Valid;
 @RequestMapping("/register")
 public class RegistrationController {
 
+    private final UserServiceImpl userService;
+
     @Autowired
-    private UserServiceImpl userService;
+    public RegistrationController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("login")
     public String showLoginPage() {

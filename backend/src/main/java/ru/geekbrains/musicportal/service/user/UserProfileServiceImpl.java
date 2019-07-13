@@ -24,7 +24,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public UserProfile save(UserProfile entity) {
+    public UserProfile saveOrUpdate(UserProfile entity) {
         return userProfileRepository.save(entity);
     }
 

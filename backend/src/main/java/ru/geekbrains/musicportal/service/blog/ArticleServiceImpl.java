@@ -33,7 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
         if (optional.isPresent()) {
             Article article = optional.get();
             article.setTitle(newTitle);
-            save(article);
+            saveOrUpdate(article);
         }
     }
 
@@ -42,12 +42,12 @@ public class ArticleServiceImpl implements ArticleService {
         if (optional.isPresent()) {
             Article article = optional.get();
             article.setContent(content);
-            save(article);
+            saveOrUpdate(article);
         }
     }
 
     @Override
-    public Article save(Article entity) {
+    public Article saveOrUpdate(Article entity) {
         return articleRepository.save(entity);
     }
 

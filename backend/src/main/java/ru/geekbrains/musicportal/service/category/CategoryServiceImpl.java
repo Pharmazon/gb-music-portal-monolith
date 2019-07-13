@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category save(Category entity) {
+    public Category saveOrUpdate(Category entity) {
         return categoryRepository.save(entity);
     }
 

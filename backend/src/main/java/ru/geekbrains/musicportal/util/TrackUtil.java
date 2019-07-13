@@ -2,7 +2,7 @@ package ru.geekbrains.musicportal.util;
 
 import org.springframework.data.jpa.domain.Specification;
 import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.pojo.SpecFeature;
+import ru.geekbrains.musicportal.specification.SpecFeature;
 
 public class TrackUtil {
 

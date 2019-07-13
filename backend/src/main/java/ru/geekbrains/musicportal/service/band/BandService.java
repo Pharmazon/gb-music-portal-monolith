@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.service.user;
+package ru.geekbrains.musicportal.service.band;
 
 import ru.geekbrains.musicportal.dto.band.BandDto;
 import ru.geekbrains.musicportal.entity.band.Band;
