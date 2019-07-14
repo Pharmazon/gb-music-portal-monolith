@@ -11,7 +11,7 @@ import java.util.Collection;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/miraculous/albums")
+@RequestMapping("/miraculous/api/albums")
 public class PlaylistRestController {
 
     private PlaylistService playlistService;

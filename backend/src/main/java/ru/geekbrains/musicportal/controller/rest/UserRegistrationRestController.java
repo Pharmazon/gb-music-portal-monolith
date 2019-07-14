@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.service.user.UserServiceImpl;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -15,8 +14,8 @@ import javax.validation.Valid;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
-public class RegistrationRestController {
+@RequestMapping("/miraculous/api/registration")
+public class UserRegistrationRestController {
 
     private UserServiceImpl userService;
 
@@ -25,14 +24,13 @@ public class RegistrationRestController {
         this.userService = userService;
     }
 
-    @GetMapping("registerForm")
+    @GetMapping
     public UserDto getUserDto() {
         return new UserDto();
     }
 
-    @PostMapping("registration")
-    public String registerUserAccount(@Valid UserDto userDto,
-                                      HttpServletRequest request) {
+    @PostMapping
+    public String registerUserAccount(@Valid UserDto userDto) {
         userService.save(userDto);
         return "Success";
     }
