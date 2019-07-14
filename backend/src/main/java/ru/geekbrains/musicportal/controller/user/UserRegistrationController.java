@@ -23,12 +23,12 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/register")
-public class RegistrationController {
+public class UserRegistrationController {
 
     private final UserServiceImpl userService;
 
     @Autowired
-    public RegistrationController(UserServiceImpl userService) {
+    public UserRegistrationController(UserServiceImpl userService) {
         this.userService = userService;
     }
 

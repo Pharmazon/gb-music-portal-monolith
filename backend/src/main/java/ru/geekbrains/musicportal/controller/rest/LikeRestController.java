@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/miraculous/like")
+@RequestMapping("/miraculous/api/likes")
 public class LikeRestController {
 
     private LikeServiceImpl likeService;

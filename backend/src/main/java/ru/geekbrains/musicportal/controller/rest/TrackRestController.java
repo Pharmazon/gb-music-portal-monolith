@@ -24,7 +24,7 @@ import java.util.Optional;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping("/api/miraculous/tracks")
+@RequestMapping("/miraculous/api/tracks")
 public class TrackRestController {
 
     private int INITIAL_PAGE = 50;

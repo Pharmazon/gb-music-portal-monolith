@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/miraculous/artists")
+@RequestMapping("/miraculous/api/artists")
 public class BandRestController {
 
     private BandService bandService;
