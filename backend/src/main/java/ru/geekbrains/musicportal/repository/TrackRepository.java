@@ -7,8 +7,7 @@ import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
 
 @Repository
-public interface TrackRepository extends CommonRepository<TrackDto>,
-        PagingAndSortingRepository<Track, Long>,
+public interface TrackRepository extends CommonRepository<TrackDto>, PagingAndSortingRepository<Track, Long>,
         JpaSpecificationExecutor<Track> {
 
 }

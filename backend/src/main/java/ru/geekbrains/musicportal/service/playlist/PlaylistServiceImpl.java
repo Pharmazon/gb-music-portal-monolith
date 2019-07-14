@@ -2,6 +2,9 @@ package ru.geekbrains.musicportal.service.playlist;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.playlist.PlaylistDto;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
@@ -48,4 +51,8 @@ public class PlaylistServiceImpl implements PlaylistService {
         return modelMapper.map(dto, Playlist.class);
     }
 
+    @Override
+    public Page<Playlist> getPlaylistsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Playlist> specification) {
+        return playlistRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
+    }
 }

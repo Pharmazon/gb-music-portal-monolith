@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.dto.marker;
+package ru.geekbrains.musicportal.marker;
 
 public interface PlaylistViews {
 

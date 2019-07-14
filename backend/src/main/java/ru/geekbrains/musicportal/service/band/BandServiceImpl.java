@@ -2,6 +2,9 @@ package ru.geekbrains.musicportal.service.band;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.band.BandDto;
 import ru.geekbrains.musicportal.entity.band.Band;
@@ -50,5 +53,10 @@ public class BandServiceImpl implements BandService {
     @Override
     public BandDto findOneDtoById(Long id) {
         return bandRepository.findOneById(id);
+    }
+
+    @Override
+    public Page<Band> getBandsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Band> specification) {
+        return bandRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
     }
 }

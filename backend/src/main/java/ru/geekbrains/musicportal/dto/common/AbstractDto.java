@@ -3,7 +3,7 @@ package ru.geekbrains.musicportal.dto.common;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.dto.marker.CommonViews;
+import ru.geekbrains.musicportal.marker.CommonViews;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

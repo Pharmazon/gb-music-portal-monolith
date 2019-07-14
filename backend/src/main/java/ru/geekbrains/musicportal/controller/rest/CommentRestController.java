@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.blog.CommentDto;
-import ru.geekbrains.musicportal.dto.marker.CommentViews;
 import ru.geekbrains.musicportal.entity.blog.Comment;
-import ru.geekbrains.musicportal.service.comment.CommentServiceImpl;
+import ru.geekbrains.musicportal.marker.CommentViews;
+import ru.geekbrains.musicportal.service.blog.CommentServiceImpl;
 
 import javax.validation.Valid;
 import java.util.Collection;

@@ -10,9 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.musicportal.dto.marker.TrackViews;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
+import ru.geekbrains.musicportal.marker.TrackViews;
 import ru.geekbrains.musicportal.service.storage.TrackStorage;
 import ru.geekbrains.musicportal.service.track.TrackService;
 import ru.geekbrains.musicportal.specification.TrackSpecs;
@@ -27,8 +27,8 @@ import java.util.Optional;
 @RequestMapping("/tracks")
 public class TrackRestController {
 
-    private int INITIAL_PAGE = 50;
-    private int PAGE_SIZE = 50;
+    private final int INITIAL_PAGE = 50;
+    private final int PAGE_SIZE = 50;
     private TrackService trackService;
     private TrackStorage storage;
 
@@ -62,24 +62,18 @@ public class TrackRestController {
     }
 
     @JsonView(TrackViews.List.class)
-    @GetMapping
+    @GetMapping("/filter")
     public String trackPage(Model model,
                             @RequestParam(value = "page") Optional<Integer> page,
                             @RequestParam(value = "bandId", required = false) Long bandId,
                             @RequestParam(value = "albumId", required = false) Long albumId,
-                            @RequestParam(value = "artistName", required = false) String artistName,
-                            @RequestParam(value = "trackName", required = false) String trackName,
-                            @RequestParam(value = "playlistName", required = false) String playlistName,
-                            @RequestParam(value = "genreName", required = false) String genreName) {
+                            @RequestParam(value = "trackName", required = false) String trackName) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
         Specification<Track> spec = Specification.where(null);
         if (bandId != null) spec.and(TrackSpecs.bandIdEquals(bandId));
         if (albumId != null) spec.and(TrackSpecs.playlistIdEquals(albumId));
-        if (artistName != null) spec.and(TrackSpecs.bandNameContains(artistName));
         if (trackName != null) spec.and(TrackSpecs.trackNameContains(trackName));
-        if (playlistName != null) spec.and(TrackSpecs.playlistNameContains(playlistName));
-        if (genreName != null) spec.and(TrackSpecs.genreNameContains(genreName));
 
         Page<Track> tracks = trackService.getTracksWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
         model.addAttribute("tracks", tracks.getContent());
@@ -87,10 +81,7 @@ public class TrackRestController {
         model.addAttribute("totalPage", tracks.getTotalPages());
         model.addAttribute("bandId", bandId);
         model.addAttribute("albumId", albumId);
-        model.addAttribute("artistName", artistName);
         model.addAttribute("trackName", trackName);
-        model.addAttribute("playlistName", playlistName);
-        model.addAttribute("genreName", genreName);
         return "Success";
     }
 

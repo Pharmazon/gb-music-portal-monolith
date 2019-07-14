@@ -3,8 +3,8 @@ package ru.geekbrains.musicportal.dto.track;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.dto.marker.CommonViews;
 import ru.geekbrains.musicportal.entity.track.Genre;
+import ru.geekbrains.musicportal.marker.CommonViews;
 
 @Data
 @NoArgsConstructor

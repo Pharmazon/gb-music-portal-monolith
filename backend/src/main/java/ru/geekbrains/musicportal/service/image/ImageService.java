@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.service.images;
+package ru.geekbrains.musicportal.service.image;
 
 import ru.geekbrains.musicportal.dto.image.ImageDto;
 import ru.geekbrains.musicportal.entity.image.Image;

@@ -6,10 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.musicportal.config.UrlConfig;
 import ru.geekbrains.musicportal.dto.common.AbstractDto;
-import ru.geekbrains.musicportal.dto.marker.TrackViews;
 import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.util.ConfigUrl;
+import ru.geekbrains.musicportal.marker.TrackViews;
 
 @Data
 @NoArgsConstructor
@@ -46,6 +46,6 @@ public class TrackDto extends AbstractDto {
         bandId = track.getBand().getId();
         bandName = track.getBand().getName();
         fileLink = track.getFileLink();
-        url = ConfigUrl.serverUrl + ConfigUrl.apiPath + ConfigUrl.trackPath + track.getId();
+        url = UrlConfig.serverUrl + UrlConfig.apiPath + UrlConfig.trackPath + track.getId();
     }
 }
