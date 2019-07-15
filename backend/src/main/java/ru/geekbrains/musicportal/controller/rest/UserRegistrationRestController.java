@@ -1,20 +1,23 @@
 package ru.geekbrains.musicportal.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.user.UserDto;
+import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
 import ru.geekbrains.musicportal.service.user.UserServiceImpl;
 
 import javax.validation.Valid;
 
 /**
- * Рест контроллер после заполнения полей с фронта принимает дто по адресу /user/registration,
+ * Рест контроллер после заполнения полей с фронта принимает дто по адресу /registration,
  * дто проходит валидацию и передается в метод saveOrUpdate юзерсервиса.
- * На фронт возвращается сообщение success.
+ * На фронт возвращается статус OK.
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/miraculous/api/registration")
+@RequestMapping("/registration")
 public class UserRegistrationRestController {
 
     private UserServiceImpl userService;
@@ -30,9 +33,9 @@ public class UserRegistrationRestController {
     }
 
     @PostMapping
-    public String registerUserAccount(@Valid UserDto userDto) {
-        userService.save(userDto);
-        return "Success";
+    public ResponseEntity<?> registerUserAccount(@Valid @RequestBody UserRegistrationDto userRegistrationDto) {
+        userService.save(userRegistrationDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 

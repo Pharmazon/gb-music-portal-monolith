@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.musicportal.dto.user.UserDto;
+import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
 import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;
@@ -123,23 +124,23 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public User save(UserDto userDto) throws UserAlreadyExistsException {
-        String username = userDto.getUsername();
-        if (isExistsByName(userDto.getUsername())) {
+    public User save(UserRegistrationDto userRegistrationDto) throws UserAlreadyExistsException {
+        String username = userRegistrationDto.getUsername();
+        if (isExistsByName(userRegistrationDto.getUsername())) {
             throw new UserAlreadyExistsException(username);
         }
 
         User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setEmail(userDto.getEmail());
+        user.setUsername(userRegistrationDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
+        user.setEmail(userRegistrationDto.getEmail());
         user.setLastPasswordChangeDate(LocalDateTime.now());
         user.setLastLoginDate(LocalDateTime.now());
         Collection<Role> roles = getRolesFromEnum(UserRoleEnum.getUser());
         user.setRoles(roles);
-        user.setPasswordQuestion(userDto.getPasswordQuestion());
-        user.setPasswordAnswer(userDto.getPasswordAnswer());
-        user.setApproved(userDto.isApproved());
+        user.setPasswordQuestion(userRegistrationDto.getPasswordQuestion());
+        user.setPasswordAnswer(userRegistrationDto.getPasswordAnswer());
+        user.setApproved(userRegistrationDto.isApproved());
         save(user);
         return user;
     }
