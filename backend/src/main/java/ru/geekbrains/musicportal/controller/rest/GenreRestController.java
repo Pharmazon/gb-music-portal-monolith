@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/miraculous/genres")
+@RequestMapping("/genres")
 public class GenreRestController {
 
     private final int INITIAL_PAGE = 50;
