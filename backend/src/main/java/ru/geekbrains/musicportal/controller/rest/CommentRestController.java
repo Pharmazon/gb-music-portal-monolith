@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/miraculous/api/comments")
+@RequestMapping("/comments")
 public class CommentRestController {
 
     private CommentServiceImpl commentService;

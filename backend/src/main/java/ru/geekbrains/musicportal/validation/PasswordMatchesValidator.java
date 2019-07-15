@@ -3,6 +3,7 @@ package ru.geekbrains.musicportal.validation;
 
 
 import ru.geekbrains.musicportal.dto.user.UserDto;
+import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -18,7 +19,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
-        UserDto userRegistrationDto = (UserDto) object;
+        UserRegistrationDto userRegistrationDto = (UserRegistrationDto) object;
         return userRegistrationDto.getPassword().equals(userRegistrationDto.getMatchingPassword());
     }
 }

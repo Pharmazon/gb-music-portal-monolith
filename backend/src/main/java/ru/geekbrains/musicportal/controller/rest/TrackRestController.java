@@ -24,7 +24,7 @@ import java.util.Optional;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping("/miraculous/api/tracks")
+@RequestMapping("/tracks")
 public class TrackRestController {
 
     private int INITIAL_PAGE = 50;
@@ -39,7 +39,7 @@ public class TrackRestController {
     }
 
     @JsonView(TrackViews.List.class)
-    @GetMapping
+    @GetMapping("/")
     public Collection<TrackDto> getAll() {
         return trackService.findAllDto();
     }

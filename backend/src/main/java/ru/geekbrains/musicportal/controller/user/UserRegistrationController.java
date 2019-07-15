@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.geekbrains.musicportal.dto.user.UserDto;
+import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.service.user.UserServiceImpl;
 
@@ -45,19 +46,19 @@ public class UserRegistrationController {
     }
 
     @PostMapping("processRegistrationForm")
-    public String processRegistrationForm(@Valid @ModelAttribute("userDto") UserDto userDto,
+    public String processRegistrationForm(@Valid @ModelAttribute("userDto") UserRegistrationDto userRegistrationDto,
                                           BindingResult theBindingResult, Model theModel) {
-        String userName = userDto.getUsername();
+        String userName = userRegistrationDto.getUsername();
         if (theBindingResult.hasErrors()) {
             return "registration";
         }
         User existing = userService.findByUserName(userName);
         if (existing != null) {
-            theModel.addAttribute("userRegistrationDto", userDto);
+            theModel.addAttribute("userRegistrationDto", userRegistrationDto);
             theModel.addAttribute("registrationError", "User with current username already exists");
             return "registration";
         }
-        userService.save(userDto);
+        userService.save(userRegistrationDto);
         return "registration-confirmation";
     }
 }
