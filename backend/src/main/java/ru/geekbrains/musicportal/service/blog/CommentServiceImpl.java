@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.service.comment;
+package ru.geekbrains.musicportal.service.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

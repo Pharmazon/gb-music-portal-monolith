@@ -5,10 +5,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.dto.common.AbstractDto;
-import ru.geekbrains.musicportal.dto.marker.BandViews;
 import ru.geekbrains.musicportal.dto.playlist.PlaylistDto;
 import ru.geekbrains.musicportal.entity.band.Band;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
+import ru.geekbrains.musicportal.marker.BandViews;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

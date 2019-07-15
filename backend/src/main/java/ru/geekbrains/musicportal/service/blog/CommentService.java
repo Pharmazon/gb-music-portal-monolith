@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.service.comment;
+package ru.geekbrains.musicportal.service.blog;
 
 import ru.geekbrains.musicportal.dto.blog.CommentDto;
 import ru.geekbrains.musicportal.entity.blog.Comment;

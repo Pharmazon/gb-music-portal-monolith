@@ -1,21 +1,21 @@
-package ru.geekbrains.musicportal.util;
+package ru.geekbrains.musicportal.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConfigUrl {
+public class UrlConfig {
     public static String serverUrl;
     public static String apiPath;
     public static String trackPath;
 
-    public ConfigUrl(
+    public UrlConfig(
             @Value("${backend.server}") String serverUrl,
             @Value("${backend.server.api.path}") String apiPath,
             @Value("${backend.server.api.track.path}") String trackPath
             ) {
-        ConfigUrl.serverUrl = serverUrl;
-        ConfigUrl.apiPath = apiPath;
-        ConfigUrl.trackPath = trackPath;
+        UrlConfig.serverUrl = serverUrl;
+        UrlConfig.apiPath = apiPath;
+        UrlConfig.trackPath = trackPath;
     }
 }

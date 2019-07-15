@@ -18,14 +18,18 @@ import ru.geekbrains.musicportal.service.user.UserServiceImpl;
 @RequestMapping("/authorization")
 public class AuthRestController {
 
-    @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
+    private UserServiceImpl userService;
+    private TokenProvider jwtProvider;
 
     @Autowired
-    UserServiceImpl userService;
-
-    @Autowired
-    TokenProvider jwtProvider;
+    public AuthRestController(AuthenticationManager authenticationManager,
+                              UserServiceImpl userService,
+                              TokenProvider jwtProvider) {
+        this.authenticationManager = authenticationManager;
+        this.userService = userService;
+        this.jwtProvider = jwtProvider;
+    }
 
     @PostMapping
     public ResponseEntity<?> authUser(@RequestBody UserAuthDto userAuthDto) {

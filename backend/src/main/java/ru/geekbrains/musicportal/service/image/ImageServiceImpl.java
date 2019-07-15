@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.service.images;
+package ru.geekbrains.musicportal.service.image;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

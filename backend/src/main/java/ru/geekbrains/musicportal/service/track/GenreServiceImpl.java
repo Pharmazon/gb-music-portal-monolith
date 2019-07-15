@@ -2,6 +2,9 @@ package ru.geekbrains.musicportal.service.track;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.track.GenreDto;
 import ru.geekbrains.musicportal.entity.track.Genre;
@@ -27,8 +30,8 @@ public class GenreServiceImpl implements GenreService {
         return genreRepository.findById(id);
     }
 
-    public Genre getByTitle(String title){
-        return genreRepository.findOneByName(title);
+    public GenreDto getByName(String name){
+        return genreRepository.findOneByName(name);
     }
 
     @Override
@@ -54,5 +57,10 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public Genre convertToEntity(GenreDto dto) {
         return modelMapper.map(dto, Genre.class);
+    }
+
+    @Override
+    public Page<Genre> getGenresWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Genre> specification) {
+        return genreRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
     }
 }

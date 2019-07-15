@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.dto.common.AbstractDto;
 import ru.geekbrains.musicportal.dto.image.ImageDto;
-import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.validation.PasswordMatches;
 import ru.geekbrains.musicportal.validation.ValidEmail;
@@ -14,7 +13,6 @@ import ru.geekbrains.musicportal.validation.ValidEmail;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

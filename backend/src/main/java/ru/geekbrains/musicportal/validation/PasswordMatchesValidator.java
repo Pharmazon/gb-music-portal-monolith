@@ -1,8 +1,5 @@
 package ru.geekbrains.musicportal.validation;
 
-
-
-import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
 
 import javax.validation.ConstraintValidator;
@@ -12,9 +9,9 @@ import javax.validation.ConstraintValidatorContext;
  * Валидатор длч пароля, в будущес можно усложнить.
  */
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
+
     @Override
     public void initialize(PasswordMatches constraintAnnotation) {
-
     }
 
     @Override

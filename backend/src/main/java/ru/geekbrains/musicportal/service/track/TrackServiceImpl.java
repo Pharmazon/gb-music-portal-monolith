@@ -13,7 +13,7 @@ import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.repository.LikeRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
 import ru.geekbrains.musicportal.specification.SpecFeature;
-import ru.geekbrains.musicportal.util.TrackUtil;
+import ru.geekbrains.musicportal.specification.TrackUtil;
 
 import java.util.Collection;
 import java.util.Comparator;
