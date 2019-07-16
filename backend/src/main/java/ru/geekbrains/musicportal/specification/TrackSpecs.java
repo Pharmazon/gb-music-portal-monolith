@@ -5,9 +5,9 @@ import ru.geekbrains.musicportal.entity.track.Track;
 
 public class TrackSpecs {
 
-    public static Specification<Track> bandIdEquals(Long bandId) {
+    public static Specification<Track> artistIdEquals(Long artistId) {
         return (Specification<Track>) (root, criteriaQuery, criteriaBuilder) ->
-            criteriaBuilder.equal(root.get("band_id"), bandId);
+            criteriaBuilder.equal(root.get("artist_id"), artistId);
     }
 
     public static Specification<Track> playlistIdEquals(Long playlistId) {

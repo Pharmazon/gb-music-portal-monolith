@@ -2,7 +2,7 @@ package ru.geekbrains.musicportal.entity.track;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.band.Band;
+import ru.geekbrains.musicportal.entity.artist.Artist;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 
 import javax.persistence.*;
@@ -38,8 +38,8 @@ public class Genre {
 
     @ManyToMany
     @JoinTable(
-            name = "join_bands_genres",
+            name = "join_artists_genres",
             joinColumns = @JoinColumn(name = "genre_id"),
-            inverseJoinColumns = @JoinColumn(name = "band_id"))
-    private Collection<Band> bands;
+            inverseJoinColumns = @JoinColumn(name = "artists_id"))
+    private Collection<Artist> artists;
 }

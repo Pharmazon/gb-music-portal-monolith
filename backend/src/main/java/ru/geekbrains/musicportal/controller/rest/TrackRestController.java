@@ -65,13 +65,13 @@ public class TrackRestController {
     @GetMapping("/filter")
     public String trackPage(Model model,
                             @RequestParam(value = "page") Optional<Integer> page,
-                            @RequestParam(value = "bandId", required = false) Long bandId,
+                            @RequestParam(value = "artistId", required = false) Long artistId,
                             @RequestParam(value = "albumId", required = false) Long albumId,
                             @RequestParam(value = "trackName", required = false) String trackName) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
         Specification<Track> spec = Specification.where(null);
-        if (bandId != null) spec.and(TrackSpecs.bandIdEquals(bandId));
+        if (artistId != null) spec.and(TrackSpecs.artistIdEquals(artistId));
         if (albumId != null) spec.and(TrackSpecs.playlistIdEquals(albumId));
         if (trackName != null) spec.and(TrackSpecs.trackNameContains(trackName));
 
@@ -79,7 +79,7 @@ public class TrackRestController {
         model.addAttribute("tracks", tracks.getContent());
         model.addAttribute("page", currentPage);
         model.addAttribute("totalPage", tracks.getTotalPages());
-        model.addAttribute("bandId", bandId);
+        model.addAttribute("artistId", artistId);
         model.addAttribute("albumId", albumId);
         model.addAttribute("trackName", trackName);
         return "Success";

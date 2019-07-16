@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.dto.band;
+package ru.geekbrains.musicportal.dto.artist;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
@@ -6,9 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.dto.common.AbstractDto;
 import ru.geekbrains.musicportal.dto.playlist.PlaylistDto;
-import ru.geekbrains.musicportal.entity.band.Band;
+import ru.geekbrains.musicportal.entity.artist.Artist;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
-import ru.geekbrains.musicportal.marker.BandViews;
+import ru.geekbrains.musicportal.marker.ArtistViews;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -16,22 +16,22 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class BandDto extends AbstractDto {
+public class ArtistDto extends AbstractDto {
 
-    @JsonView(BandViews.All.class)
+    @JsonView(ArtistViews.All.class)
     private Long imageId;
 
-    @JsonView(BandViews.Single.class)
+    @JsonView(ArtistViews.Single.class)
     private Collection<PlaylistDto> playlists;
 
-    public BandDto(Band band) {
-        if (band == null) return;
+    public ArtistDto(Artist artist) {
+        if (artist == null) return;
 
-        super.setId(band.getId());
-        super.setName(band.getName());
-        super.setDescription(band.getDescription());
-        imageId = band.getImage() == null ? null : band.getImage().getId();
-        Collection<Playlist> playlistsList = band.getPlaylists();
+        super.setId(artist.getId());
+        super.setName(artist.getName());
+        super.setDescription(artist.getDescription());
+        imageId = artist.getImage() == null ? null : artist.getImage().getId();
+        Collection<Playlist> playlistsList = artist.getPlaylists();
         this.playlists = playlistsList.stream()
                 .map(PlaylistDto::new)
                 .collect(Collectors.toList());
