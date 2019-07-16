@@ -2,12 +2,40 @@
   <div class="registration-form-headphones-pic"></div>
   <div class="registration-form-contents">
     <h5 class="registration-signature">Register / Sign Up</h5>
-    <form class="registration-form">
-      <input type="text" name="registration-name-input" placeholder="Enter Your Name" class="registration-name-input">
-      <input type="email" name="registration-email-input" placeholder="Enter Your Email" class="registration-email-input">
-      <input type="password" name="registration-password-input" placeholder="Enter Your Password" class="registration-password-input">
-      <input type="password" name="registration-confirm-password-input" placeholder="Confirm Your Password" class="registration-confirm-password-input">
-      <input type="submit" name="registration-submit-button" class="registration-submit-button" value="Register Now">
+    <form class="registration-form" (ngSubmit)="submitRegistrationForm()" name="registration-form" #registrationForm>
+      <input type="text" name="registration-name-input" placeholder="Enter Your Username" class="registration-name-input" [(ngModel)]="visitor.login"
+             required #username="ngModel" minlength="5" #usernameInput >
+      <figure [hidden]="username.valid || username.pristine" class="username-invalid-message" >Username invalid</figure>
+      <figure [hidden]="true" class="username-already-exists-message">Username already exists</figure>
+      <input type="email" name="registration-email-input" placeholder="Enter Your Email" class="registration-email-input" [(ngModel)]="visitor.email"
+             required #email="ngModel" pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
+      <figure [hidden]="email.valid || email.untouched" class="email-invalid-message">Invalid Email</figure>
+      <input type="password" name="registration-password-input" placeholder="Enter Your Password" class="registration-password-input"
+             [(ngModel)]="visitor.password" required #password="ngModel">
+      <figure [hidden]="true" class="email-invalid-message">Wrong Password</figure>
+      <figure [hidden]="visitor.password == visitor.confirmationPassword || (password.pristine && confirmPassword.pristine)" class="password-invalid-message">Passwords do not match</figure>
+      <input type="password" name="registration-confirm-password-input" placeholder="Confirm Your Password" class="registration-confirm-password-input"
+             [(ngModel)]="visitor.confirmationPassword" required #confirmPassword="ngModel" minlength="6">
+      <p class="register-as-signature">Register as: </p>
+      <label for="user-role" class="user-role-input-label">
+        <input type="radio" name="role" value="user" id="user-role" class="user-role-input" checked (click)="hideAdditionalDataPanel()">
+        User
+      </label>
+      <label class="artist-role-input-label" for="artist-role">
+        <input type="radio" name="role" value="artist" id="artist-role" class="artist-role-input" (click)="showAdditionalDataPanel()">
+        Artist
+      </label>
+      <div class="additional-artist-information"  [hidden]="!isArtistRoleChosen">
+        <p class="artist-additional-info-demand-text">Please, give us some more information about yourself</p>
+        <p class="additional-info-required-signature" [hidden]="(additionalArtistInfo.pristine || additionalArtistInfo.valid) && isArtistRoleChosen==true">Additional information is required</p>
+        <textarea name="additional-artist-info" placeholder="Add some information about yourself" class="artist-description-textarea" [(ngModel)]="visitor.description" required #additionalArtistInfo="ngModel"
+        minlength="5"></textarea>
+        <p class="location-required-signature" [hidden]="(artistLocation.pristine || artistLocation.valid) && isArtistRoleChosen==true">Location is required</p>
+        <input name="artist-location" type="text" placeholder="Enter your location" class="artist-location-input" [(ngModel)]="visitor.location"
+               required #artistLocation="ngModel"  minlength="3">
+      </div>
+      <input type="submit" [disabled]="username.invalid || email.invalid || password.invalid || password!=confirmPassword || additionalArtistInfo.invalid || artistLocation.invalid" name="registration-submit-button" class="registration-submit-button" value="Register Now" (click)="submitRegistrationForm()">
+      <input type="reset" class="registration-form-reset-button" hidden="true">
     </form>
     <p class="login-link">Already Have An Account?<button (click)="switchToLoginComponent()">Login Here</button></p>
   </div>

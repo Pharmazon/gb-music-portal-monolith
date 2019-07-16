@@ -11,12 +11,12 @@
     <li><a routerLink="stations" (click)="navigate('stations')"><img src="assets/icons/radio-icon.png" title="Stations"></a></li>
   </ul>
   <ul class="navigation-lower-link-list">
-    <li><a routerLink="downloads" (click)="navigate('downloads')"><img src="assets/icons/downloads-icon.png" title="Downloads"></a></li>
-    <li><a routerLink="purchased-music" (click)="navigate('purchased-music')"><img src="assets/icons/purchased-music-icon.png"></a></li>
-    <li><a routerLink="favourites" (click)="navigate('favourites')"><img src="assets/icons/favourites-icon.png"></a></li>
-    <li><a routerLink="history" (click)="navigate('history')"><img src="assets/icons/history-icon.png"></a></li>
-    <li><a routerLink="featured-playlists" (click)="navigate('featured-playlists')"><img src="assets/icons/featured-playlist-icon.png"></a></li>
-    <li><a routerLink="create-playlist" (click)="navigate('create-playlist')"><img src="assets/icons/create-playlist-icon.png"></a></li>
+    <li><a routerLink="cart" (click)="navigate('cart')"><img src="assets/icons/purchased-music-icon.png" title="Cart"></a></li>
+    <li><a routerLink="purchased-music" (click)="navigate('purchased-music')"><img src="assets/icons/downloads-icon.png" title="Purchased Music"></a></li>
+<!--    <li><a routerLink="favourites" (click)="navigate('favourites')"><img src="assets/icons/favourites-icon.png"></a></li>-->
+<!--    <li><a routerLink="history" (click)="navigate('history')"><img src="assets/icons/history-icon.png"></a></li>-->
+<!--    <li><a routerLink="featured-playlists" (click)="navigate('featured-playlists')"><img src="assets/icons/featured-playlist-icon.png"></a></li>-->
+<!--    <li><a routerLink="create-playlist" (click)="navigate('create-playlist')"><img src="assets/icons/create-playlist-icon.png"></a></li>-->
   </ul>
 </div>
 <div class="right-block">
@@ -25,7 +25,7 @@
       <input type="text" name="search" class="search-panel-search-form-input" placeholder="Search Music Here">
       <button class="search-panel-search-form-submit-button"><a routerLink="/search"><img src="assets/icons/loupe-icon.png"></a></button>
     </form>
-    <h5 class="trending-songs-signature"><span>Trending songs: </span></h5>
+    <h5 class="trending-songs-signature"><span>Top songs: </span></h5>
     <figure class="languages-signature" (click)="showInternalizationPanel()" style="cursor: pointer">Languages
       <img src="assets/icons/language-icon.png" class="language-icon" ></figure>
     <figure class="user-profile-circle">
@@ -34,7 +34,7 @@
         <li><a routerLink="user-profile" (click)="navigate('artist-profile/1')">Profile (artist)</a></li>
         <li><a routerLink="edit-user-profile" (click)="navigate('edit-user-profile/1')">Settings (user)</a></li>
         <li><a routerLink="edit-artist-profile" (click)="navigate('edit-artist-profile/1')">Settings (artist)</a></li>
-        <li><a href="logout" (click)="navigate('logout')">Logout</a></li>
+        <li><a routerLink="logout" (click)="navigate('logout')">Logout</a></li>
       </ul>
     </figure>
     <figure class="upload-music-signature">
@@ -46,6 +46,7 @@
     </figure>
     <button class="register-button" (click)="showRegistrationComponent()">Register</button>
     <button class="login-button" (click)="showLoginComponent()">Login</button>
+    <button class="admin-page-button" (click)="switchToAdminPage()">Admin</button>
   </div>
   <div class="content">
     <router-outlet></router-outlet>

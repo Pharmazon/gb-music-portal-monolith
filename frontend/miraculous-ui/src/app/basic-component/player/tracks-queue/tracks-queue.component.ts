@@ -1,6 +1,6 @@
 import {Component, ComponentRef, EventEmitter, OnInit, Output} from '@angular/core';
-import {PlayerServiceService} from "../../../../services/player-service.service";
-import {Track} from "../../../../model/track";
+import {PlayerServiceService} from "../../../../services/player-service/player-service.service";
+import {Track} from "../../../../model/track/track";
 
 @Component({
   selector: 'app-tracks-queue',

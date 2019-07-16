@@ -1,0 +1,27 @@
+<figure class="audiotrack">
+  <audio src="assets/music/Spitfire.mp3" class="audiotrack-sound" controls="true"></audio>
+  <figure class="audiotrack-number">01</figure>
+  <figure class="audiotrack-picture" onclick="toggleAudiotrack(); changePicture()"></figure>
+  <figure class="audiotrack-information">
+    <p class="audiotrack-title">Until I met you</p>
+    <p class="audiotrack-author">Ava Cornish</p>
+    <p>Album: </p>
+  </figure>
+  <figure class="audiotrack-length">5:10</figure>
+  <figure style="width: 100px; display: flex">
+    <i class="fa fa-heart"><p class="number-of-likes">0</p></i>
+    <i class="fa fa-shopping-cart" (click)="addTrackToCart()"></i>
+    <i class="fa fa-ellipsis-h">
+      <ul class="track-options-list">
+        <i class="fa fa-plus"></i>
+        <i class="fa fa-download"></i>
+        <li>
+          <a type="button" (click)="addTrackToQueue()">Add To Queue</a>
+        </li>
+        <li>
+          <a href="assets/music/Spitfire.mp3" download>Download preview</a>
+        </li>
+      </ul>
+    </i>
+  </figure>
+</figure>

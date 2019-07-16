@@ -71,7 +71,7 @@ export class BasicComponentComponent implements OnInit{
 
   showRegistrationComponent(){
 
-     this.registrationComponent.nativeElement.style = "z-index: 1000000; opacity: 1; transition: 1s; pointer-events: all; position: fixed; width: 930px; height: 510px; top: 25%";
+     this.registrationComponent.nativeElement.style = "z-index: 1000000; opacity: 1; transition: 1s; pointer-events: all; position: fixed; width: 930px; height: 510px; top: 8%";
      this.hideOtherComponents();
 
   }
@@ -119,5 +119,9 @@ export class BasicComponentComponent implements OnInit{
       this.isPlayerHidden = true;
     }
 
+  }
+
+  switchToAdminPage() {
+      this.router.navigate(["/admin"]);
   }
 }

@@ -53,6 +53,12 @@ import { ArtistCommentComponent } from './basic-component/artist-profile/artist-
 import { PlayerComponent } from './basic-component/player/player.component';
 import { TracksQueueComponent } from './basic-component/player/tracks-queue/tracks-queue.component';
 import { TracksQueueItemComponent } from './basic-component/player/tracks-queue/tracks-queue-item/tracks-queue-item.component';
+import { TopTrackComponent } from './common-components/top-tracks/top-track/top-track.component';
+import { TrackPopupComponent } from './common-components/top-tracks/top-track/track-popup/track-popup.component';
+import { CartComponent } from './basic-component/cart/cart.component';
+import { TopAlbumsComponent } from './common-components/top-albums/top-albums.component';
+import {HttpClientModule} from "@angular/common/http";
+
 
 
 const appRoutes: Routes = [
@@ -66,10 +72,10 @@ const appRoutes: Routes = [
       {path:'top-tracks', component: TopTracksComponent},
       {path:'free-music', component: FreeMusicComponent},
       {path:'stations', component: RadioComponent},
-      {path:'downloads', component: AlbumPageComponent},
+      {path:'purchased-music', component: PurchasedMusicComponent},
       {path:'tracks/:id', component: TrackPageComponent},
       {path:'albums/:id', component: AlbumPageComponent},
-      {path:'purchased-music', component: PurchasedMusicComponent},
+      {path:'cart', component: CartComponent},
       {path:'favourites', component: FavouritesComponent},
       {path:'history', component: HistoryComponent},
       {path:'user/:id', component: UserProfileComponent},
@@ -136,7 +142,10 @@ const appRoutes: Routes = [
     PlayerComponent,
     TracksQueueComponent,
     TracksQueueItemComponent,
-
+    TopTrackComponent,
+    TrackPopupComponent,
+    CartComponent,
+    TopAlbumsComponent,
   ],
   entryComponents: [TagComponent, AudiotrackComponent, AudiotrackWithDetailsComponent],
   imports: [
@@ -145,7 +154,8 @@ const appRoutes: Routes = [
     Ng2CarouselamosModule,
     TranslateModule.forRoot(),
     CommonModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
 
   ],
   providers: [],

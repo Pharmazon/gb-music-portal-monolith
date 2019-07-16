@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {PlayerServiceService} from "../../../services/player-service.service";
+import {PlayerServiceService} from "../../../services/player-service/player-service.service";
 
 
 @Component({
@@ -96,6 +96,8 @@ export class PlayerComponent implements OnInit {
       if (this.playerService.tracks.length != this.playerService.currentTrackIndex -1){
         this.playerService.currentTrackIndex ++;
         (<HTMLAudioElement>this.audio.nativeElement).autoplay = true;
+      }else {
+        this.isPlaying = false;
       }
     }
 

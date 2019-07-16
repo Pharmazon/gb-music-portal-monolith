@@ -95,7 +95,7 @@
   margin-top: 10px;
 }
 
-.single-track-upload-input-label {
+.single-track-upload-input-label, .preview-track-upload-input-label {
 
   margin-top: 25px;
   width: 122px;
@@ -113,7 +113,12 @@
 
 }
 
-.single-track-upload-input {
+.single-track-upload-input-label:hover, .preview-track-upload-input-label:hover {
+
+  box-shadow: 0px 0px 20px 0px #3bc8e7;
+}
+
+.single-track-upload-input, .preview-track-upload-input {
 
   position: absolute;
   overflow: hidden;
@@ -376,7 +381,7 @@
   background-color: #1b2039;
   color: #3bc8e7;
 }
-.add-new-track-to-album-button:hover, .album-cover-picture-label:hover {
+.add-new-track-to-album-button:hover, .album-cover-picture-label:hover, .cut- {
 
   box-shadow: 0px 0px 20px 0px #3bc8e7;
 }

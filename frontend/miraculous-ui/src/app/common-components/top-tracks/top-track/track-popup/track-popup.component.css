@@ -1,0 +1,52 @@
+.track-options-list {
+
+  width: 65px;
+  height: 43px;
+  list-style-type: none;
+  padding-right: 20px;
+  line-height: 1;
+  border-radius: 6px;
+  background-color: #fff;
+  border: 1px solid black;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -45px;
+  right: 20px;
+}
+
+.track-options-list li {
+
+  padding: 5px 0px;
+  color: #222;
+  font-family: "JosephinSansBold";
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.track-options-list a {
+
+  text-decoration: none;
+  color: #222;
+  cursor: pointer;
+}
+
+.track-options-list a:hover {
+
+  color: #3bc8e7;
+}
+
+
+.track-popup {
+
+  position: absolute;
+}
+
+.fa-plus {
+
+  position: absolute;
+  left: 18px;
+  top: 17px;
+}
