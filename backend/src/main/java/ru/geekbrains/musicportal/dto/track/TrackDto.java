@@ -18,10 +18,10 @@ import ru.geekbrains.musicportal.marker.TrackViews;
 public class TrackDto extends AbstractDto {
 
     @JsonView(TrackViews.All.class)
-    private String bandName;
+    private String artistName;
 
     @JsonView(TrackViews.All.class)
-    private Long bandId;
+    private Long artistId;
 
     @JsonView(TrackViews.All.class)
     private Long liked;
@@ -43,8 +43,8 @@ public class TrackDto extends AbstractDto {
         super.setId(track.getId());
         super.setName(track.getName());
         super.setDescription(track.getDescription());
-        bandId = track.getBand().getId();
-        bandName = track.getBand().getName();
+        artistId = track.getArtist().getId();
+        artistName = track.getArtist().getName();
         fileLink = track.getFileLink();
         url = UrlConfig.serverUrl + UrlConfig.apiPath + UrlConfig.trackPath + track.getId();
     }

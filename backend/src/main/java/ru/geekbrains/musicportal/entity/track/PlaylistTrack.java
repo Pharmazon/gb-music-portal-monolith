@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "join_playlist_track")
+@Table(name = "join_playlists_tracks")
 public class PlaylistTrack {
 
     @EmbeddedId

@@ -1,11 +1,11 @@
 --исполнители
-INSERT INTO app_bands (id, creation_date, description, last_update, name)
+INSERT INTO app_artists (id, creation_date, description, last_update, name)
     VALUES (1, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Лучшая группа', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'METALLICA');
 
-INSERT INTO app_bands (id, creation_date, description, last_update, name)
+INSERT INTO app_artists (id, creation_date, description, last_update, name)
     VALUES (2, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Один исполнитель', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Иыван Иванов');
 
-INSERT INTO app_bands (id, creation_date, description, last_update, name)
+INSERT INTO app_artists (id, creation_date, description, last_update, name)
     VALUES (3, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Дуэт', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Иван Иванов и Марина');
 
 --типы свойств треков
@@ -40,15 +40,15 @@ INSERT INTO app_genres (id, name) VALUES (17, 'Металл');
 INSERT INTO app_genres (id, name) VALUES (18, 'Рок');
 
 --треки
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id) 
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
     VALUES (14, current_timestamp, 'Песня о жизни', current_timestamp, 'О жизни', '14.mp3', 2);
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id) 
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
     VALUES (15, current_timestamp, 'Юмор', current_timestamp, 'На лабутенах', '15.mp3', 3);
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
     VALUES (16, current_timestamp, 'Поем вечные хиты', current_timestamp, 'Unforgiven', '16.mp3', 3);
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
     VALUES (17, current_timestamp, '', current_timestamp, 'Zebra crossing the street', '17.mp3', 3);
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, band_id)
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
     VALUES (18, current_timestamp, '', current_timestamp, 'Coldwater Canyon', '18.mp3', 2);
 
 --трек-жанр
@@ -80,29 +80,29 @@ INSERT INTO app_users (id, creation_date, last_update, name, password, password_
 VALUES(23, to_timestamp('2019-06-11', 'yyyy-mm-dd'), current_timestamp, 'Вероника', '121212', 'Иванова', 'Девчья фамилия матери?', 3, FALSE, TRUE, to_timestamp('2019-06-12', 'yyyy-mm-dd'), to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'nika', 'nika@protonmail.com', 4, 0);
 
 --пользователь - группа
-INSERT INTO join_user_bands (USER_ID, BAND_ID) values (20, 2);
-INSERT INTO join_user_bands (USER_ID, BAND_ID) values (21, 3);
-INSERT INTO join_user_bands (USER_ID, BAND_ID) values (22, 2);
-INSERT INTO join_user_bands (USER_ID, BAND_ID) values (23, 1);
+INSERT INTO join_users_artists (USER_ID, ARTIST_ID) values (20, 2);
+INSERT INTO join_users_artists (USER_ID, ARTIST_ID) values (21, 3);
+INSERT INTO join_users_artists (USER_ID, ARTIST_ID) values (22, 2);
+INSERT INTO join_users_artists (USER_ID, ARTIST_ID) values (23, 1);
 
 --пользователь-профиль
 INSERT INTO app_user_profiles (id, creation_date, last_update, birth_date, city, country, email, first_name, hobby, last_name, mobile_phone, site, skype, user_id)
   VALUES (24, current_timestamp, current_timestamp, to_timestamp('1990-01-05', 'yyyy-mm-dd'), 'Москва', 'Россия', '111@222.ru', 'Билл', 'Прыжки с парашютом', 'Гейтс', '8-909-111-11-11', NULL, NULL, 20 );
 
 --плейлисты
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, band_id)
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, artist_id)
     VALUES (25, current_timestamp, 'Любимый плейлист Вероники', current_timestamp, 'хиты', 22, 1);
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, band_id)
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, artist_id)
     VALUES (26, current_timestamp, 'Билл слушает на работе', current_timestamp, 'работа', 23, 1);
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, band_id)
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, artist_id)
     VALUES (27, current_timestamp, 'Вилли слушает на природе', current_timestamp, 'Домашний', 23, 1);
 
 --плейлист-трек
-INSERT INTO join_playlist_track (track_id, playlist_id, position) VALUES(14,25,1);
-INSERT INTO join_playlist_track (track_id, playlist_id, position) VALUES(15,25,2);
-INSERT INTO join_playlist_track (track_id, playlist_id, position) VALUES(16,25,3);
-INSERT INTO join_playlist_track (track_id, playlist_id, position) VALUES(15,26,1);
-INSERT INTO join_playlist_track (track_id, playlist_id, position) VALUES(14,26,2);
+INSERT INTO join_playlists_tracks (track_id, playlist_id, position) VALUES(14,25,1);
+INSERT INTO join_playlists_tracks (track_id, playlist_id, position) VALUES(15,25,2);
+INSERT INTO join_playlists_tracks (track_id, playlist_id, position) VALUES(16,25,3);
+INSERT INTO join_playlists_tracks (track_id, playlist_id, position) VALUES(15,26,1);
+INSERT INTO join_playlists_tracks (track_id, playlist_id, position) VALUES(14,26,2);
 
 --типы свойств плейлиста
 INSERT INTO app_playlist_feature_types (id, description, name)
@@ -138,17 +138,17 @@ INSERT INTO app_roles (id, creation_date, description, last_update, name)
 VALUES (37, current_timestamp, 'Исполнитель', current_timestamp, 'ARTIST');
 
 --пользователь-роль
-INSERT INTO join_user_roles (user_id, role_id)
+INSERT INTO join_users_roles (user_id, role_id)
     VALUES(20, 35);
-INSERT INTO join_user_roles (user_id, role_id)
+INSERT INTO join_users_roles (user_id, role_id)
     VALUES(20, 37);
-INSERT INTO join_user_roles (user_id, role_id)
+INSERT INTO join_users_roles (user_id, role_id)
     VALUES(21, 36);
-INSERT INTO join_user_roles (user_id, role_id)
+INSERT INTO join_users_roles (user_id, role_id)
     VALUES(22, 36);
-INSERT INTO join_user_roles (user_id, role_id)
+INSERT INTO join_users_roles (user_id, role_id)
     VALUES(23, 36);
-INSERT INTO join_user_roles (user_id, role_id)
+INSERT INTO join_users_roles (user_id, role_id)
     VALUES(23, 37);
 
 --лайки
@@ -170,9 +170,9 @@ INSERT INTO join_playlists_genres (playlist_id, genre_id) VALUES (27, 12);
 INSERT INTO join_playlists_genres (playlist_id, genre_id) VALUES (27, 13);
 
 --исполнитель-жанр
-INSERT INTO join_bands_genres (band_id, genre_id) VALUES (1, 8);
-INSERT INTO join_bands_genres (band_id, genre_id) VALUES (2, 9);
-INSERT INTO join_bands_genres (band_id, genre_id) VALUES (3, 10);
-INSERT INTO join_bands_genres (band_id, genre_id) VALUES (1, 11);
-INSERT INTO join_bands_genres (band_id, genre_id) VALUES (2, 12);
-INSERT INTO join_bands_genres (band_id, genre_id) VALUES (3, 13);
+INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (1, 8);
+INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (2, 9);
+INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (3, 10);
+INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (1, 11);
+INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (2, 12);
+INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (3, 13);

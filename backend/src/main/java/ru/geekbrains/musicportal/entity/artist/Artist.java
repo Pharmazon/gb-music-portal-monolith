@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.entity.band;
+package ru.geekbrains.musicportal.entity.artist;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,27 +18,27 @@ import java.util.Collection;
 @Entity
 @NoArgsConstructor
 @ToString(exclude = {"users", "playlists", "tracks"})
-@Table(name = "app_bands")
+@Table(name = "app_artists")
 @EqualsAndHashCode(callSuper = true)
-public class Band extends AbstractEntity {
+public class Artist extends AbstractEntity {
 
     @ManyToMany(
             cascade = CascadeType.DETACH,
             fetch = FetchType.EAGER)
     @JoinTable(
-            name = "join_user_bands",
-            joinColumns = @JoinColumn(name = "band_id"),
+            name = "join_users_artists",
+            joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Collection<User> users;
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "band")
+            mappedBy = "artist")
     private Collection<Track> tracks;
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "band")
+            mappedBy = "artist")
     private Collection<Playlist> playlists;
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -47,8 +47,8 @@ public class Band extends AbstractEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "join_bands_genres",
-            joinColumns = @JoinColumn(name = "band_id"),
+            name = "join_artists_genres",
+            joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Collection<Genre> genres;
 }

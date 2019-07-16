@@ -1,6 +1,6 @@
 package ru.geekbrains.musicportal.marker;
 
-public interface BandViews {
+public interface ArtistViews {
 
     interface List extends CommonViews.General {}
     interface Single extends List, CommonViews.All {}

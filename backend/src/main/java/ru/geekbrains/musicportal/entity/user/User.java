@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.geekbrains.musicportal.entity.band.Band;
+import ru.geekbrains.musicportal.entity.artist.Artist;
 import ru.geekbrains.musicportal.entity.blog.Article;
 import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.entity.blog.Like;
@@ -87,7 +87,7 @@ public class User extends AbstractEntity implements UserDetails {
             cascade = CascadeType.DETACH,
             fetch = FetchType.EAGER)
     @JoinTable(
-            name = "join_user_roles",
+            name = "join_users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
@@ -97,10 +97,10 @@ public class User extends AbstractEntity implements UserDetails {
             cascade = CascadeType.DETACH,
             fetch = FetchType.LAZY)
     @JoinTable(
-            name = "join_user_bands",
+            name = "join_users_artists",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "band_id"))
-    private Collection<Band> bands;
+            inverseJoinColumns = @JoinColumn(name = "artist_id"))
+    private Collection<Artist> artists;
 
     @OneToMany(
             fetch = FetchType.LAZY,

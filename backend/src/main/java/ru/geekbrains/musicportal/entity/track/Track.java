@@ -3,7 +3,7 @@ package ru.geekbrains.musicportal.entity.track;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.band.Band;
+import ru.geekbrains.musicportal.entity.artist.Artist;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 
 import javax.persistence.*;
@@ -20,8 +20,8 @@ public class Track extends AbstractEntity {
     private String fileLink;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "band_id")
-    private Band band;
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
 
     @ManyToMany
     @JoinTable(
