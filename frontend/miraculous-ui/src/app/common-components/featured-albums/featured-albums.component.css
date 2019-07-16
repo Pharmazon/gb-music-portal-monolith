@@ -28,7 +28,6 @@
 
 }
 
-
 .featured-album-picture {
 
   width: 333px;
@@ -42,6 +41,16 @@
   cursor: pointer;
 }
 
+.left-arrow {
+
+  margin-left: -50px;
+}
+
+.right-arrow {
+
+  margin-right: -50px;
+}
+
 .artist-name, .album-name {
 
   font-family: JosephinSansBold;
@@ -53,4 +62,8 @@
   font-family: JosephinSansRegular;
 }
 
+.ng2-carouselamos-wrapper, .ng2-carouselamos-container {
+
+  width: 1200px;
+}
 

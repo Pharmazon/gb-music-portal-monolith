@@ -2,7 +2,7 @@
 
   display: flex;
   width: 930px;
-  height: 510px;
+  min-height: 510px;
   border-radius: 10px;
   background-color: #000000;
   background-image: linear-gradient(to left, #3bc8e7 0%, #20a7c4 100%);
@@ -54,6 +54,7 @@
   flex-direction: column;
   font-family: "JosephinSansRegular";
   align-items: center;
+  position: relative;
 }
 
 .registration-submit-button {
@@ -68,6 +69,12 @@
   cursor: pointer;
   text-align: center;
   outline: none;
+  margin-top: 15px;
+}
+
+.registration-submit-button:hover {
+
+  box-shadow: 0px 0px 20px 0px white;
 }
 
 .registration-name-input, .registration-email-input, .registration-password-input ,
@@ -135,4 +142,100 @@
   right: -5px;
   top: -5px;
   cursor: pointer;
+}
+
+.username-already-exists-message, .username-invalid-message {
+
+  margin: 0;
+  position: absolute;
+  top: -25px;
+  color: darkred;
+  font-size: 18px;
+  font-family: JosephinSansBold;
+}
+
+.register-as-signature {
+
+  color: white;
+  font-family: JosephinSansRegular;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.user-role-input-label, .artist-role-input-label {
+
+  color: white;
+  font-family: JosephinSansRegular;
+}
+
+.additional-artist-information {
+  width: 100%;
+  position: relative;
+}
+
+.artist-description-textarea {
+
+  width: 100%;
+  border-radius: 5px;
+  height: 70px;
+  font-family: JosephinSansRegular;
+  padding-left: 10px;
+  outline: none;
+  margin-top: 10px;
+}
+
+.artist-additional-info-demand-text {
+
+  text-align: center;
+  color: white;
+}
+
+.artist-location-input {
+
+  outline: none;
+  border-radius: 5px;
+  width: 50%;
+  padding-left: 10px;
+  height: 30px;
+  font-family: JosephinSansRegular;
+  margin-top: 16px;
+}
+
+.email-invalid-message {
+
+  position: absolute;
+  top: 30px;
+  left: 147px;
+  color: darkred;
+  font-family: JosephinSansBold;
+  font-size: 17px;
+}
+
+.password-invalid-message {
+
+  position: absolute;
+  top: 95px;
+  left: 110px;
+  color: darkred;
+  font-size: 17px;
+  font-family: JosephinSansBold;
+}
+
+.additional-info-required-signature, .location-required-signature  {
+
+  color: darkred;
+  font-family: JosephinSansBold;
+}
+
+.additional-info-required-signature {
+
+  position: absolute;
+  top: 20px;
+}
+
+.location-required-signature {
+
+  position: absolute;
+  position: absolute;
+  margin-top: -5px;
+  left: 10px;
 }

@@ -23,9 +23,15 @@
         <p class="track-size-signature">Track size: {{trackSize}} Mbs</p>
         <p class="track-duration-signature">Track duration: {{trackDuration}} Min</p>
       </div>
-      <div>
-        <label for="single-track-upload-input" class="single-track-upload-input-label" #singleTrackUploadInputLabel>Upload Your Track</label>
-        <input type="file" value="Upload your track" id="single-track-upload-input" class="single-track-upload-input" #singleTrackUploadInput accept="audio/mp3">
+      <div style="display: flex">
+        <div style="margin-right: 20px">
+          <label for="single-track-upload-input" class="single-track-upload-input-label" #singleTrackUploadInputLabel>Upload Your Track</label>
+          <input type="file" value="Upload your track" id="single-track-upload-input" class="single-track-upload-input" #singleTrackUploadInput accept="audio/mp3">
+        </div>
+        <div>
+          <label for="cut-version-of-track-upload-input" class="preview-track-upload-input-label" #previewTrackVersionUploadInputLabel>Upload Preview Track Version</label>
+          <input type="file" value="Upload your track" id="cut-version-of-track-upload-input" class="preview-track-upload-input" #previewTrackUploadInput accept="audio/mp3">
+        </div>
       </div>
     </div>
     <div style="display: flex; flex-direction: column;">

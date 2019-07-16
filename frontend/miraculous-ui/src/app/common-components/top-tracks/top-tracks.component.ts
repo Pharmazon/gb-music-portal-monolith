@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CartServiceService} from "../../../services/cart-service/cart-service.service";
 
 @Component({
   selector: 'app-top-tracks',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopTracksComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cartService: CartServiceService) {
+
+  }
 
   ngOnInit() {
   }

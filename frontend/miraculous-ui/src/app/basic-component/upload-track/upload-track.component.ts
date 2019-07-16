@@ -11,6 +11,8 @@ import {
 import {TagComponent} from "../upload-album/tag/tag.component";
 import {AudiotrackComponent} from "./audiotrack/audiotrack.component";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Track} from "../../../model/track/track";
+import {UploadTrackServiceService} from "../../../services/upload-track-service/upload-track-service.service";
 
 @Component({
   selector: 'app-upload-track',
@@ -19,9 +21,13 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class UploadTrackComponent implements OnInit, AfterViewInit, OnChanges, AfterContentChecked {
 
+
+  track: Track = new Track();
   trackDuration: number = 0;
   trackSize: number = 0;
   tagText: string;
+  trackCoverPicture: any;
+  tracksToUpload: File[] = [];
 
   @ViewChild("albumCoverPicture", {read: ElementRef})
   fileName: ElementRef;
@@ -56,13 +62,20 @@ export class UploadTrackComponent implements OnInit, AfterViewInit, OnChanges, A
   @ViewChild("singleTrackUploadInput", {read: ElementRef})
   singleTrackUploadInput: ElementRef;
 
+  @ViewChild("previewTrackUploadInput", {read: ElementRef})
+  previewTrackUploadInput: ElementRef;
+
+  @ViewChild("previewTrackVersionUploadInputLabel", {read: ElementRef})
+  previewTrackVersionUploadInputLabel: ElementRef;
+
   @ViewChild("singleTrackUploadInputLabel", {read: ElementRef})
   singleTrackUploadInputLabel: ElementRef
 
   @ViewChild("uploadedTrackTemplate", {read: ElementRef})
   uploadedTrackTemplate: ElementRef;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private domSanitizer: DomSanitizer) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private domSanitizer: DomSanitizer,
+              uploadTrackService: UploadTrackServiceService) { }
 
   ngOnInit() {
 
@@ -81,7 +94,13 @@ export class UploadTrackComponent implements OnInit, AfterViewInit, OnChanges, A
     audio.onloadeddata = ()=> {
       this.trackDuration = Math.round(audio.duration/60);
     }
+    this.tracksToUpload.push(uploadedTrackPath);
+    console.log(this.tracksToUpload);
 
+  }
+
+  uploadAndShowPreviewTrackVersion(){
+    this.previewTrackVersionUploadInputLabel.nativeElement.textContent = this.previewTrackUploadInput.nativeElement.files[0].name;
   }
 
   ngAfterViewInit(){
@@ -96,17 +115,19 @@ export class UploadTrackComponent implements OnInit, AfterViewInit, OnChanges, A
         this.uploadAndShowNewTrack();
       }
     });
+
+    this.previewTrackUploadInput.nativeElement.addEventListener("change", ()=>{
+      this.uploadAndShowPreviewTrackVersion();
+
+    })
   }
 
   showCoverPicture(){
 
     let filePath = URL.createObjectURL(this.fileName.nativeElement.files[0]);
     this.coverBlock.nativeElement.style = "background-image: url("+filePath+")";
-    if (this.addedTracksBlock.nativeElement.children.length > 0) {
-      for (let i = 0; i < this.addedTracksBlock.nativeElement.children.length; i++) {
-        this.addedTracksBlock.nativeElement.children[i].querySelector(".added-track-cover").style.backgroundImage = "url("+filePath+")";
-      }
-    }
+    this.trackCoverPicture = this.fileName.nativeElement.files[0];
+
   }
 
   togglePriceBlock(){
