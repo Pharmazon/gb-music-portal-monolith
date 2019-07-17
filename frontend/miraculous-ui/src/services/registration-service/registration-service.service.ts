@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {VisitorRegistrationDto} from "../../model/visitorRegistrationDto/visitor-registration-dto";
 import {DomainServiceService} from "../domain-service/domain-service.service";
+import {Observable} from "rxjs";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +17,7 @@ export class RegistrationServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  registerVisitor(visitor: VisitorRegistrationDto){
-
-
+  registerVisitor(visitor: VisitorRegistrationDto): Observable<string>{
+     return this.httpClient.post<string>(this.registrationApi, visitor, httpOptions);
   }
 }
