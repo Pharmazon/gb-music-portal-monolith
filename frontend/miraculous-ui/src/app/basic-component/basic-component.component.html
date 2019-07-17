@@ -34,7 +34,7 @@
         <li><a routerLink="user-profile" (click)="navigate('artist-profile/1')">Profile (artist)</a></li>
         <li><a routerLink="edit-user-profile" (click)="navigate('edit-user-profile/1')">Settings (user)</a></li>
         <li><a routerLink="edit-artist-profile" (click)="navigate('edit-artist-profile/1')">Settings (artist)</a></li>
-        <li><a routerLink="logout" (click)="navigate('logout')">Logout</a></li>
+        <li><a routerLink="logout" (click)="logOut()">Logout</a></li>
       </ul>
     </figure>
     <figure class="upload-music-signature">
@@ -119,7 +119,7 @@
     </div>
   </footer>
   <internalization-panel class="internalization-component" (closedInternalizationPanel)="closeInternalizationPanel()" #internalizationPanelComponent (appliedLanguage)="changeLanguage()"></internalization-panel>
-  <login-component class="login-component" (closedLoginComponent)="closeLoginComponent()" #loginComponent (switchedToRegistrationComponent)="switchToRegistrationForm()"></login-component>
+  <login-component (switchedToRememberMeAuthMode)="setRememberMeAuthMode(isRememberMeModeOn)" class="login-component" (closedLoginComponent)="closeLoginComponent()" #loginComponent (switchedToRegistrationComponent)="switchToRegistrationForm()"></login-component>
   <registration-component class="registration-component" #registrationComponent (closedRegistrationComponent)="closeRegistrationComponent()" (switchedToLoginComponent)="switchToLoginForm()"></registration-component>
   <div class="darkening-overflow" #darkeningOverflow></div>
 </div>

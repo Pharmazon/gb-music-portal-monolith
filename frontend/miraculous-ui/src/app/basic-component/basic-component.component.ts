@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
+import {TokenStorageServiceService} from "../../services/token-storage-service/token-storage-service.service";
 
 @Component({
   selector: 'app-basic-component',
@@ -11,10 +12,13 @@ export class BasicComponentComponent implements OnInit{
 
   currentYear: Date = new Date();
   isPlayerHidden: boolean = false;
+  authorizedVisitorInfo: any;
+  isRememberMeModeOn: boolean = false;
+  visitorAuthority: string;
+  visitorRoles: string[] = [];
 
   @ViewChild("navigationPanel")
   navigationPanel: ElementRef;
-
 
   @ViewChild("darkeningOverflow")
   darkeningOverflow: ElementRef;
@@ -31,10 +35,35 @@ export class BasicComponentComponent implements OnInit{
   @ViewChild("internalizationPanelComponent", {read: ElementRef})
   internalizationComponent: ElementRef;
 
-  constructor(private router: Router, private translator: TranslateService) { }
+  constructor(private router: Router, private translator: TranslateService, private tokenStorageService: TokenStorageServiceService) { }
 
   ngOnInit() {
+    if (this.tokenStorageService.getToken(this.isRememberMeModeOn)) {
+      this.authorizedVisitorInfo = {
+        token: this.tokenStorageService.getToken(this.isRememberMeModeOn),
+        login: this.tokenStorageService.getLogin(this.isRememberMeModeOn),
+        visitorID: this.tokenStorageService.getVisitorId(this.isRememberMeModeOn),
+        authorities: this.tokenStorageService.getAuthorities(this.isRememberMeModeOn)
+      }
+      this.visitorRoles = this.tokenStorageService.getAuthorities(this.isRememberMeModeOn);
+      this.visitorRoles.every(role =>{
+        if (role === "ROLE_ADMIN"){
+          this.visitorAuthority = "admin";
+          return false;
+        }else if (role === "ROLE_ARTIST"){
+          this.visitorAuthority = "artist";
+          return false;
+        } else if (role === "ROLE_USER"){
+          this.visitorAuthority = "user";
+          return  true;
+        }
+      })
+    }
+  }
 
+  logOut(){
+    this.tokenStorageService.signOut(this.isRememberMeModeOn);
+    window.location.reload();
   }
 
   navigate(path: string) {
@@ -118,10 +147,17 @@ export class BasicComponentComponent implements OnInit{
       document.querySelector(".toggle-player-block-button").setAttribute("style","background-image: url(../../../assets/images/chevron-up.png);");
       this.isPlayerHidden = true;
     }
-
   }
 
   switchToAdminPage() {
       this.router.navigate(["/admin"]);
+  }
+
+  setRememberMeAuthMode(isRememberMeModeOn: boolean) {
+    this.isRememberMeModeOn = isRememberMeModeOn;
+  }
+
+  changeLanguage() {
+
   }
 }

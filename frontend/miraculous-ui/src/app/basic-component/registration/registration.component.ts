@@ -2,6 +2,9 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
 import {User} from "../../../model/user/user";
 import {VisitorRegistrationDto} from "../../../model/visitorRegistrationDto/visitor-registration-dto";
 import {RegistrationServiceService} from "../../../services/registration-service/registration-service.service";
+import {HttpHeaders} from "@angular/common/http";
+
+
 
 @Component({
   selector: 'registration-component',
@@ -12,6 +15,9 @@ export class RegistrationComponent implements OnInit {
 
   visitor: VisitorRegistrationDto = new VisitorRegistrationDto();
   isArtistRoleChosen: boolean = false;
+  registrationErrorMessage: string = "";
+  isRegistrationSuccessful: boolean = false;
+  isRegistrationFailed: boolean = false;
  
   @Output() closedRegistrationComponent = new EventEmitter<any>();
   @Output() switchedToLoginComponent = new EventEmitter<any>();
@@ -40,7 +46,16 @@ export class RegistrationComponent implements OnInit {
 
   submitRegistrationForm() {
 
-    console.log(this.registrationService.registrationApi);
+    this.registrationService.registerVisitor(this.visitor).subscribe(
+      data => {
+        this.isRegistrationFailed = false;
+        this.isRegistrationSuccessful = true;
+      },
+      error => {
+        this.registrationErrorMessage = error.error.message;
+        this.isRegistrationFailed = true;
+      }
+    )
   }
 
   showAdditionalDataPanel() {
