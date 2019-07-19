@@ -9,10 +9,8 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>ru.geekbrains</groupId>
-    <artifactId>musicportal</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <name>musicportal</name>
+    <artifactId>backend</artifactId>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
