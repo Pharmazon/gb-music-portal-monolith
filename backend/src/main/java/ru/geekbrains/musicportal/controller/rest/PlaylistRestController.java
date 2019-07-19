@@ -6,12 +6,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.musicportal.dto.blog.LikeDto;
 import ru.geekbrains.musicportal.dto.playlist.PlaylistDto;
+import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
+import ru.geekbrains.musicportal.enums.EntityLikeEnum;
+import ru.geekbrains.musicportal.marker.LikeViews;
 import ru.geekbrains.musicportal.marker.PlaylistViews;
+import ru.geekbrains.musicportal.service.blog.LikeServiceImpl;
 import ru.geekbrains.musicportal.service.playlist.PlaylistService;
 import ru.geekbrains.musicportal.specification.PlaylistSpecs;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -23,10 +29,12 @@ public class PlaylistRestController {
     private final int INITIAL_PAGE = 50;
     private final int PAGE_SIZE = 50;
     private PlaylistService playlistService;
+    private LikeServiceImpl likeService;
 
     @Autowired
-    public PlaylistRestController(PlaylistService playlistService) {
+    public PlaylistRestController(PlaylistService playlistService, LikeServiceImpl likeService) {
         this.playlistService = playlistService;
+        this.likeService = likeService;
     }
 
     @JsonView(PlaylistViews.List.class)
@@ -57,5 +65,12 @@ public class PlaylistRestController {
         model.addAttribute("totalPage", playlists.getTotalPages());
         model.addAttribute("playlistName", playlistName);
         return "Success";
+    }
+    @JsonView(LikeViews.List.class)
+    @PostMapping ("albums/add-like/{id}")
+    public Like createLikeAlbum(@PathVariable Long id, @Valid LikeDto likeDto) {
+        likeDto.setEntityId(id);
+        likeDto.setEntity(EntityLikeEnum.ALBUM);
+        return likeService.save(likeDto);
     }
 }
