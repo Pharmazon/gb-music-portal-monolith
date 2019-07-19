@@ -1,11 +1,9 @@
-/backend/target/
-/backend/*.iml
-/backend/target/*.class
+### IntelliJ IDEA ###
 /target/
-!.mvn/wrapper/maven-wrapper.jar
-/mvn/
-mvnw.cmd
-mvnw
+/.idea/
+*.iml
+*.iws
+*.ipr
 *.class
 
 ### STS ###
@@ -17,14 +15,11 @@ mvnw
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-/.idea/
-/backend/*.iml
-/backend/.idea/
-*.iml
-*.iws
-*.iml
-*.ipr
+### Maven ###
+!.mvn/wrapper/maven-wrapper.jar
+/mvn/
+mvnw.cmd
+mvnw
 
 ### NetBeans ###
 /nbproject/private/
@@ -33,4 +28,3 @@ mvnw
 /nbdist/
 /.nb-gradle/
 /build/
-/backend/.idea
