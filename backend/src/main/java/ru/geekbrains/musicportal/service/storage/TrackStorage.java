@@ -11,5 +11,6 @@ import java.io.FileNotFoundException;
  * Интерфейс для работы с файловым хранилищем
  */
 public interface TrackStorage {
+
     ResponseEntity<InputStreamResource> getTrackFile(Track track) throws FileNotFoundException;
 }

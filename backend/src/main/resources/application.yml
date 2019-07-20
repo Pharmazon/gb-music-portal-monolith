@@ -3,6 +3,16 @@ server:
   servlet:
     context-path: /miraculous/api
 
+storage.folder.path: 'storage'
+backend:
+  server: 'http://localhost:8080'
+  server.api.track.path: '/tracks/pl ay/'
+
+musicportal:
+  app:
+    jwtSecret: musicportalsecretkey
+    jwtExpiration: 86400
+
 spring:
   #Datasource
   datasource:
@@ -18,14 +28,16 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        hbm2ddl:
-          auto: none
+        hbm2ddl.auto: none
         format_sql: true
         show-sql: true
         max_fetch_depth: 20
         jdbc:
           fetch_size: 50
           batch_size: 10
+          lob:
+            non_contextual_creation: true
+
 #Logging
 logging:
   level:

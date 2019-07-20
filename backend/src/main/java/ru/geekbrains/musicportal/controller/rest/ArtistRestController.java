@@ -12,9 +12,10 @@ import ru.geekbrains.musicportal.marker.ArtistViews;
 import ru.geekbrains.musicportal.service.artist.ArtistService;
 import ru.geekbrains.musicportal.specification.ArtistSpecs;
 
-import javax.validation.Valid;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -43,29 +44,38 @@ public class ArtistRestController {
         return artistService.findOneDtoById(id);
     }
 
-    @JsonView(ArtistViews.All.class)
     @PutMapping
-    public void updateArtist(ArtistDto dto) {
+    public void saveOrUpdate(ArtistDto dto) {
         Optional<Artist> artist = artistService.findOneEntityById(dto.getId());
         artist.ifPresent(value -> artistService.saveOrUpdate(value));
     }
 
-    @JsonView(ArtistViews.List.class)
-    @GetMapping("/filter")
-    public String artistPage(Model model,
-                             @RequestParam(value = "page") Optional<Integer> page,
-                             @RequestParam(value = "artistName", required = false) String artistName) {
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable("id") Long id) {
+        artistService.deleteById(id);
+    }
+
+    @JsonView(ArtistViews.All.class)
+    @GetMapping("music/{id}")
+    public Collection<ArtistDto> getMusic(Model model,
+                                @RequestParam(value = "page") Optional<Integer> page,
+                                @RequestParam(value = "artistName", required = false) String artistName) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
         Specification<Artist> spec = Specification.where(null);
         if (artistName != null) spec.and(ArtistSpecs.artistNameContains(artistName));
 
-        Page<Artist> artists = artistService.getArtistsWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
-        model.addAttribute("artists", artists.getContent());
+        Page<Artist> pages = artistService.getArtistsWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
+        List<Artist> artists = pages.getContent();
+        List<ArtistDto> dtos = artists.stream()
+                .map(artist -> artistService.convertToDto(artist))
+                .collect(Collectors.toList());
+        model.addAttribute("artists", artists);
         model.addAttribute("page", currentPage);
-        model.addAttribute("totalPage", artists.getTotalPages());
+        model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("artistName", artistName);
-        return "Success";
+        return dtos;
     }
+
 }
 

@@ -47,4 +47,9 @@ public class UserProfileServiceImpl implements UserProfileService {
     public UserProfile convertToEntity(UserProfileDto dto) {
         return modelMapper.map(dto, UserProfile.class);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        userProfileRepository.deleteById(id);
+    }
 }

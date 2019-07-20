@@ -6,12 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.blog.LikeDto;
 import ru.geekbrains.musicportal.entity.blog.Like;
-import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.enums.EntityLikeEnum;
 import ru.geekbrains.musicportal.marker.LikeViews;
 import ru.geekbrains.musicportal.service.blog.LikeServiceImpl;
-import ru.geekbrains.musicportal.service.track.TrackService;
-import ru.geekbrains.musicportal.service.track.TrackServiceImpl;
 
 import javax.validation.Valid;
 import java.util.Optional;

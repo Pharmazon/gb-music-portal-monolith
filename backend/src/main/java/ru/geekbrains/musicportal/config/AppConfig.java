@@ -14,7 +14,6 @@ import java.util.Locale;
 
 
 @Configuration
-@PropertySource("classpath:application.properties")
 public class AppConfig implements WebMvcConfigurer {
 
     @Bean

@@ -14,4 +14,6 @@ public interface CommonService<E, D> {
     D findOneDtoById(Long id);
 
     E convertToEntity(D dto);
+
+    void deleteById(Long id);
 }

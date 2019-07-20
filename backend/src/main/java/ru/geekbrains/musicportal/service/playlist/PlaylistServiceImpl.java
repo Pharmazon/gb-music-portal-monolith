@@ -52,6 +52,11 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
+    public void deleteById(Long id) {
+        playlistRepository.deleteById(id);
+    }
+
+    @Override
     public Page<Playlist> getPlaylistsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Playlist> specification) {
         return playlistRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
     }

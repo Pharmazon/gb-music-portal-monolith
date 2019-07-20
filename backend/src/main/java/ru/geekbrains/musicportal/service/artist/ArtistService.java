@@ -9,4 +9,6 @@ import ru.geekbrains.musicportal.service.common.CommonService;
 public interface ArtistService extends CommonService<Artist, ArtistDto> {
 
     Page<Artist> getArtistsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Artist> specification);
+
+    ArtistDto convertToDto(Artist entity);
 }

@@ -94,8 +94,6 @@ public class UserServiceImpl implements UserService {
         return fromDb != null;
     }
 
-
-
     @Override
     public UserDto getDtoByUsername(String username) {
         return userRepository.getDtoByUsername(username);

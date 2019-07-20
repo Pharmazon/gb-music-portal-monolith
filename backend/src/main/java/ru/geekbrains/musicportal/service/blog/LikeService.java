@@ -10,5 +10,4 @@ public interface LikeService {
 
     Optional<Like> findById(Long id);
 
-    void deleteById(Long id);
 }

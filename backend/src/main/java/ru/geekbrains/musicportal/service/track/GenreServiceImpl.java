@@ -60,6 +60,11 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    public void deleteById(Long id) {
+        genreRepository.deleteById(id);
+    }
+
+    @Override
     public Page<Genre> getGenresWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Genre> specification) {
         return genreRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
     }

@@ -16,8 +16,6 @@ public interface TrackService extends CommonService<Track, TrackDto> {
 
     Page<Track> getTracksWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Track> specification);
 
-    void deleteById(Long id);
-
     Collection<TrackDto> getTopTracks(int topMax);
 
     Track findTrackById(Long id);
