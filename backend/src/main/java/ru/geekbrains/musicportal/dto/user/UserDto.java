@@ -50,7 +50,7 @@ public class UserDto extends AbstractDto {
 
     private boolean approved;
 
-    private List<Role> roles;
+    private List<RoleDto> roles;
 
     private ImageDto image;
 
@@ -66,6 +66,10 @@ public class UserDto extends AbstractDto {
         passwordAnswer = user.getPasswordAnswer();
         approved = user.isApproved();
         image = new ImageDto(user.getImage());
+
+        for (Role role:user.getRoles()) {
+            roles.add(new RoleDto(role));
+        }
     }
 
 }

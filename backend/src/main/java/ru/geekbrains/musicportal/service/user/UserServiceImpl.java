@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.geekbrains.musicportal.dto.user.RoleDto;
 import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
 import ru.geekbrains.musicportal.entity.user.Role;
@@ -93,25 +94,7 @@ public class UserServiceImpl implements UserService {
         return fromDb != null;
     }
 
-    @Override
-    @Transactional
-    public void registerUser(
-            String username,
-            String password,
-            String email,
-            Collection<UserRoleEnum> rolesEnum) throws UserAlreadyExistsException {
-        if (isExistsByName(username)) {
-            throw new UserAlreadyExistsException(username);
-        }
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        Collection<Role> roles = getRolesFromEnum(rolesEnum);
-        user.setRoles(roles);
-        save(user);
-    }
 
     @Override
     public UserDto getDtoByUsername(String username) {
@@ -141,7 +124,54 @@ public class UserServiceImpl implements UserService {
         user.setPasswordQuestion(userRegistrationDto.getPasswordQuestion());
         user.setPasswordAnswer(userRegistrationDto.getPasswordAnswer());
         user.setApproved(userRegistrationDto.isApproved());
+        user = save(user);
+        return user;
+    }
+
+    @Override
+    @Transactional
+    public void registerUser(
+            String username,
+            String password,
+            String email,
+            Collection<UserRoleEnum> rolesEnum) throws UserAlreadyExistsException {
+        if (isExistsByName(username)) {
+            throw new UserAlreadyExistsException(username);
+        }
+
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        Collection<Role> roles = getRolesFromEnum(rolesEnum);
+        user.setRoles(roles);
         save(user);
+    }
+
+    @Transactional
+    public User saveOrUpdate(UserDto userDto) {
+        String username = userDto.getUsername();
+
+        User user = userRepository.findOneByUsername(username);
+        if (user.getId().equals(userDto.getId()) && user.getUsername().equals(username)) {
+            user.setId(userDto.getId());
+        }
+
+        user.setUsername(userDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setEmail(userDto.getEmail());
+        user.setLastUpdate(LocalDateTime.now());
+        ArrayList<Role> roles = new ArrayList<>();
+
+        for (RoleDto roleDto:userDto.getRoles()) {
+            roles.add(roleRepository.findOneByName(roleDto.getName()));
+        }
+
+        user.setRoles(roles);
+        user.setPasswordQuestion(userDto.getPasswordQuestion());
+        user.setPasswordAnswer(userDto.getPasswordAnswer());
+        user.setApproved(userDto.isApproved());
+        user = save(user);
         return user;
     }
 
