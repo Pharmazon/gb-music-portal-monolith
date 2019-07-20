@@ -47,7 +47,7 @@ public class TrackRestController {
     }
 
     @JsonView(TrackViews.List.class)
-    @GetMapping("/")
+    @GetMapping
     public Collection<TrackDto> getAll() {
         return trackService.findAllDto();
     }
@@ -63,10 +63,9 @@ public class TrackRestController {
      * @return - коллекция топ-треков (макс 15)
      */
     @JsonView(TrackViews.All.class)
-    @GetMapping("/top/{max}")
-    public Collection<TrackDto> getTopByLikes(@PathVariable(name = "max", required = false) Integer max) {
-        if (max == null || max > 100 || max < 1) max = 15;
-        return trackService.getTopTracks(max);
+    @GetMapping("/top-15-tracks")
+    public Collection<TrackDto> getTopByLikes() {
+        return trackService.getTop(15);
     }
 
     @JsonView(TrackViews.List.class)
@@ -101,8 +100,11 @@ public class TrackRestController {
      */
     @GetMapping(value = "/play/{id}", produces = "audio/mpeg")
     public ResponseEntity<InputStreamResource> getPlayFile(@PathVariable("id") Long id) {
-        Track track = trackService.findTrackById(id);
-        if (track == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        Optional<Track> optional = trackService.findOneEntityById(id);
+        if (!optional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        Track track = optional.get();
         try {
             return storage.getTrackFile(track);
         } catch (FileNotFoundException e) {

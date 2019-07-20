@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.enums.EntityLikeEnum;
 import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.repository.LikeRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
@@ -16,7 +15,6 @@ import ru.geekbrains.musicportal.specification.SpecFeature;
 import ru.geekbrains.musicportal.specification.TrackUtil;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,21 +74,16 @@ public class TrackServiceImpl implements TrackService {
      * @param topMax Максимальное количество треков в рейтинге
      * @return Коллекция объектов TrackDto
      */
-    public Collection<TrackDto> getTopTracks(int topMax){
-        return likeRepository.getTopTracks(EntityLikeEnum.TRACK, PageRequest.of(0, topMax))
-                .stream()
-                .sorted(Comparator.comparingLong(o -> (Long) o[1]))
-                .map(objects -> {
-                    Track track = trackRepository.findById((Long)objects[0]).orElse(null);
-                    if (track == null) return null;
-                    return new TrackDto(track, (Long)objects[1]);
-                })
+    public Collection<TrackDto> getTop(int topMax){
+        Collection<Track> topTracks = trackRepository.getTop(topMax);
+        return topTracks.stream()
+                .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Track findTrackById(Long id) {
-        return trackRepository.findById(id).orElse(null);
+    public TrackDto convertToDto(Track entity) {
+        return modelMapper.map(entity, TrackDto.class);
     }
 
     @Override

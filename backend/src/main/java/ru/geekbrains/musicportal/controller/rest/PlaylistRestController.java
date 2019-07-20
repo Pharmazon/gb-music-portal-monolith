@@ -49,6 +49,12 @@ public class PlaylistRestController {
         return playlistService.findOneDtoById(id);
     }
 
+    @JsonView(PlaylistViews.All.class)
+    @GetMapping("/top-15-albums")
+    public Collection<PlaylistDto> getTopByLikes() {
+        return playlistService.getTop(15);
+    }
+
     @JsonView(PlaylistViews.List.class)
     @GetMapping("/filter")
     public String playlistPage(Model model,
