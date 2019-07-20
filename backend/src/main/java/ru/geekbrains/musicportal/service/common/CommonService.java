@@ -3,15 +3,15 @@ package ru.geekbrains.musicportal.service.common;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface CommonService<ENTITY, DTO> {
+public interface CommonService<E, D> {
 
-    ENTITY saveOrUpdate(ENTITY entity);
+    E saveOrUpdate(E entity);
 
-    Optional<ENTITY> findOneEntityById(Long id);
+    Optional<E> findOneEntityById(Long id);
 
-    Collection<DTO> findAllDto();
+    Collection<D> findAllDto();
 
-    DTO findOneDtoById(Long id);
+    D findOneDtoById(Long id);
 
-    ENTITY convertToEntity(DTO dto);
+    E convertToEntity(D dto);
 }

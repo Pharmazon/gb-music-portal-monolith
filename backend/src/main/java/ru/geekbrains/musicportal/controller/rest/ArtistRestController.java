@@ -12,6 +12,7 @@ import ru.geekbrains.musicportal.marker.ArtistViews;
 import ru.geekbrains.musicportal.service.artist.ArtistService;
 import ru.geekbrains.musicportal.specification.ArtistSpecs;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -37,9 +38,16 @@ public class ArtistRestController {
     }
 
     @JsonView(ArtistViews.All.class)
-    @GetMapping("{artistId}")
-    public ArtistDto getOneById(@PathVariable("artistId") Long artistId) {
-        return artistService.findOneDtoById(artistId);
+    @GetMapping("{id}")
+    public ArtistDto getOneById(@PathVariable("id") Long id) {
+        return artistService.findOneDtoById(id);
+    }
+
+    @JsonView(ArtistViews.All.class)
+    @PutMapping
+    public void updateArtist(ArtistDto dto) {
+        Optional<Artist> artist = artistService.findOneEntityById(dto.getId());
+        artist.ifPresent(value -> artistService.saveOrUpdate(value));
     }
 
     @JsonView(ArtistViews.List.class)
