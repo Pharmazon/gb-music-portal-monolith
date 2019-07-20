@@ -45,6 +45,11 @@ public class ImageServiceImpl implements ImageService {
         return null;
     }
 
+    @Override
+    public void deleteById(Long id) {
+        imageRepository.deleteById(id);
+    }
+
     public Optional<ImageDto> findByIdDTO(Long id) {
         return Optional.of(imageRepository.findById(id, ImageDto.class));
     }

@@ -54,7 +54,7 @@ public class GenreRestController {
         Page<Genre> genres = genreService.getGenresWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
         model.addAttribute("genres", genres.getContent());
         model.addAttribute("page", currentPage);
-        model.addAttribute("totalPage", genres.getTotalPages());
+        model.addAttribute("totalPages", genres.getTotalPages());
         model.addAttribute("genreName", genreName);
         return "Success";
     }

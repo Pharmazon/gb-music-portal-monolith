@@ -6,5 +6,4 @@ import ru.geekbrains.musicportal.service.common.CommonService;
 
 public interface CommentService extends CommonService<Comment, CommentDto> {
 
-    void deleteById(Long id);
 }

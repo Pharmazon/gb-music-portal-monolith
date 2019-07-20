@@ -5,15 +5,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UrlConfig {
+
     public static String serverUrl;
     public static String apiPath;
     public static String trackPath;
 
     public UrlConfig(
             @Value("${backend.server}") String serverUrl,
-            @Value("${backend.server.api.path}") String apiPath,
-            @Value("${backend.server.api.track.path}") String trackPath
-            ) {
+            @Value("${server.servlet.context-path}") String apiPath,
+            @Value("${backend.server.api.track.path}") String trackPath) {
         UrlConfig.serverUrl = serverUrl;
         UrlConfig.apiPath = apiPath;
         UrlConfig.trackPath = trackPath;

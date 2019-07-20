@@ -9,5 +9,4 @@ public class PlaylistSpecs {
         return (Specification<Playlist>) (root, criteriaQuery, criteriaBuilder) ->
                 criteriaBuilder.like(root.get("name"), "%" + word + "%");
     }
-
 }

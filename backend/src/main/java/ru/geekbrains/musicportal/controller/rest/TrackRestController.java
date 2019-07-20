@@ -86,7 +86,7 @@ public class TrackRestController {
         Page<Track> tracks = trackService.getTracksWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
         model.addAttribute("tracks", tracks.getContent());
         model.addAttribute("page", currentPage);
-        model.addAttribute("totalPage", tracks.getTotalPages());
+        model.addAttribute("totalPages", tracks.getTotalPages());
         model.addAttribute("artistId", artistId);
         model.addAttribute("albumId", albumId);
         model.addAttribute("trackName", trackName);

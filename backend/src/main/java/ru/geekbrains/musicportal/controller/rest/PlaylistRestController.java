@@ -62,7 +62,7 @@ public class PlaylistRestController {
         Page<Playlist> playlists = playlistService.getPlaylistsWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
         model.addAttribute("playlists", playlists.getContent());
         model.addAttribute("page", currentPage);
-        model.addAttribute("totalPage", playlists.getTotalPages());
+        model.addAttribute("totalPages", playlists.getTotalPages());
         model.addAttribute("playlistName", playlistName);
         return "Success";
     }

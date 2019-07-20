@@ -10,5 +10,6 @@
     </parent>
 
     <artifactId>frontend</artifactId>
+    <packaging>pom</packaging>
 
 </project>

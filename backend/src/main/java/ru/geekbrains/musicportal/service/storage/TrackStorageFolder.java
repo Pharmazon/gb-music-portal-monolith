@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 @Service
 public class TrackStorageFolder implements TrackStorage {
 
-    // В application.properties прописали путь папке-хранилищу
+    // В application.yml прописали путь папке-хранилищу
     @Value("${storage.folder.path}")
     private String folder;
 

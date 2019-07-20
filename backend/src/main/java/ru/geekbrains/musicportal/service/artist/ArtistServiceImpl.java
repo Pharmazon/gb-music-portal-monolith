@@ -46,6 +46,11 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    public void deleteById(Long id) {
+        artistRepository.deleteById(id);
+    }
+
+    @Override
     public Collection<ArtistDto> findAllDto() {
         return artistRepository.findAllByIdNotNull();
     }
@@ -58,5 +63,10 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     public Page<Artist> getArtistsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Artist> specification) {
         return artistRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
+    }
+
+    @Override
+    public ArtistDto convertToDto(Artist entity) {
+        return modelMapper.map(entity, ArtistDto.class);
     }
 }
