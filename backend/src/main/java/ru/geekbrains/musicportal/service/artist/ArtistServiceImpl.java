@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.dto.artist.ArtistDto;
+import ru.geekbrains.musicportal.dto.artist.ArtistProfileDto;
 import ru.geekbrains.musicportal.entity.artist.Artist;
 import ru.geekbrains.musicportal.repository.ArtistRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
@@ -41,7 +41,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public Artist convertToEntity(ArtistDto dto) {
+    public Artist convertToEntity(ArtistProfileDto dto) {
         return modelMapper.map(dto, Artist.class);
     }
 
@@ -51,12 +51,12 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public Collection<ArtistDto> findAllDto() {
+    public Collection<ArtistProfileDto> findAllDto() {
         return artistRepository.findAllByIdNotNull();
     }
 
     @Override
-    public ArtistDto findOneDtoById(Long id) {
+    public ArtistProfileDto findOneDtoById(Long id) {
         return artistRepository.findOneById(id);
     }
 
@@ -66,7 +66,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public ArtistDto convertToDto(Artist entity) {
-        return modelMapper.map(entity, ArtistDto.class);
+    public ArtistProfileDto convertToDto(Artist entity) {
+        return modelMapper.map(entity, ArtistProfileDto.class);
     }
 }
