@@ -12,6 +12,7 @@ import ru.geekbrains.musicportal.repository.PlaylistRepository;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
@@ -59,5 +60,18 @@ public class PlaylistServiceImpl implements PlaylistService {
     @Override
     public Page<Playlist> getPlaylistsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Playlist> specification) {
         return playlistRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
+    }
+
+    @Override
+    public Collection<PlaylistDto> getTop(int max) {
+        Collection<Playlist> top = playlistRepository.getTop(max);
+        return top.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public PlaylistDto convertToDto(Playlist entity) {
+        return modelMapper.map(entity, PlaylistDto.class);
     }
 }
