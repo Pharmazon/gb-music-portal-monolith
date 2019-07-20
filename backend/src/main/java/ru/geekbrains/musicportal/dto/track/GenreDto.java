@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.track.Genre;
 import ru.geekbrains.musicportal.marker.CommonViews;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-public class GenreDto {
+public class GenreDto implements Serializable {
 
     @JsonView(CommonViews.General.class)
     private Long id;

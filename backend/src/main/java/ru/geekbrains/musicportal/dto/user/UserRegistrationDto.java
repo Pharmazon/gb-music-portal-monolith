@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 @EqualsAndHashCode(callSuper = true)
 @PasswordMatches
 public class UserRegistrationDto extends AbstractDto {
+
     @NotNull
     @NotEmpty
     @Size(min = 6, max = 25)

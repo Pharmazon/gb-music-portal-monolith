@@ -37,6 +37,4 @@ public class UserRegistrationRestController {
         userService.save(userRegistrationDto);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
-
 }

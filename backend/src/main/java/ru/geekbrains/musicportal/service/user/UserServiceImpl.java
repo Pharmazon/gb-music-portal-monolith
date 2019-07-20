@@ -23,15 +23,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-
     private RoleRepository roleRepository;
-
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -68,6 +67,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    public User getOneById(Long id) {
+        Optional<User> optional = userRepository.findById(id);
+        return optional.orElse(null);
+    }
+
+    @Override
+    public void deleteOne(User user) {
+        userRepository.deleteById(user.getId());
+    }
+
     public boolean changePassword(String username, String oldPsw, String newPsw) {
         boolean result = true;
         User user = userRepository.findOneByUsername(username);
@@ -92,6 +101,16 @@ public class UserServiceImpl implements UserService {
     public boolean isExistsByName(String username) {
         User fromDb = findByUserName(username);
         return fromDb != null;
+    }
+
+    @Override
+    public UserDto getOneDtoById(Long id) {
+        return userRepository.findOneById(id);
+    }
+
+    @Override
+    public void deleteOneById(Long id) {
+        userRepository.deleteById(id);
     }
 
     @Override

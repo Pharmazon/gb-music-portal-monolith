@@ -8,13 +8,17 @@ import ru.geekbrains.musicportal.enums.UserRoleEnum;
 
 import java.util.Collection;
 
-public interface UserService extends UserDetailsService {
+public interface UserService extends UserDetailsService  {
 
     User findByUserName(String username);
 
     User save(UserRegistrationDto userRegistrationDto);
 
     User save(User user);
+
+    User getOneById(Long id);
+
+    void deleteOne(User user);
 
     UserDto getDtoByUsername(String username);
 
@@ -35,4 +39,8 @@ public interface UserService extends UserDetailsService {
             String passwordAnswer);
 
     boolean isExistsByName(String username);
+
+    UserDto getOneDtoById(Long id);
+
+    void deleteOneById(Long id);
 }

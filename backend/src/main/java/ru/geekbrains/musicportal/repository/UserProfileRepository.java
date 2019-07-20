@@ -8,4 +8,6 @@ import ru.geekbrains.musicportal.entity.user.UserProfile;
 @Repository
 public interface UserProfileRepository  extends CommonRepository<UserProfileDto>,
         CrudRepository<UserProfile, Long> {
+
+    UserProfileDto findOneById(Long id);
 }
