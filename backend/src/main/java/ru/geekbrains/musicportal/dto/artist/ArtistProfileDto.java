@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ArtistDto extends AbstractDto {
+public class ArtistProfileDto extends AbstractDto {
 
     @JsonView(ArtistViews.All.class)
     private Long imageId;
@@ -24,7 +24,7 @@ public class ArtistDto extends AbstractDto {
     @JsonView(ArtistViews.Single.class)
     private Collection<PlaylistDto> playlists;
 
-    public ArtistDto(Artist artist) {
+    public ArtistProfileDto(Artist artist) {
         if (artist == null) return;
 
         super.setId(artist.getId());
