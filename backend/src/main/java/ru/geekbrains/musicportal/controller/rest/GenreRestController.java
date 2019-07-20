@@ -42,7 +42,7 @@ public class GenreRestController {
     }
 
     @JsonView(GenreViews.List.class)
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public String genrePage(Model model,
                             @RequestParam(value = "page") Optional<Integer> page,
                             @RequestParam(value = "genreName", required = false) String genreName) {

@@ -63,13 +63,13 @@ public class TrackRestController {
      * @return - коллекция топ-треков (макс 15)
      */
     @JsonView(TrackViews.All.class)
-    @GetMapping("/top-15-tracks")
+    @GetMapping("top-15-tracks")
     public Collection<TrackDto> getTopByLikes() {
         return trackService.getTop(15);
     }
 
     @JsonView(TrackViews.List.class)
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public String trackPage(Model model,
                             @RequestParam(value = "page") Optional<Integer> page,
                             @RequestParam(value = "artistId", required = false) Long artistId,
@@ -98,7 +98,7 @@ public class TrackRestController {
      * @return Возвращает тело файла. Если трека нет в базе, то выдаёт ответ 404 (HttpStatus.NOT_FOUND), если не удалось
      * вытащить файл, то ответ 500 (HttpStatus.INTERNAL_SERVER_ERROR)
      */
-    @GetMapping(value = "/play/{id}", produces = "audio/mpeg")
+    @GetMapping(value = "play/{id}", produces = "audio/mpeg")
     public ResponseEntity<InputStreamResource> getPlayFile(@PathVariable("id") Long id) {
         Optional<Track> optional = trackService.findOneEntityById(id);
         if (!optional.isPresent()) {

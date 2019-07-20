@@ -15,9 +15,7 @@ import ru.geekbrains.musicportal.enums.EntityLikeEnum;
 public class LikeDto extends AbstractDto {
 
     private UserDto user;
-
     private Long entityId;
-
     private EntityLikeEnum entity;
 
     public LikeDto(Like like) {

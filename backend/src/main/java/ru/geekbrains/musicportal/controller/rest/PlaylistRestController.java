@@ -50,13 +50,13 @@ public class PlaylistRestController {
     }
 
     @JsonView(PlaylistViews.All.class)
-    @GetMapping("/top-15-albums")
+    @GetMapping("top-15-albums")
     public Collection<PlaylistDto> getTopByLikes() {
         return playlistService.getTop(15);
     }
 
     @JsonView(PlaylistViews.List.class)
-    @GetMapping("/filter")
+    @GetMapping("filter")
     public String playlistPage(Model model,
                             @RequestParam(value = "page") Optional<Integer> page,
                             @RequestParam(value = "playlistName", required = false) String playlistName) {
