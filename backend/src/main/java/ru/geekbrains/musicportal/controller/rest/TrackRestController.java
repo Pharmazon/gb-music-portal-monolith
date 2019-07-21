@@ -6,26 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.musicportal.dto.blog.LikeDto;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
-import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.enums.EntityLikeEnum;
-import ru.geekbrains.musicportal.marker.LikeViews;
+import ru.geekbrains.musicportal.marker.PlaylistViews;
 import ru.geekbrains.musicportal.marker.TrackViews;
-import ru.geekbrains.musicportal.service.blog.LikeServiceImpl;
+import ru.geekbrains.musicportal.response.TrackResponse;
+import ru.geekbrains.musicportal.response.common.ResponseWrapper;
 import ru.geekbrains.musicportal.service.storage.TrackStorage;
 import ru.geekbrains.musicportal.service.track.TrackService;
 import ru.geekbrains.musicportal.specification.TrackSpecs;
 
-import javax.validation.Valid;
 import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @CrossOrigin
@@ -37,59 +34,64 @@ public class TrackRestController {
     private final int PAGE_SIZE = 50;
     private TrackService trackService;
     private TrackStorage storage;
-    private LikeServiceImpl likeService;
 
     @Autowired
-    public TrackRestController(TrackService trackService, TrackStorage storage, LikeServiceImpl likeService) {
+    public TrackRestController(TrackService trackService,
+                               TrackStorage storage) {
         this.trackService = trackService;
         this.storage = storage;
-        this.likeService = likeService;
     }
 
-    @JsonView(TrackViews.List.class)
-    @GetMapping
-    public Collection<TrackDto> getAll() {
-        return trackService.findAllDto();
-    }
-
-    @JsonView(TrackViews.Single.class)
-    @GetMapping("{id}")
-    public TrackDto getOneById(@PathVariable("id") Long id) {
-        return trackService.findOneDtoById(id);
-    }
-
-    /**
-     * Контроллер выдаёт топ треков (по колличеству лайков)
-     * @return - коллекция топ-треков (макс 15)
-     */
     @JsonView(TrackViews.All.class)
-    @GetMapping("top-15-tracks")
-    public Collection<TrackDto> getTopByLikes() {
-        return trackService.getTop(15);
+    @GetMapping
+    public ResponseWrapper<Collection<TrackDto>> getAll() {
+        Collection<TrackDto> dtos = trackService.findAllDtos();
+        if (dtos != null) {
+            return ResponseWrapper.ok(dtos, TrackResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(TrackResponse.ERROR_NOT_FOUND);
     }
 
-    @JsonView(TrackViews.List.class)
-    @GetMapping("filter")
-    public String trackPage(Model model,
-                            @RequestParam(value = "page") Optional<Integer> page,
-                            @RequestParam(value = "artistId", required = false) Long artistId,
-                            @RequestParam(value = "albumId", required = false) Long albumId,
-                            @RequestParam(value = "trackName", required = false) String trackName) {
-        final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+    @JsonView(TrackViews.All.class)
+    @GetMapping("{id}")
+    public ResponseWrapper<TrackDto> getOneById(@PathVariable("id") Long id) {
+        TrackDto dto = trackService.findOneDtoById(id);
+        if (dto != null) {
+            return ResponseWrapper.ok(dto, TrackResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(TrackResponse.ERROR_NOT_FOUND);
+    }
 
+    @JsonView(PlaylistViews.All.class)
+    @GetMapping("top-15-tracks")
+    public ResponseWrapper<Collection<TrackDto>> getTopByLikes() {
+        Collection<TrackDto> dto = trackService.getTop(15);
+        if (dto != null) {
+            return ResponseWrapper.ok(dto, TrackResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(TrackResponse.ERROR_NOT_FOUND);
+    }
+
+    @JsonView(TrackViews.All.class)
+    @GetMapping("filter")
+    public ResponseWrapper<Collection<TrackDto>> trackPage(@RequestParam(value = "page") Optional<Integer> page,
+                                                           @RequestParam(value = "artistId", required = false) Long artistId,
+                                                           @RequestParam(value = "playlistId", required = false) Long playlistId,
+                                                           @RequestParam(value = "trackName", required = false) String trackName) {
+        final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         Specification<Track> spec = Specification.where(null);
         if (artistId != null) spec.and(TrackSpecs.artistIdEquals(artistId));
-        if (albumId != null) spec.and(TrackSpecs.playlistIdEquals(albumId));
+        if (playlistId != null) spec.and(TrackSpecs.playlistIdEquals(playlistId));
         if (trackName != null) spec.and(TrackSpecs.trackNameContains(trackName));
-
-        Page<Track> tracks = trackService.getTracksWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
-        model.addAttribute("tracks", tracks.getContent());
-        model.addAttribute("page", currentPage);
-        model.addAttribute("totalPages", tracks.getTotalPages());
-        model.addAttribute("artistId", artistId);
-        model.addAttribute("albumId", albumId);
-        model.addAttribute("trackName", trackName);
-        return "Success";
+        Page<Track> pages = trackService.getTracksWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
+        if (pages != null) {
+            List<Track> entities = pages.getContent();
+            List<TrackDto> dtos = entities.stream()
+                    .map(artist -> trackService.convertToDto(artist))
+                    .collect(Collectors.toList());
+            return ResponseWrapper.ok(dtos, TrackResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(TrackResponse.ERROR_NOT_FOUND);
     }
 
     /**
@@ -99,24 +101,19 @@ public class TrackRestController {
      * вытащить файл, то ответ 500 (HttpStatus.INTERNAL_SERVER_ERROR)
      */
     @GetMapping(value = "play/{id}", produces = "audio/mpeg")
-    public ResponseEntity<InputStreamResource> getPlayFile(@PathVariable("id") Long id) {
+    public ResponseWrapper<ResponseEntity<InputStreamResource>> getPlayFile(@PathVariable("id") Long id) {
         Optional<Track> optional = trackService.findOneEntityById(id);
         if (!optional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseWrapper.notFound(TrackResponse.ERROR_NOT_FOUND);
         }
         Track track = optional.get();
         try {
-            return storage.getTrackFile(track);
+            return ResponseWrapper.ok(storage.getTrackFile(track), TrackResponse.SUCCESS_READ);
         } catch (FileNotFoundException e) {
-            log.error("Трек c id={} не найден", id);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            String message = "Трек c id=" + id + " не найден";
+            log.error(message);
+            return ResponseWrapper.error(message);
         }
     }
-    @JsonView(LikeViews.List.class)
-    @PostMapping ("tracks/add-like/{id}")
-    public Like createLikeTrack(@PathVariable Long id, @Valid LikeDto likeDto) {
-        likeDto.setEntityId(id);
-        likeDto.setEntity(EntityLikeEnum.TRACK);
-        return likeService.save(likeDto);
-    }
+
 }

@@ -4,16 +4,19 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.track.GenreDto;
 import ru.geekbrains.musicportal.entity.track.Genre;
 import ru.geekbrains.musicportal.marker.GenreViews;
+import ru.geekbrains.musicportal.response.GenreResponse;
+import ru.geekbrains.musicportal.response.common.ResponseWrapper;
 import ru.geekbrains.musicportal.service.track.GenreService;
 import ru.geekbrains.musicportal.specification.GenreSpecs;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -29,33 +32,41 @@ public class GenreRestController {
         this.genreService = genreService;
     }
 
-    @JsonView(GenreViews.List.class)
+    @JsonView(GenreViews.All.class)
     @GetMapping
-    public Collection<GenreDto> getAll() {
-        return genreService.findAllDto();
+    public ResponseWrapper<Collection<GenreDto>> getAll() {
+        Collection<GenreDto> dtos = genreService.findAllDtos();
+        if (dtos != null) {
+            return ResponseWrapper.ok(dtos, GenreResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(GenreResponse.ERROR_NOT_FOUND);
     }
 
-    @JsonView(GenreViews.Single.class)
+    @JsonView(GenreViews.All.class)
     @GetMapping("{id}")
-    public GenreDto getOneById(@PathVariable("id") Long id) {
-        return genreService.findOneDtoById(id);
+    public ResponseWrapper<GenreDto> getOneById(@PathVariable("id") Long id) {
+        GenreDto dto = genreService.findOneDtoById(id);
+        if (dto != null) {
+            return ResponseWrapper.ok(dto, GenreResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(GenreResponse.ERROR_NOT_FOUND);
     }
 
-    @JsonView(GenreViews.List.class)
+    @JsonView(GenreViews.All.class)
     @GetMapping("filter")
-    public String genrePage(Model model,
-                            @RequestParam(value = "page") Optional<Integer> page,
-                            @RequestParam(value = "genreName", required = false) String genreName) {
+    public ResponseWrapper<Collection<GenreDto>> genrePage(@RequestParam(value = "page") Optional<Integer> page,
+                                                           @RequestParam(value = "name", required = false) String name) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-
         Specification<Genre> spec = Specification.where(null);
-        if (genreName != null) spec.and(GenreSpecs.genreNameContains(genreName));
-
+        if (name != null) spec.and(GenreSpecs.genreNameContains(name));
         Page<Genre> genres = genreService.getGenresWithPagingAndFiltering(currentPage, PAGE_SIZE, spec);
-        model.addAttribute("genres", genres.getContent());
-        model.addAttribute("page", currentPage);
-        model.addAttribute("totalPages", genres.getTotalPages());
-        model.addAttribute("genreName", genreName);
-        return "Success";
+        if (genres != null) {
+            List<Genre> content = genres.getContent();
+            Collection<GenreDto> dtos = content.stream()
+                    .map(genre -> genreService.convertToDto(genre))
+                    .collect(Collectors.toList());
+            return ResponseWrapper.ok(dtos, GenreResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(GenreResponse.ERROR_NOT_FOUND);
     }
 }

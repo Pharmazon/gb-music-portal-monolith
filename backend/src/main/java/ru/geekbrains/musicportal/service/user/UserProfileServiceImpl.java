@@ -34,7 +34,12 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public Collection<UserProfileDto> findAllDto() {
+    public Collection<UserProfileDto> findAllDtos() {
+        return null;
+    }
+
+    @Override
+    public Collection<UserProfile> findAll() {
         return null;
     }
 
@@ -49,7 +54,13 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public UserProfileDto convertToDto(UserProfile entity) {
+        return null;
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
         userProfileRepository.deleteById(id);
+        return true;
     }
 }

@@ -1,13 +1,23 @@
 package ru.geekbrains.musicportal.dto.user;
 
-import ru.geekbrains.musicportal.dto.common.AbstractDto;
+import com.fasterxml.jackson.annotation.JsonView;
+import lombok.Getter;
 import ru.geekbrains.musicportal.entity.user.Role;
+import ru.geekbrains.musicportal.marker.UserViews;
 
-public class RoleDto extends AbstractDto {
+import java.io.Serializable;
+
+@Getter
+public class RoleDto implements Serializable {
+
+    @JsonView(UserViews.All.class)
+    private Long id;
+
+    @JsonView(UserViews.All.class)
+    private String name;
 
     public RoleDto(Role role) {
-        super.setId(role.getId());
-        super.setName(role.getName());
-        super.setDescription(role.getDescription());
+        id = role.getId();
+        name = role.getName();
     }
 }

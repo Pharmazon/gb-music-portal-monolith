@@ -17,7 +17,7 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@ToString(exclude = {"users", "playlists", "tracks"})
+@ToString(exclude = {"users", "playlists", "tracks", "genres"})
 @Table(name = "app_artists")
 @EqualsAndHashCode(callSuper = true)
 public class Artist extends AbstractEntity {

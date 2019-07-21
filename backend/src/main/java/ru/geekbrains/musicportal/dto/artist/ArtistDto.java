@@ -16,20 +16,22 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ArtistProfileDto extends AbstractDto {
+public class ArtistDto extends AbstractDto {
 
     @JsonView(ArtistViews.All.class)
     private Long imageId;
 
-    @JsonView(ArtistViews.Single.class)
+    @JsonView(ArtistViews.All.class)
     private Collection<PlaylistDto> playlists;
 
-    public ArtistProfileDto(Artist artist) {
+    public ArtistDto(Artist artist) {
         if (artist == null) return;
 
         super.setId(artist.getId());
         super.setName(artist.getName());
         super.setDescription(artist.getDescription());
+        super.setCreationDate(artist.getCreationDate());
+        super.setLastUpdate(artist.getLastUpdate());
         imageId = artist.getImage() == null ? null : artist.getImage().getId();
         Collection<Playlist> playlistsList = artist.getPlaylists();
         this.playlists = playlistsList.stream()

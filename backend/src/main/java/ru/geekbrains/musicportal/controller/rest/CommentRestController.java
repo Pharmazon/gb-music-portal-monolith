@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.blog.CommentDto;
 import ru.geekbrains.musicportal.entity.blog.Comment;
 import ru.geekbrains.musicportal.marker.CommentViews;
+import ru.geekbrains.musicportal.response.CommentResponse;
+import ru.geekbrains.musicportal.response.common.ResponseWrapper;
 import ru.geekbrains.musicportal.service.blog.CommentServiceImpl;
 
 import javax.validation.Valid;
@@ -24,29 +26,53 @@ public class CommentRestController {
         this.commentService = commentService;
     }
 
-    @JsonView(CommentViews.List.class)
+    @JsonView(CommentViews.All.class)
     @GetMapping
-    public Collection<CommentDto> comments() {
-        return commentService.findAllDto();
+    public ResponseWrapper<Collection<CommentDto>> getAll() {
+        Collection<CommentDto> dtos = commentService.findAllDtos();
+        if (dtos != null) {
+            return ResponseWrapper.ok(dtos, CommentResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(CommentResponse.ERROR_NOT_FOUND);
     }
 
-    @JsonView(CommentViews.List.class)
+    @JsonView(CommentViews.All.class)
+    @GetMapping("{id}")
+    public ResponseWrapper<CommentDto> getOneById(@PathVariable("id") Long id) {
+        CommentDto dto = commentService.findOneDtoById(id);
+        if (dto != null) {
+            return ResponseWrapper.ok(dto, CommentResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(CommentResponse.ERROR_NOT_FOUND);
+    }
+
+    @JsonView(CommentViews.All.class)
     @PostMapping
-    public Comment createComment(@Valid CommentDto commentDto) {
-        return commentService.save(commentDto);
+    public ResponseWrapper<CommentDto> createComment(@Valid CommentDto commentDto) {
+        Comment converted = commentService.convertToEntity(commentDto);
+        Comment comment = commentService.saveOrUpdate(converted);
+        if (comment != null && converted != null) {
+            return ResponseWrapper.ok(commentDto, CommentResponse.SUCCESS_CREATED);
+        }
+        return ResponseWrapper.notFound(CommentResponse.ERROR_NOT_FOUND);
     }
 
-    @JsonView(CommentViews.List.class)
-    @PutMapping("{id}")
-    public Comment updateComment(@PathVariable Long id,
-                                 @Valid CommentDto commentDto) {
-        return commentService.update(commentDto, id);
+    @JsonView(CommentViews.All.class)
+    @PutMapping
+    public ResponseWrapper<CommentDto> updateComment(@Valid CommentDto commentDto) {
+        Comment converted = commentService.convertToEntity(commentDto);
+        Comment comment = commentService.saveOrUpdate(converted);
+        if (converted != null && comment != null) {
+            return ResponseWrapper.ok(commentDto, CommentResponse.SUCCESS_UPDATED);
+        }
+        return ResponseWrapper.notFound(CommentResponse.ERROR_NOT_FOUND);
     }
 
-    @JsonView(CommentViews.List.class)
+    @JsonView(CommentViews.All.class)
     @DeleteMapping("{id}")
-    public String deleteComment(@PathVariable Long id) {
-        commentService.deleteById(id);
-        return "Comment Deleted";
+    public ResponseWrapper deleteComment(@PathVariable("id") Long id) {
+        boolean deleted = commentService.deleteById(id);
+        if (deleted) return ResponseWrapper.success(CommentResponse.SUCCESS_DELETED);
+        return ResponseWrapper.notFound(CommentResponse.ERROR_NOT_FOUND);
     }
 }

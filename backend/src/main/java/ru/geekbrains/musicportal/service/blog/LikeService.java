@@ -1,13 +1,9 @@
 package ru.geekbrains.musicportal.service.blog;
 
+import ru.geekbrains.musicportal.dto.blog.LikeDto;
 import ru.geekbrains.musicportal.entity.blog.Like;
+import ru.geekbrains.musicportal.service.common.CommonService;
 
-import java.util.Optional;
-
-public interface LikeService {
-
-    Like save(Like entity);
-
-    Optional<Like> findById(Long id);
+public interface LikeService extends CommonService<Like, LikeDto> {
 
 }

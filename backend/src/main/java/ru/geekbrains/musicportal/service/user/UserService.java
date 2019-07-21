@@ -5,20 +5,15 @@ import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
 import ru.geekbrains.musicportal.entity.user.User;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;
+import ru.geekbrains.musicportal.service.common.CommonService;
 
 import java.util.Collection;
 
-public interface UserService extends UserDetailsService  {
+public interface UserService extends UserDetailsService, CommonService<User, UserDto> {
 
     User findByUserName(String username);
 
     User save(UserRegistrationDto userRegistrationDto);
-
-    User save(User user);
-
-    User getOneById(Long id);
-
-    void deleteOne(User user);
 
     UserDto getDtoByUsername(String username);
 
@@ -40,7 +35,4 @@ public interface UserService extends UserDetailsService  {
 
     boolean isExistsByName(String username);
 
-    UserDto getOneDtoById(Long id);
-
-    void deleteOneById(Long id);
 }

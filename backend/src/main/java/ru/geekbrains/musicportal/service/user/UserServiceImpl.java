@@ -1,5 +1,6 @@
 package ru.geekbrains.musicportal.service.user;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,14 +33,17 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    private ModelMapper modelMapper;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            RoleRepository roleRepository,
+                           ModelMapper modelMapper,
                            PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = encoder;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -53,28 +57,11 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException(UserMessage.INVALID_USERNAME.getText());
         }
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-//                mapRolesToAuthorities(user.getRoles()));
         return user;
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
-
-    @Override
-    public User save(User user) {
-        return userRepository.save(user);
-    }
-
-    public User getOneById(Long id) {
-        Optional<User> optional = userRepository.findById(id);
-        return optional.orElse(null);
-    }
-
-    @Override
-    public void deleteOne(User user) {
-        userRepository.deleteById(user.getId());
     }
 
     public boolean changePassword(String username, String oldPsw, String newPsw) {
@@ -83,7 +70,7 @@ public class UserServiceImpl implements UserService {
         if(user == null || !passwordEncoder.matches(oldPsw, user.getPassword())) return false;
         user.setPassword(passwordEncoder.encode(newPsw));
         user.setLastPasswordChangeDate(LocalDateTime.now());
-        save(user);
+        saveOrUpdate(user);
         return result;
     }
 
@@ -93,7 +80,7 @@ public class UserServiceImpl implements UserService {
         if(user == null || !passwordEncoder.matches(user.getPasswordAnswer(), passwordAnswer)) return false;
         user.setPassword(passwordEncoder.encode(newPsw));
         user.setLastPasswordChangeDate(LocalDateTime.now());
-        save(user);
+        saveOrUpdate(user);
         return res;
     }
 
@@ -104,13 +91,44 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getOneDtoById(Long id) {
+    public User saveOrUpdate(User entity) {
+        return userRepository.save(entity);
+    }
+
+    @Override
+    public Optional<User> findOneEntityById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public UserDto findOneDtoById(Long id) {
         return userRepository.findOneById(id);
     }
 
     @Override
-    public void deleteOneById(Long id) {
+    public Collection<UserDto> findAllDtos() {
+        return userRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public Collection<User> findAll() {
+        return (Collection<User>) userRepository.findAll();
+    }
+
+    @Override
+    public User convertToEntity(UserDto dto) {
+        return modelMapper.map(dto, User.class);
+    }
+
+    @Override
+    public UserDto convertToDto(User entity) {
+        return modelMapper.map(entity, UserDto.class);
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
         userRepository.deleteById(id);
+        return true;
     }
 
     @Override
@@ -141,13 +159,13 @@ public class UserServiceImpl implements UserService {
         user.setPasswordQuestion(userRegistrationDto.getPasswordQuestion());
         user.setPasswordAnswer(userRegistrationDto.getPasswordAnswer());
         user.setApproved(userRegistrationDto.isApproved());
-        user = save(user);
+        user = saveOrUpdate(user);
         return user;
     }
 
     @Override
     @Transactional
-    public void registerUser(
+    public void registerUser (
             String username,
             String password,
             String email,
@@ -162,11 +180,11 @@ public class UserServiceImpl implements UserService {
         user.setEmail(email);
         Collection<Role> roles = getRolesFromEnum(rolesEnum);
         user.setRoles(roles);
-        save(user);
+        saveOrUpdate(user);
     }
 
     @Transactional
-    public User saveOrUpdate(UserDto userDto) {
+    public User save(UserDto userDto) {
         String username = userDto.getUsername();
 
         User user = userRepository.findOneByUsername(username);
@@ -180,7 +198,7 @@ public class UserServiceImpl implements UserService {
         user.setLastUpdate(LocalDateTime.now());
         ArrayList<Role> roles = new ArrayList<>();
 
-        for (RoleDto roleDto:userDto.getRoles()) {
+        for (RoleDto roleDto : userDto.getRoles()) {
             roles.add(roleRepository.findOneByName(roleDto.getName()));
         }
 
@@ -188,7 +206,7 @@ public class UserServiceImpl implements UserService {
         user.setPasswordQuestion(userDto.getPasswordQuestion());
         user.setPasswordAnswer(userDto.getPasswordAnswer());
         user.setApproved(userDto.isApproved());
-        user = save(user);
+        user = saveOrUpdate(user);
         return user;
     }
 

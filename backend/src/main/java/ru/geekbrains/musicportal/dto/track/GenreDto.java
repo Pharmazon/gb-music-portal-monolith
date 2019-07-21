@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.track.Genre;
-import ru.geekbrains.musicportal.marker.CommonViews;
+import ru.geekbrains.musicportal.marker.GenreViews;
 
 import java.io.Serializable;
 
@@ -12,10 +12,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class GenreDto implements Serializable {
 
-    @JsonView(CommonViews.General.class)
+    @JsonView(GenreViews.All.class)
     private Long id;
 
-    @JsonView(CommonViews.General.class)
+    @JsonView(GenreViews.All.class)
     private String name;
 
     public GenreDto(Genre genre) {

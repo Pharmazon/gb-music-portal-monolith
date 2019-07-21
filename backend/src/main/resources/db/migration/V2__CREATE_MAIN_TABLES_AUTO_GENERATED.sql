@@ -30,8 +30,9 @@ CREATE TABLE "app_comments" (
 "last_update" timestamp(6) NOT NULL,
 "name" varchar(255) COLLATE "default",
 "comment_content" varchar(255) COLLATE "default",
-"author_id" int8,
+"entity" varchar(255) COLLATE "default",
 "entity_id" int8,
+"author_id" int8,
 CONSTRAINT "app_comments_pkey" PRIMARY KEY ("id")
 )
 WITHOUT OIDS;
@@ -118,9 +119,6 @@ ALTER TABLE "app_playlist_feature_types" OWNER TO "musicportal";
 
 CREATE TABLE "app_roles" (
 "id" int8 NOT NULL,
-"creation_date" timestamp(6) NOT NULL,
-"description" varchar(255) COLLATE "default",
-"last_update" timestamp(6) NOT NULL,
 "name" varchar(255) COLLATE "default",
 CONSTRAINT "app_roles_pkey" PRIMARY KEY ("id")
 )

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @Data
 @Entity
 @NoArgsConstructor
+@ToString(exclude = {"roles", "userProfile", "playlists", "articles", "comments", "likes"})
 @Table(name = "app_users")
 @EqualsAndHashCode(callSuper = true)
 public class User extends AbstractEntity implements UserDetails {

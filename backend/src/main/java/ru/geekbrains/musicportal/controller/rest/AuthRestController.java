@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.config.TokenProvider;
 import ru.geekbrains.musicportal.dto.user.JwtResponse;
 import ru.geekbrains.musicportal.dto.user.UserAuthDto;
-import ru.geekbrains.musicportal.service.user.UserServiceImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -19,15 +18,12 @@ import ru.geekbrains.musicportal.service.user.UserServiceImpl;
 public class AuthRestController {
 
     private AuthenticationManager authenticationManager;
-    private UserServiceImpl userService;
     private TokenProvider jwtProvider;
 
     @Autowired
     public AuthRestController(AuthenticationManager authenticationManager,
-                              UserServiceImpl userService,
                               TokenProvider jwtProvider) {
         this.authenticationManager = authenticationManager;
-        this.userService = userService;
         this.jwtProvider = jwtProvider;
     }
 

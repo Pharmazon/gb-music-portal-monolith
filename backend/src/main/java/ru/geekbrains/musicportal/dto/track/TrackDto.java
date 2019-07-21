@@ -32,19 +32,16 @@ public class TrackDto extends AbstractDto {
     @JsonView(TrackViews.All.class)
     private String url;
 
-    public TrackDto(Track track, Long liked) {
-        this(track);
-        this.liked = liked;
-    }
-
     public TrackDto(Track track) {
         if (track == null) return;
 
         super.setId(track.getId());
         super.setName(track.getName());
         super.setDescription(track.getDescription());
-        artistId = track.getArtist().getId();
-        artistName = track.getArtist().getName();
+        super.setCreationDate(track.getCreationDate());
+        super.setLastUpdate(track.getLastUpdate());
+        artistId = track.getArtist() == null ? null : track.getArtist().getId();
+        artistName = track.getArtist() == null ? null : track.getArtist().getName();
         fileLink = track.getFileLink();
         url = UrlConfig.serverUrl + UrlConfig.apiPath + UrlConfig.trackPath + track.getId();
     }

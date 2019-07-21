@@ -1,24 +1,28 @@
 package ru.geekbrains.musicportal.entity.user;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "app_roles")
-@EqualsAndHashCode(callSuper = true)
-public class Role extends AbstractEntity implements GrantedAuthority {
+public class Role implements GrantedAuthority {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, updatable = false)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
 
     public Role(UserRoleEnum roleEnum) {
-        super.setName(roleEnum.getName());
+        name = roleEnum.getName();
     }
 
     @Override

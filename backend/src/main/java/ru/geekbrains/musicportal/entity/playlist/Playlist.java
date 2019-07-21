@@ -3,6 +3,7 @@ package ru.geekbrains.musicportal.entity.playlist;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.geekbrains.musicportal.entity.artist.Artist;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.image.Image;
@@ -16,6 +17,7 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
+@ToString(exclude = {"user", "artist", "genres", "playlistTracks", "playlistFeatures"})
 @Table(name = "app_playlists")
 @EqualsAndHashCode(callSuper = true)
 public class Playlist extends AbstractEntity {

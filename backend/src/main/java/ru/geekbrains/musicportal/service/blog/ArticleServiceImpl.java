@@ -3,6 +3,8 @@ package ru.geekbrains.musicportal.service.blog;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.blog.ArticleDto;
 import ru.geekbrains.musicportal.entity.blog.Article;
@@ -24,26 +26,36 @@ public class ArticleServiceImpl implements ArticleService {
         this.modelMapper = modelMapper;
     }
 
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         articleRepository.deleteById(id);
+        return true;
     }
 
-    public void changeTitleById(Long id, String newTitle) {
+    public boolean changeTitleById(Long id, String newTitle) {
         Optional<Article> optional = findOneEntityById(id);
         if (optional.isPresent()) {
             Article article = optional.get();
             article.setTitle(newTitle);
             saveOrUpdate(article);
+            return true;
         }
+        return false;
     }
 
-    public void addContent(Long id, String content) {
+    public boolean addContent(Long id, String content) {
         Optional<Article> optional = findOneEntityById(id);
         if (optional.isPresent()) {
             Article article = optional.get();
             article.setContent(content);
             saveOrUpdate(article);
+            return true;
         }
+        return false;
+    }
+
+    @Override
+    public Page<Article> getArticlesWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Article> specification) {
+        return null;
     }
 
     @Override
@@ -57,8 +69,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Collection<ArticleDto> findAllDto() {
-        return null;
+    public Collection<ArticleDto> findAllDtos() {
+        return articleRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public Collection<Article> findAll() {
+        return (Collection<Article>) articleRepository.findAll();
     }
 
     @Override
@@ -69,5 +86,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article convertToEntity(ArticleDto dto) {
         return modelMapper.map(dto, Article.class);
+    }
+
+    @Override
+    public ArticleDto convertToDto(Article entity) {
+        return modelMapper.map(entity, ArticleDto.class);
     }
 }

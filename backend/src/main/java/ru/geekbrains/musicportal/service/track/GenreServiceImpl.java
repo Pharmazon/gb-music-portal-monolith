@@ -45,8 +45,13 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public Collection<GenreDto> findAllDto() {
-        return null;
+    public Collection<GenreDto> findAllDtos() {
+        return genreRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public Collection<Genre> findAll() {
+        return (Collection<Genre>) genreRepository.findAll();
     }
 
     @Override
@@ -60,8 +65,14 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public GenreDto convertToDto(Genre entity) {
+        return modelMapper.map(entity, GenreDto.class);
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
         genreRepository.deleteById(id);
+        return true;
     }
 
     @Override
