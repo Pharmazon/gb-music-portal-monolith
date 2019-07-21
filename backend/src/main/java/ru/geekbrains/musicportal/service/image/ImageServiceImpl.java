@@ -1,5 +1,6 @@
 package ru.geekbrains.musicportal.service.image;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.image.ImageDto;
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class ImageServiceImpl implements ImageService {
 
     private ImageRepository imageRepository;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public ImageServiceImpl(ImageRepository imageRepository){
+    public ImageServiceImpl(ImageRepository imageRepository, ModelMapper modelMapper) {
         this.imageRepository = imageRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -30,10 +33,14 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Collection<ImageDto> findAllDto() {
+    public Collection<ImageDto> findAllDtos() {
         return imageRepository.findAllByIdNotNull();
     }
 
+    @Override
+    public Collection<Image> findAll() {
+        return (Collection<Image>) imageRepository.findAll();
+    }
 
     @Override
     public ImageDto findOneDtoById(Long id) {
@@ -46,15 +53,13 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public ImageDto convertToDto(Image entity) {
+        return modelMapper.map(entity, ImageDto.class);
+    }
+
+    public boolean deleteById(Long id) {
         imageRepository.deleteById(id);
+        return true;
     }
 
-    public Optional<ImageDto> findByIdDTO(Long id) {
-        return Optional.of(imageRepository.findById(id, ImageDto.class));
-    }
-
-    public void delete(Image image){
-        imageRepository.delete(image);
-    }
 }

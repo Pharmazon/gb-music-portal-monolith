@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.dto.common.AbstractDto;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
+import ru.geekbrains.musicportal.entity.playlist.PlaylistFeature;
 import ru.geekbrains.musicportal.entity.track.PlaylistTrack;
 import ru.geekbrains.musicportal.marker.PlaylistViews;
 
@@ -18,14 +19,14 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = true)
 public class PlaylistDto extends AbstractDto {
 
-    @JsonView(PlaylistViews.Single.class)
+    @JsonView(PlaylistViews.All.class)
     private Collection<TrackDto> tracks;
 
     @JsonView(PlaylistViews.All.class)
-    private String imagePath;
+    private Long imageId;
 
     @JsonView(PlaylistViews.All.class)
-    private Long imageId;
+    private Collection<PlaylistFeatureDto> playlistFeatureDtos;
 
     public PlaylistDto(Playlist playlist) {
         if (playlist == null) return;
@@ -33,12 +34,17 @@ public class PlaylistDto extends AbstractDto {
         super.setId(playlist.getId());
         super.setName(playlist.getName());
         super.setDescription(playlist.getDescription());
+        super.setCreationDate(playlist.getCreationDate());
+        super.setLastUpdate(playlist.getLastUpdate());
         Collection<PlaylistTrack> playlistTracksList = playlist.getPlaylistTracks();
         tracks = playlistTracksList.stream()
                 .map(playTrack -> new TrackDto(playTrack.getTrack()))
                 .collect(Collectors.toList());
         imageId = playlist.getImage() != null ? playlist.getImage().getId() : null;
-        imagePath = playlist.getImage() != null ? playlist.getImage().getImgLink() : null;
+        Collection<PlaylistFeature> playlistFeatures = playlist.getPlaylistFeatures();
+        playlistFeatureDtos = playlistFeatures.stream()
+                .map(PlaylistFeatureDto::new)
+                .collect(Collectors.toList());
     }
 
 }

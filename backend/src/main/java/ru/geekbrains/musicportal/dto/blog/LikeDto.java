@@ -1,26 +1,39 @@
 package ru.geekbrains.musicportal.dto.blog;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.dto.common.AbstractDto;
-import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.enums.EntityLikeEnum;
+import ru.geekbrains.musicportal.marker.LikeViews;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode (callSuper = true)
-public class LikeDto extends AbstractDto {
+public class LikeDto implements Serializable {
 
-    private UserDto user;
+    @JsonView(LikeViews.All.class)
+    private Long id;
+
+    @JsonView(LikeViews.All.class)
+    private LocalDateTime creationDate;
+
+    @JsonView(LikeViews.All.class)
+    private Long userId;
+
+    @JsonView(LikeViews.All.class)
     private Long entityId;
+
+    @JsonView(LikeViews.All.class)
     private EntityLikeEnum entity;
 
     public LikeDto(Like like) {
-        super.setId(like.getId());
-        user = new UserDto(like.getUser());
+        id = like.getId();
+        creationDate = like.getCreationDate();
+        userId = like.getUser().getId();
         entityId = like.getLikedEntity();
         entity = like.getTypeLikedEntity();
     }

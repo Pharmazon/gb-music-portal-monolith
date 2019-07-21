@@ -8,14 +8,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.enums.FilterJoinTypeEnum;
 import ru.geekbrains.musicportal.repository.LikeRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
-import ru.geekbrains.musicportal.specification.SpecFeature;
-import ru.geekbrains.musicportal.specification.TrackUtil;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,15 +19,12 @@ import java.util.stream.Collectors;
 public class TrackServiceImpl implements TrackService {
 
     private TrackRepository trackRepository;
-    private LikeRepository likeRepository;
     private ModelMapper modelMapper;
 
     @Autowired
     public TrackServiceImpl(TrackRepository trackRepository,
-                            LikeRepository likeRepository,
                             ModelMapper modelMapper) {
         this.trackRepository = trackRepository;
-        this.likeRepository = likeRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -43,25 +36,6 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public Optional<Track> findOneEntityById(Long id) {
         return trackRepository.findById(id);
-    }
-
-    public Page<Track> getTrackWithPagingAndFiltering(int pageNumber, int pageSize, List<SpecFeature> specFeatures) {
-        Specification<Track> trackSpecification = Specification.where(null);
-        for (SpecFeature specFeature : specFeatures) {
-            if (specFeature.getJoinType() == FilterJoinTypeEnum.AND) {
-                trackSpecification = trackSpecification.and(TrackUtil.getSpecification(specFeature));
-            } else if (specFeature.getJoinType() == FilterJoinTypeEnum.OR) {
-                trackSpecification = trackSpecification.or(TrackUtil.getSpecification(specFeature));
-            } else {
-                trackSpecification = trackSpecification.and(TrackUtil.getSpecification(specFeature));
-            }
-        }
-        return trackRepository.findAll(trackSpecification, PageRequest.of(pageNumber, pageSize));
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        trackRepository.deleteById(id);
     }
 
     @Override
@@ -87,8 +61,19 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public Collection<TrackDto> findAllDto() {
+    public boolean deleteById(Long id) {
+        trackRepository.deleteById(id);
+        return true;
+    }
+
+    @Override
+    public Collection<TrackDto> findAllDtos() {
         return trackRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public Collection<Track> findAll() {
+        return (Collection<Track>) trackRepository.findAll();
     }
 
     @Override

@@ -14,5 +14,4 @@ public interface PlaylistService extends CommonService<Playlist, PlaylistDto> {
 
     Collection<PlaylistDto> getTop(int max);
 
-    PlaylistDto convertToDto(Playlist entity);
 }

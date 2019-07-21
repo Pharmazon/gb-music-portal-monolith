@@ -1,5 +1,6 @@
 package ru.geekbrains.musicportal.service.blog;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.blog.CommentDto;
@@ -13,14 +14,13 @@ import java.util.Optional;
 public class CommentServiceImpl implements CommentService {
 
     private CommentRepository commentRepository;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository,
+                              ModelMapper modelMapper) {
         this.commentRepository = commentRepository;
-    }
-
-    public void deleteById(Long id) {
-        commentRepository.deleteById(id);
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -33,34 +33,34 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findById(id);
     }
 
-    public Collection<CommentDto> findAllDto() {
-        return commentRepository.findAllByIdNotNull();
-    }
-
     @Override
     public CommentDto findOneDtoById(Long id) {
         return commentRepository.findOneById(id);
     }
 
     @Override
+    public Collection<CommentDto> findAllDtos() {
+        return commentRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public Collection<Comment> findAll() {
+        return (Collection<Comment>) commentRepository.findAll();
+    }
+
+    @Override
     public Comment convertToEntity(CommentDto dto) {
-        return null;
+        return modelMapper.map(dto, Comment.class);
     }
 
-    public Comment save(CommentDto commentDto) {
-        Comment comment = new Comment();
-        comment.setAuthor(commentDto.getAuthor());
-        comment.setContent(commentDto.getContent());
-        comment.setEntityId(commentDto.getEntityId());
-        comment.setTypeCommentedEntity(commentDto.getEntity());
-        return commentRepository.save(comment);
+    @Override
+    public CommentDto convertToDto(Comment entity) {
+        return modelMapper.map(entity, CommentDto.class);
     }
 
-    public Comment update(CommentDto commentDto, Long id) {
-        Comment comment = convertToEntity(commentRepository.findOneById(id));
-        if (comment != null) {
-            save(commentDto);
-        }
-        return null;
+    @Override
+    public boolean deleteById(Long id) {
+        commentRepository.deleteById(id);
+        return true;
     }
 }

@@ -9,11 +9,15 @@ public interface CommonService<E, D> {
 
     Optional<E> findOneEntityById(Long id);
 
-    Collection<D> findAllDto();
-
     D findOneDtoById(Long id);
+
+    Collection<D> findAllDtos();
+
+    Collection<E> findAll();
 
     E convertToEntity(D dto);
 
-    void deleteById(Long id);
+    D convertToDto(E entity);
+
+    boolean deleteById(Long id);
 }

@@ -124,18 +124,16 @@ INSERT INTO app_articles (id, creation_date, description, last_update, name, con
   VALUES (32, current_timestamp, 'Описание описание', current_timestamp, NULL , 'Предложение предложение предложение предложение', NULL , 'Название 2', 20);
 
 --Комментарии к статье
-INSERT INTO app_comments (id, creation_date, description, last_update, name, comment_content, author_id,  entity_id)
-  VALUES (33, current_timestamp, '', current_timestamp, 'Название комментария 1', 'слово слово слово слово слово слово слово слово слово ', 21, 31);
-INSERT INTO app_comments (id, creation_date, description, last_update, name, comment_content, author_id, entity_id)
-  VALUES (34, current_timestamp, '', current_timestamp, 'Название комментария 2', 'Предложение предложение', 22, 31);
+INSERT INTO app_comments (id, creation_date, description, last_update, name, comment_content, entity, entity_id, author_id)
+  VALUES (33, current_timestamp, '', current_timestamp, 'Название комментария 1', 'слово ', 'TRACK', 31, 22);
+INSERT INTO app_comments (id, creation_date, description, last_update, name, comment_content, entity, entity_id, author_id)
+  VALUES (34, current_timestamp, '', current_timestamp, 'Название комментария 2', 'Предложение предложение', 'TRACK', 31, 22);
 
 --роли
-INSERT INTO app_roles (id, creation_date, description, last_update, name)
-VALUES (35, current_timestamp, 'Может все', current_timestamp, 'ADMIN');
-INSERT INTO app_roles (id, creation_date, description, last_update, name)
-VALUES (36, current_timestamp, 'Пользователь портала', current_timestamp, 'USER');
-INSERT INTO app_roles (id, creation_date, description, last_update, name)
-VALUES (37, current_timestamp, 'Исполнитель', current_timestamp, 'ARTIST');
+INSERT INTO app_roles (id, name) VALUES (35, 'ADMIN');
+INSERT INTO app_roles (id, name) VALUES (36, 'USER');
+INSERT INTO app_roles (id, name) VALUES (37, 'ARTIST');
+INSERT INTO app_roles (id, name) VALUES (38, 'SUPERADMIN');
 
 --пользователь-роль
 INSERT INTO join_users_roles (user_id, role_id)

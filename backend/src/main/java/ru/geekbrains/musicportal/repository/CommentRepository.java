@@ -6,8 +6,6 @@ import ru.geekbrains.musicportal.dto.blog.CommentDto;
 import ru.geekbrains.musicportal.entity.blog.Comment;
 
 @Repository
-public interface CommentRepository extends CommonRepository<CommentDto>,
-        CrudRepository<Comment, Long> {
+public interface CommentRepository extends CommonRepository<CommentDto>, CrudRepository<Comment, Long> {
 
-//    Comment updateById(Long id, CommentDto comment);
 }

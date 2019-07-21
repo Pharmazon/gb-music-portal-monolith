@@ -1,16 +1,20 @@
 package ru.geekbrains.musicportal.controller.rest;
 
-
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.blog.LikeDto;
 import ru.geekbrains.musicportal.entity.blog.Like;
 import ru.geekbrains.musicportal.marker.LikeViews;
+import ru.geekbrains.musicportal.response.LikeResponse;
+import ru.geekbrains.musicportal.response.common.ResponseWrapper;
 import ru.geekbrains.musicportal.service.blog.LikeServiceImpl;
 
 import javax.validation.Valid;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -24,29 +28,45 @@ public class LikeRestController {
         this.likeService = likeService;
     }
 
-    @JsonView(LikeViews.List.class)
+    @JsonView(LikeViews.All.class)
     @GetMapping
-    public Iterable<Like> getAll() {
-        return likeService.findAll();
+    public ResponseWrapper<Collection<LikeDto>> getAll() {
+        Collection<Like> likes = likeService.findAll();
+        if (likes != null) {
+            List<LikeDto> dtos = likes.stream()
+                    .map(LikeDto::new)
+                    .collect(Collectors.toList());
+            return ResponseWrapper.ok(dtos, LikeResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(LikeResponse.ERROR_NOT_FOUND);
     }
 
-    @JsonView(LikeViews.List.class)
+    @JsonView(LikeViews.All.class)
     @GetMapping("{id}")
-    public Optional<Like> getOneById(@PathVariable Long id) {
-        return likeService.findById(id);
+    public ResponseWrapper<LikeDto> getOneById(@PathVariable("id") Long id) {
+        Optional<Like> optional = likeService.findOneEntityById(id);
+        if (optional.isPresent()) {
+            LikeDto dto = new LikeDto(optional.get());
+            return ResponseWrapper.ok(dto, LikeResponse.SUCCESS_READ);
+        }
+        return ResponseWrapper.notFound(LikeResponse.ERROR_NOT_FOUND);
     }
 
-    @JsonView(LikeViews.List.class)
+    @JsonView(LikeViews.All.class)
     @DeleteMapping("{id}")
-    public String deleteOneById(@PathVariable Long id) {
-        likeService.deleteById(id);
-        return "Like Deleted";
+    public ResponseWrapper deleteOneById(@PathVariable("id") Long id) {
+        boolean deleted = likeService.deleteById(id);
+        if (deleted) return ResponseWrapper.ok(null, LikeResponse.SUCCESS_DELETED);
+        return ResponseWrapper.notFound(LikeResponse.ERROR_DELETED);
     }
 
-    @JsonView(LikeViews.List.class)
-    @PostMapping ("{id}")
-    public Like createLike(@PathVariable Long id, @Valid LikeDto likeDto) {
-        return likeService.save(likeDto);
+    @JsonView(LikeViews.All.class)
+    @PostMapping
+    public ResponseWrapper<Like> createLike(@Valid LikeDto likeDto) {
+        Like converted = likeService.convertToEntity(likeDto);
+        Like like = likeService.saveOrUpdate(converted);
+        if (converted != null && like != null) return ResponseWrapper.ok(null, LikeResponse.SUCCESS_CREATED);
+        return ResponseWrapper.notFound(LikeResponse.ERROR_CREATED);
     }
 
 }

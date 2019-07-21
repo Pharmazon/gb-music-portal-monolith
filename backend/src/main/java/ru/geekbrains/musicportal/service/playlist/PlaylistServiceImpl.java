@@ -38,8 +38,13 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
-    public Collection<PlaylistDto> findAllDto() {
+    public Collection<PlaylistDto> findAllDtos() {
         return playlistRepository.findAllByIdNotNull();
+    }
+
+    @Override
+    public Collection<Playlist> findAll() {
+        return (Collection<Playlist>) playlistRepository.findAll();
     }
 
     @Override
@@ -53,8 +58,9 @@ public class PlaylistServiceImpl implements PlaylistService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         playlistRepository.deleteById(id);
+        return true;
     }
 
     @Override
