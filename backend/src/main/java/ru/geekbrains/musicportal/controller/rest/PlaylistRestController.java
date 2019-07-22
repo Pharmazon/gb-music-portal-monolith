@@ -37,7 +37,7 @@ public class PlaylistRestController {
 
     @JsonView(PlaylistViews.All.class)
     @GetMapping
-    public ResponseWrapper<Collection<PlaylistDto>> getAll() {
+    public ResponseWrapper getAll() {
         Collection<PlaylistDto> dtos = playlistService.findAllDtos();
         if (dtos != null) {
             return ResponseWrapper.ok(dtos, PlaylistResponse.SUCCESS_READ);
@@ -47,7 +47,7 @@ public class PlaylistRestController {
 
     @JsonView(PlaylistViews.All.class)
     @GetMapping("{id}")
-    public ResponseWrapper<PlaylistDto> getOneById(@PathVariable("id") Long id) {
+    public ResponseWrapper getOneById(@PathVariable("id") Long id) {
         PlaylistDto dto = playlistService.findOneDtoById(id);
         if (dto != null) {
             return ResponseWrapper.ok(dto, PlaylistResponse.SUCCESS_READ);
@@ -57,7 +57,7 @@ public class PlaylistRestController {
 
     @JsonView(PlaylistViews.All.class)
     @GetMapping("top-15-playlists")
-    public ResponseWrapper<Collection<PlaylistDto>> getTopByLikes() {
+    public ResponseWrapper getTopByLikes() {
         Collection<PlaylistDto> dto = playlistService.getTop(15);
         if (dto != null) {
             return ResponseWrapper.ok(dto, PlaylistResponse.SUCCESS_READ);
@@ -67,8 +67,8 @@ public class PlaylistRestController {
 
     @JsonView(PlaylistViews.All.class)
     @GetMapping("filter")
-    public ResponseWrapper<Collection<PlaylistDto>> playlistPage(@RequestParam(value = "page") Optional<Integer> page,
-                                                                 @RequestParam(value = "name", required = false) String name) {
+    public ResponseWrapper playlistPage(@RequestParam(value = "page") Optional<Integer> page,
+                                        @RequestParam(value = "name", required = false) String name) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         Specification<Playlist> spec = Specification.where(null);
         if (name != null) spec.and(PlaylistSpecs.playlistNameContains(name));

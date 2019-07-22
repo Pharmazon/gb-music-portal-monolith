@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.geekbrains.musicportal.entity.artist.Artist;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
+import ru.geekbrains.musicportal.entity.genre.Genre;
 
 import javax.persistence.*;
 import java.util.Collection;

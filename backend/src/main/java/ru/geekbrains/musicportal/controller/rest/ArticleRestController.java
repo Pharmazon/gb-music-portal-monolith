@@ -35,7 +35,7 @@ public class ArticleRestController {
 
     @JsonView(ArticleViews.All.class)
     @GetMapping
-    public ResponseWrapper<Collection<ArticleDto>> getAll() {
+    public ResponseWrapper getAll() {
         Collection<ArticleDto> dtos = articleService.findAllDtos();
         if (dtos != null) {
             return ResponseWrapper.ok(dtos, ArticleResponse.SUCCESS_READ);
@@ -45,7 +45,7 @@ public class ArticleRestController {
 
     @JsonView(ArticleViews.All.class)
     @GetMapping("{id}")
-    public ResponseWrapper<ArticleDto> getOneById(@PathVariable("id") Long id) {
+    public ResponseWrapper getOneById(@PathVariable("id") Long id) {
         ArticleDto dto = articleService.findOneDtoById(id);
         if (dto != null) {
             return ResponseWrapper.ok(dto, ArticleResponse.SUCCESS_READ);
@@ -55,7 +55,7 @@ public class ArticleRestController {
 
     @JsonView(ArticleViews.All.class)
     @PutMapping
-    public ResponseWrapper<ArticleDto> update(@Valid ArticleDto dto) {
+    public ResponseWrapper update(@Valid ArticleDto dto) {
         Article converted = articleService.convertToEntity(dto);
         Article article = articleService.saveOrUpdate(converted);
         if (converted != null && article != null) {
@@ -66,12 +66,12 @@ public class ArticleRestController {
 
     @JsonView(ArticleViews.All.class)
     @GetMapping("filter")
-    public ResponseWrapper<Collection<ArticleDto>> genrePage(@RequestParam(value = "page") Optional<Integer> page,
-                                                             @RequestParam(value = "title", required = false) String title,
-                                                             @RequestParam(value = "name", required = false) String name,
-                                                             @RequestParam(value = "description", required = false) String description,
-                                                             @RequestParam(value = "shortDescription", required = false) String shortDescription,
-                                                             @RequestParam(value = "content", required = false) String content) {
+    public ResponseWrapper genrePage(@RequestParam(value = "page") Optional<Integer> page,
+                                     @RequestParam(value = "title", required = false) String title,
+                                     @RequestParam(value = "name", required = false) String name,
+                                     @RequestParam(value = "description", required = false) String description,
+                                     @RequestParam(value = "shortDescription", required = false) String shortDescription,
+                                     @RequestParam(value = "content", required = false) String content) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         Specification<Article> spec = Specification.where(null);
         if (title != null) spec.and(ArticleSpecs.articleTitleContains(title));

@@ -83,7 +83,6 @@ CREATE TABLE "app_playlists" (
 "description" varchar(255) COLLATE "default",
 "last_update" timestamp(6) NOT NULL,
 "name" varchar(255) COLLATE "default",
-"artist_id" int8,
 "user_id" int8,
 "image_id" int8,
 CONSTRAINT "app_playlists_pkey" PRIMARY KEY ("id")
@@ -240,7 +239,6 @@ ALTER TABLE "app_track_features" ADD CONSTRAINT "fk_feature_track" FOREIGN KEY (
 ALTER TABLE "app_track_features" ADD CONSTRAINT "fk_tr_feature_tr_type" FOREIGN KEY ("track_feature_type_id") REFERENCES "app_track_feature_types" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_playlists" ADD CONSTRAINT "fk_playlist_user" FOREIGN KEY ("user_id") REFERENCES "app_users" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_playlists" ADD CONSTRAINT "fk_playlist_image" FOREIGN KEY ("image_id") REFERENCES "app_images" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "app_playlists" ADD CONSTRAINT "fk_playlists_artists" FOREIGN KEY ("artist_id") REFERENCES "app_artists" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_playlist_features" ADD CONSTRAINT "fk_pl_feature_f_type" FOREIGN KEY ("playlist_feature_type_id") REFERENCES "app_playlist_feature_types" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_playlist_features" ADD CONSTRAINT "fk_feature_playlist" FOREIGN KEY ("playlist_id") REFERENCES "app_playlists" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "app_tracks" ADD CONSTRAINT "fk_track_artist" FOREIGN KEY ("artist_id") REFERENCES "app_artists" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;

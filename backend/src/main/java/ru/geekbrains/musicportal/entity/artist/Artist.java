@@ -4,11 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import ru.geekbrains.musicportal.entity.album.Album;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
+import ru.geekbrains.musicportal.entity.genre.Genre;
 import ru.geekbrains.musicportal.entity.image.Image;
-import ru.geekbrains.musicportal.entity.playlist.Playlist;
-import ru.geekbrains.musicportal.entity.track.Genre;
-import ru.geekbrains.musicportal.entity.track.Track;
 import ru.geekbrains.musicportal.entity.user.User;
 
 import javax.persistence.*;
@@ -17,7 +16,7 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@ToString(exclude = {"users", "playlists", "tracks", "genres"})
+@ToString(exclude = {"users", "albums", "genres"})
 @Table(name = "app_artists")
 @EqualsAndHashCode(callSuper = true)
 public class Artist extends AbstractEntity {
@@ -34,12 +33,7 @@ public class Artist extends AbstractEntity {
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "artist")
-    private Collection<Track> tracks;
-
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "artist")
-    private Collection<Playlist> playlists;
+    private Collection<Album> albums;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id")
@@ -51,4 +45,5 @@ public class Artist extends AbstractEntity {
             joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Collection<Genre> genres;
+
 }

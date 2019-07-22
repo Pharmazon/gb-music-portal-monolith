@@ -116,7 +116,7 @@ public class User extends AbstractEntity implements UserDetails {
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "id")
+            mappedBy = "author")
     private Collection<Comment> comments;
 
     @OneToMany(

@@ -90,12 +90,12 @@ INSERT INTO app_user_profiles (id, creation_date, last_update, birth_date, city,
   VALUES (24, current_timestamp, current_timestamp, to_timestamp('1990-01-05', 'yyyy-mm-dd'), 'Москва', 'Россия', '111@222.ru', 'Билл', 'Прыжки с парашютом', 'Гейтс', '8-909-111-11-11', NULL, NULL, 20 );
 
 --плейлисты
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, artist_id)
-    VALUES (25, current_timestamp, 'Любимый плейлист Вероники', current_timestamp, 'хиты', 22, 1);
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, artist_id)
-    VALUES (26, current_timestamp, 'Билл слушает на работе', current_timestamp, 'работа', 23, 1);
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id, artist_id)
-    VALUES (27, current_timestamp, 'Вилли слушает на природе', current_timestamp, 'Домашний', 23, 1);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id)
+    VALUES (25, current_timestamp, 'Любимый плейлист Вероники', current_timestamp, 'хиты', 22);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id)
+    VALUES (26, current_timestamp, 'Билл слушает на работе', current_timestamp, 'работа', 23);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id)
+    VALUES (27, current_timestamp, 'Вилли слушает на природе', current_timestamp, 'Домашний', 23);
 
 --плейлист-трек
 INSERT INTO join_playlists_tracks (track_id, playlist_id, position) VALUES(14,25,1);
@@ -174,3 +174,45 @@ INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (3, 10);
 INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (1, 11);
 INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (2, 12);
 INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (3, 13);
+
+--альбом
+INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
+    VALUES (200, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 1', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Горгород', 1);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
+    VALUES (201, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 1.5', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Пустота', 1);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
+    VALUES (202, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 2', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Лето', 2);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
+    VALUES (203, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 3', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Оборона', 2);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
+    VALUES (204, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 4', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Садовой', 3);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
+    VALUES (205, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 5', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Городничий', 3);
+
+--типы свойств альбомов
+INSERT INTO app_album_feature_types (id, description, name) VALUES (400, '', 'Год');
+INSERT INTO app_album_feature_types (id, description, name) VALUES (401, '', 'Глубина проработки');
+INSERT INTO app_album_feature_types (id, description, name) VALUES (402, '', 'Творчество');
+
+--фичи альбомов
+INSERT INTO app_album_features (id, creation_date, description, last_update, name, value, album_id, album_feature_type_id)
+    VALUES (500, current_timestamp, 'слово', current_timestamp, 'xnj-nj', '20', 201, 400);
+INSERT INTO app_album_features (id, creation_date, description, last_update, name, value, album_id, album_feature_type_id)
+    VALUES (501, current_timestamp, 'слово', current_timestamp, 'что-то', 'avasfvbab', 202, 401);
+INSERT INTO app_album_features (id, creation_date, description, last_update, name, value, album_id, album_feature_type_id)
+    VALUES (502, current_timestamp, 'слово', current_timestamp, 'something', 'dfbdfbfd', 203, 402);
+
+--альбом-жанр
+INSERT INTO join_albums_genres (album_id, genre_id) VALUES (200, 8);
+INSERT INTO join_albums_genres (album_id, genre_id) VALUES (200, 9);
+INSERT INTO join_albums_genres (album_id, genre_id) VALUES (201, 10);
+INSERT INTO join_albums_genres (album_id, genre_id) VALUES (202, 11);
+INSERT INTO join_albums_genres (album_id, genre_id) VALUES (203, 12);
+INSERT INTO join_albums_genres (album_id, genre_id) VALUES (204, 13);
+
+--альбом-трек
+INSERT INTO join_albums_tracks (album_id, track_id, position) VALUES(200, 14, 1);
+INSERT INTO join_albums_tracks (album_id, track_id, position) VALUES(201, 15, 2);
+INSERT INTO join_albums_tracks (album_id, track_id, position) VALUES(202, 16, 3);
+INSERT INTO join_albums_tracks (album_id, track_id, position) VALUES(203, 17, 1);
+INSERT INTO join_albums_tracks (album_id, track_id, position) VALUES(204, 18, 2);

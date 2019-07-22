@@ -12,15 +12,15 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @JsonView(CommonViews.General.class)
-public class ResponseWrapper<T> implements Serializable {
+public class ResponseWrapper implements Serializable {
 
     private LocalDateTime timestamp;
     private HttpStatus httpStatus;
     private ResponseEntity response;
     private String message;
-    private T payload;
+    private Object payload;
 
-    public ResponseWrapper(T payload,
+    public ResponseWrapper(Object payload,
                            HttpStatus httpStatus,
                            ResponseEnum response,
                            String message) {
@@ -31,27 +31,27 @@ public class ResponseWrapper<T> implements Serializable {
         this.message = message;
     }
 
-    public static <T> ResponseWrapper<T> build(T object,
-                                               HttpStatus httpStatus,
-                                               ResponseEnum responseEnum,
-                                               String message) {
-        return new ResponseWrapper<>(object, httpStatus, responseEnum, message);
+    public static ResponseWrapper build(Object object,
+                                        HttpStatus httpStatus,
+                                        ResponseEnum responseEnum,
+                                        String message) {
+        return new ResponseWrapper(object, httpStatus, responseEnum, message);
     }
 
-    public static <T> ResponseWrapper<T> ok(T object,
-                                            ResponseEnum responseEnum) {
+    public static ResponseWrapper ok(Object object,
+                                     ResponseEnum responseEnum) {
         return build(object, HttpStatus.OK, responseEnum, "SUCCESS");
     }
 
-    public static <T> ResponseWrapper<T> notFound(ResponseEnum responseEnum) {
+    public static ResponseWrapper notFound(ResponseEnum responseEnum) {
         return build(null, HttpStatus.NOT_FOUND, responseEnum, "NOT_FOUND");
     }
 
-    public static <T> ResponseWrapper<T> success(ResponseEnum responseEnum) {
+    public static ResponseWrapper success(ResponseEnum responseEnum) {
         return build(null, HttpStatus.OK, responseEnum, "SUCCESS");
     }
 
-    public static <T> ResponseWrapper<T> error(String message) {
+    public static ResponseWrapper error(String message) {
         return build(null, HttpStatus.INTERNAL_SERVER_ERROR, null, message);
     }
 }
