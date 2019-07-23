@@ -37,7 +37,7 @@ public class ArtistRestController {
 
     @JsonView(ArtistViews.All.class)
     @GetMapping
-    public ResponseWrapper<Collection<ArtistDto>> getAll() {
+    public ResponseWrapper getAll() {
         Collection<ArtistDto> dtos = artistService.findAllDtos();
         if (dtos != null) {
             return ResponseWrapper.ok(dtos, ArtistResponse.SUCCESS_READ);
@@ -47,7 +47,7 @@ public class ArtistRestController {
 
     @JsonView(ArtistViews.All.class)
     @GetMapping("{id}")
-    public ResponseWrapper<ArtistDto> getOne(@PathVariable("id") Long id) {
+    public ResponseWrapper getOne(@PathVariable("id") Long id) {
         ArtistDto dto = artistService.findOneDtoById(id);
         if (dto != null) {
             return ResponseWrapper.ok(dto, ArtistResponse.SUCCESS_READ);
@@ -57,7 +57,7 @@ public class ArtistRestController {
 
     @JsonView(ArtistViews.All.class)
     @PutMapping
-    public ResponseWrapper<ArtistDto> update(@Valid ArtistDto dto) {
+    public ResponseWrapper update(@Valid ArtistDto dto) {
         Artist converted = artistService.convertToEntity(dto);
         Artist artist = artistService.saveOrUpdate(converted);
         if (converted != null && artist != null) {
@@ -78,7 +78,7 @@ public class ArtistRestController {
 
     @JsonView(ArtistViews.All.class)
     @GetMapping("music")
-    public ResponseWrapper<Collection<ArtistDto>> artistPage(@RequestParam(value = "page") Optional<Integer> page,
+    public ResponseWrapper artistPage(@RequestParam(value = "page") Optional<Integer> page,
                                                              @RequestParam(value = "artistName", required = false) String artistName) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         Specification<Artist> spec = Specification.where(null);

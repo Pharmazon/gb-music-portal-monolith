@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
-import ru.geekbrains.musicportal.repository.LikeRepository;
 import ru.geekbrains.musicportal.repository.TrackRepository;
 
 import java.util.Collection;

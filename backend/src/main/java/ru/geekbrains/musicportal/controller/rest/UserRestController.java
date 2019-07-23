@@ -31,7 +31,7 @@ public class UserRestController {
 
     @JsonView(UserViews.All.class)
     @GetMapping
-    public ResponseWrapper<Collection<UserDto>> getAll() {
+    public ResponseWrapper getAll() {
         Collection<UserDto> dtos = userService.findAllDtos();
         if (dtos != null) {
             return ResponseWrapper.ok(dtos, UserResponse.SUCCESS_READ);
@@ -41,7 +41,7 @@ public class UserRestController {
 
     @JsonView(UserViews.All.class)
     @GetMapping("{id}")
-    public ResponseWrapper<UserDto> getOne(@PathVariable("id") Long id) {
+    public ResponseWrapper getOne(@PathVariable("id") Long id) {
         UserDto dto = userService.findOneDtoById(id);
         if (dto != null) {
             return ResponseWrapper.ok(dto, UserResponse.SUCCESS_READ);
@@ -51,7 +51,7 @@ public class UserRestController {
 
     @JsonView(UserViews.All.class)
     @PutMapping
-    public ResponseWrapper<UserDto> update(@Valid UserDto dto) {
+    public ResponseWrapper update(@Valid UserDto dto) {
         User converted = userService.convertToEntity(dto);
         User artist = userService.saveOrUpdate(converted);
         if (converted != null && artist != null) {

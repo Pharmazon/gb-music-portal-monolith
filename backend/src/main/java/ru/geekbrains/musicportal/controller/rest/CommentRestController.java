@@ -28,7 +28,7 @@ public class CommentRestController {
 
     @JsonView(CommentViews.All.class)
     @GetMapping
-    public ResponseWrapper<Collection<CommentDto>> getAll() {
+    public ResponseWrapper getAll() {
         Collection<CommentDto> dtos = commentService.findAllDtos();
         if (dtos != null) {
             return ResponseWrapper.ok(dtos, CommentResponse.SUCCESS_READ);
@@ -38,7 +38,7 @@ public class CommentRestController {
 
     @JsonView(CommentViews.All.class)
     @GetMapping("{id}")
-    public ResponseWrapper<CommentDto> getOneById(@PathVariable("id") Long id) {
+    public ResponseWrapper getOneById(@PathVariable("id") Long id) {
         CommentDto dto = commentService.findOneDtoById(id);
         if (dto != null) {
             return ResponseWrapper.ok(dto, CommentResponse.SUCCESS_READ);
@@ -48,7 +48,7 @@ public class CommentRestController {
 
     @JsonView(CommentViews.All.class)
     @PostMapping
-    public ResponseWrapper<CommentDto> createComment(@Valid CommentDto commentDto) {
+    public ResponseWrapper createComment(@Valid CommentDto commentDto) {
         Comment converted = commentService.convertToEntity(commentDto);
         Comment comment = commentService.saveOrUpdate(converted);
         if (comment != null && converted != null) {
@@ -59,7 +59,7 @@ public class CommentRestController {
 
     @JsonView(CommentViews.All.class)
     @PutMapping
-    public ResponseWrapper<CommentDto> updateComment(@Valid CommentDto commentDto) {
+    public ResponseWrapper updateComment(@Valid CommentDto commentDto) {
         Comment converted = commentService.convertToEntity(commentDto);
         Comment comment = commentService.saveOrUpdate(converted);
         if (converted != null && comment != null) {

@@ -30,7 +30,7 @@ public class LikeRestController {
 
     @JsonView(LikeViews.All.class)
     @GetMapping
-    public ResponseWrapper<Collection<LikeDto>> getAll() {
+    public ResponseWrapper getAll() {
         Collection<Like> likes = likeService.findAll();
         if (likes != null) {
             List<LikeDto> dtos = likes.stream()
@@ -43,7 +43,7 @@ public class LikeRestController {
 
     @JsonView(LikeViews.All.class)
     @GetMapping("{id}")
-    public ResponseWrapper<LikeDto> getOneById(@PathVariable("id") Long id) {
+    public ResponseWrapper getOneById(@PathVariable("id") Long id) {
         Optional<Like> optional = likeService.findOneEntityById(id);
         if (optional.isPresent()) {
             LikeDto dto = new LikeDto(optional.get());
@@ -62,7 +62,7 @@ public class LikeRestController {
 
     @JsonView(LikeViews.All.class)
     @PostMapping
-    public ResponseWrapper<Like> createLike(@Valid LikeDto likeDto) {
+    public ResponseWrapper createLike(@Valid LikeDto likeDto) {
         Like converted = likeService.convertToEntity(likeDto);
         Like like = likeService.saveOrUpdate(converted);
         if (converted != null && like != null) return ResponseWrapper.ok(null, LikeResponse.SUCCESS_CREATED);

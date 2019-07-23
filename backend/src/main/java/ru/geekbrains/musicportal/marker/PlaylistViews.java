@@ -2,7 +2,7 @@ package ru.geekbrains.musicportal.marker;
 
 public interface PlaylistViews {
 
-    interface List extends ArtistViews.List {}
-    interface Single extends List, ArtistViews.Single {}
+    interface List extends UserViews.List {}
+    interface Single extends List, UserViews.Single {}
     interface All extends List, Single {}
 }

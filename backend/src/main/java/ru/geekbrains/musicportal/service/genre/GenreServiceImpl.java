@@ -1,4 +1,4 @@
-package ru.geekbrains.musicportal.service.track;
+package ru.geekbrains.musicportal.service.genre;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.musicportal.dto.track.GenreDto;
-import ru.geekbrains.musicportal.entity.track.Genre;
+import ru.geekbrains.musicportal.dto.genre.GenreDto;
+import ru.geekbrains.musicportal.entity.genre.Genre;
 import ru.geekbrains.musicportal.repository.GenreRepository;
 
 import java.util.Collection;

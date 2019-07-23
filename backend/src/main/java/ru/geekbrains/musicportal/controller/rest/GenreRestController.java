@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.musicportal.dto.track.GenreDto;
-import ru.geekbrains.musicportal.entity.track.Genre;
+import ru.geekbrains.musicportal.dto.genre.GenreDto;
+import ru.geekbrains.musicportal.entity.genre.Genre;
 import ru.geekbrains.musicportal.marker.GenreViews;
 import ru.geekbrains.musicportal.response.GenreResponse;
 import ru.geekbrains.musicportal.response.common.ResponseWrapper;
-import ru.geekbrains.musicportal.service.track.GenreService;
+import ru.geekbrains.musicportal.service.genre.GenreService;
 import ru.geekbrains.musicportal.specification.GenreSpecs;
 
 import java.util.Collection;
@@ -34,7 +34,7 @@ public class GenreRestController {
 
     @JsonView(GenreViews.All.class)
     @GetMapping
-    public ResponseWrapper<Collection<GenreDto>> getAll() {
+    public ResponseWrapper getAll() {
         Collection<GenreDto> dtos = genreService.findAllDtos();
         if (dtos != null) {
             return ResponseWrapper.ok(dtos, GenreResponse.SUCCESS_READ);
@@ -44,7 +44,7 @@ public class GenreRestController {
 
     @JsonView(GenreViews.All.class)
     @GetMapping("{id}")
-    public ResponseWrapper<GenreDto> getOneById(@PathVariable("id") Long id) {
+    public ResponseWrapper getOneById(@PathVariable("id") Long id) {
         GenreDto dto = genreService.findOneDtoById(id);
         if (dto != null) {
             return ResponseWrapper.ok(dto, GenreResponse.SUCCESS_READ);
@@ -54,8 +54,8 @@ public class GenreRestController {
 
     @JsonView(GenreViews.All.class)
     @GetMapping("filter")
-    public ResponseWrapper<Collection<GenreDto>> genrePage(@RequestParam(value = "page") Optional<Integer> page,
-                                                           @RequestParam(value = "name", required = false) String name) {
+    public ResponseWrapper genrePage(@RequestParam(value = "page") Optional<Integer> page,
+                                     @RequestParam(value = "name", required = false) String name) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         Specification<Genre> spec = Specification.where(null);
         if (name != null) spec.and(GenreSpecs.genreNameContains(name));

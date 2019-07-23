@@ -1,9 +1,9 @@
-package ru.geekbrains.musicportal.dto.track;
+package ru.geekbrains.musicportal.dto.genre;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.musicportal.entity.track.Genre;
+import ru.geekbrains.musicportal.entity.genre.Genre;
 import ru.geekbrains.musicportal.marker.GenreViews;
 
 import java.io.Serializable;

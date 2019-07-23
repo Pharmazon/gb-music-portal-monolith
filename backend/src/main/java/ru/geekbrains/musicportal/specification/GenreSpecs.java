@@ -1,7 +1,7 @@
 package ru.geekbrains.musicportal.specification;
 
 import org.springframework.data.jpa.domain.Specification;
-import ru.geekbrains.musicportal.entity.track.Genre;
+import ru.geekbrains.musicportal.entity.genre.Genre;
 
 public class GenreSpecs {
 

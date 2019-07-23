@@ -3,10 +3,8 @@ package ru.geekbrains.musicportal.controller.rest;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.track.TrackDto;
 import ru.geekbrains.musicportal.entity.track.Track;
@@ -44,7 +42,7 @@ public class TrackRestController {
 
     @JsonView(TrackViews.All.class)
     @GetMapping
-    public ResponseWrapper<Collection<TrackDto>> getAll() {
+    public ResponseWrapper getAll() {
         Collection<TrackDto> dtos = trackService.findAllDtos();
         if (dtos != null) {
             return ResponseWrapper.ok(dtos, TrackResponse.SUCCESS_READ);
@@ -54,7 +52,7 @@ public class TrackRestController {
 
     @JsonView(TrackViews.All.class)
     @GetMapping("{id}")
-    public ResponseWrapper<TrackDto> getOneById(@PathVariable("id") Long id) {
+    public ResponseWrapper getOneById(@PathVariable("id") Long id) {
         TrackDto dto = trackService.findOneDtoById(id);
         if (dto != null) {
             return ResponseWrapper.ok(dto, TrackResponse.SUCCESS_READ);
@@ -64,7 +62,7 @@ public class TrackRestController {
 
     @JsonView(PlaylistViews.All.class)
     @GetMapping("top-15-tracks")
-    public ResponseWrapper<Collection<TrackDto>> getTopByLikes() {
+    public ResponseWrapper getTopByLikes() {
         Collection<TrackDto> dto = trackService.getTop(15);
         if (dto != null) {
             return ResponseWrapper.ok(dto, TrackResponse.SUCCESS_READ);
@@ -74,10 +72,10 @@ public class TrackRestController {
 
     @JsonView(TrackViews.All.class)
     @GetMapping("filter")
-    public ResponseWrapper<Collection<TrackDto>> trackPage(@RequestParam(value = "page") Optional<Integer> page,
-                                                           @RequestParam(value = "artistId", required = false) Long artistId,
-                                                           @RequestParam(value = "playlistId", required = false) Long playlistId,
-                                                           @RequestParam(value = "trackName", required = false) String trackName) {
+    public ResponseWrapper trackPage(@RequestParam(value = "page") Optional<Integer> page,
+                                     @RequestParam(value = "artistId", required = false) Long artistId,
+                                     @RequestParam(value = "playlistId", required = false) Long playlistId,
+                                     @RequestParam(value = "trackName", required = false) String trackName) {
         final int currentPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         Specification<Track> spec = Specification.where(null);
         if (artistId != null) spec.and(TrackSpecs.artistIdEquals(artistId));
@@ -101,7 +99,7 @@ public class TrackRestController {
      * вытащить файл, то ответ 500 (HttpStatus.INTERNAL_SERVER_ERROR)
      */
     @GetMapping(value = "play/{id}", produces = "audio/mpeg")
-    public ResponseWrapper<ResponseEntity<InputStreamResource>> getPlayFile(@PathVariable("id") Long id) {
+    public ResponseWrapper getPlayFile(@PathVariable("id") Long id) {
         Optional<Track> optional = trackService.findOneEntityById(id);
         if (!optional.isPresent()) {
             return ResponseWrapper.notFound(TrackResponse.ERROR_NOT_FOUND);

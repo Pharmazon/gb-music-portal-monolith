@@ -1,14 +1,14 @@
-package ru.geekbrains.musicportal.entity.playlist;
+package ru.geekbrains.musicportal.entity.album;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import ru.geekbrains.musicportal.entity.artist.Artist;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.genre.Genre;
 import ru.geekbrains.musicportal.entity.image.Image;
-import ru.geekbrains.musicportal.entity.track.PlaylistTrack;
-import ru.geekbrains.musicportal.entity.user.User;
+import ru.geekbrains.musicportal.entity.track.AlbumTrack;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -16,24 +16,24 @@ import java.util.Collection;
 @Data
 @Entity
 @NoArgsConstructor
-@ToString(exclude = {"user", "genres", "playlistTracks", "playlistFeatures"})
-@Table(name = "app_playlists")
+@Table(name = "app_albums")
 @EqualsAndHashCode(callSuper = true)
-public class Playlist extends AbstractEntity {
+@ToString(exclude = {"artist", "genres", "albumTracks", "albumFeatures"})
+public class Album extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
 
     @OneToMany(
-            mappedBy = "playlist",
+            mappedBy = "album",
             fetch = FetchType.LAZY)
-    private Collection<PlaylistFeature> playlistFeatures;
+    private Collection<AlbumFeature> albumFeatures;
 
     @OneToMany(
-            mappedBy = "playlist",
+            mappedBy = "album",
             fetch = FetchType.LAZY)
-    private Collection<PlaylistTrack> playlistTracks;
+    private Collection<AlbumTrack> albumTracks;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id")
@@ -41,8 +41,8 @@ public class Playlist extends AbstractEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "join_playlists_genres",
-            joinColumns = @JoinColumn(name = "playlist_id"),
+            name = "join_albums_genres",
+            joinColumns = @JoinColumn(name = "album_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Collection<Genre> genres;
 }
