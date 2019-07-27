@@ -14,5 +14,7 @@ public interface TrackService extends CommonService<Track, TrackDto> {
 
     Collection<TrackDto> getTop(int topMax);
 
-    TrackDto convertToDto(Track entity);
+    Collection<TrackDto> getAllByArtistId(Long id);
+
+    Collection<TrackDto> findAllByGenreName(String name);
 }

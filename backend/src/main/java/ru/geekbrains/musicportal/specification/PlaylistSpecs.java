@@ -9,4 +9,10 @@ public class PlaylistSpecs {
         return (Specification<Playlist>) (root, criteriaQuery, criteriaBuilder) ->
                 criteriaBuilder.like(root.get("name"), "%" + word + "%");
     }
+
+    public static Specification<Playlist> userIdEquals(Long userId) {
+        return (Specification<Playlist>) (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("user_id"), userId);
+    }
+
 }

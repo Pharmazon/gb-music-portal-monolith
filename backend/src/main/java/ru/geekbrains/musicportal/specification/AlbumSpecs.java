@@ -9,4 +9,9 @@ public class AlbumSpecs {
         return (Specification<Album>) (root, criteriaQuery, criteriaBuilder) ->
                 criteriaBuilder.like(root.get("name"), "%" + word + "%");
     }
+
+    public static Specification<Album> artistIdEquals(Long artistId) {
+        return (Specification<Album>) (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("arist_id"), artistId);
+    }
 }

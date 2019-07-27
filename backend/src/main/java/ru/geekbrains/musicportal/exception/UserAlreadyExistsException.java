@@ -1,6 +1,6 @@
 package ru.geekbrains.musicportal.exception;
 
-import ru.geekbrains.musicportal.message.UserMessage;
+import ru.geekbrains.musicportal.enums.UserMessageEnum;
 
 /**
  * Исключение котороя выбрасывается если пытаться сохранить уже существующего юзера.
@@ -8,6 +8,6 @@ import ru.geekbrains.musicportal.message.UserMessage;
 public class UserAlreadyExistsException extends RuntimeException {
 
     public UserAlreadyExistsException(String username) {
-        super(UserMessage.ACCOUNT_EXISTS + username);
+        super(UserMessageEnum.ACCOUNT_EXISTS + username);
     }
 }

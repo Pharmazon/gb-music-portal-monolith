@@ -1,7 +1,7 @@
 package ru.geekbrains.musicportal.specification;
 
 import org.springframework.data.jpa.domain.Specification;
-import ru.geekbrains.musicportal.entity.blog.Article;
+import ru.geekbrains.musicportal.entity.article.Article;
 
 public class ArticleSpecs {
 

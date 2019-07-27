@@ -8,12 +8,12 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.geekbrains.musicportal.entity.article.Article;
 import ru.geekbrains.musicportal.entity.artist.Artist;
-import ru.geekbrains.musicportal.entity.blog.Article;
-import ru.geekbrains.musicportal.entity.blog.Comment;
-import ru.geekbrains.musicportal.entity.blog.Like;
+import ru.geekbrains.musicportal.entity.comment.Comment;
 import ru.geekbrains.musicportal.entity.common.AbstractEntity;
 import ru.geekbrains.musicportal.entity.image.Image;
+import ru.geekbrains.musicportal.entity.like.Like;
 import ru.geekbrains.musicportal.entity.playlist.Playlist;
 
 import javax.persistence.*;

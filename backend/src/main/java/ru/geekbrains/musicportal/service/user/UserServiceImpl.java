@@ -14,9 +14,9 @@ import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
 import ru.geekbrains.musicportal.entity.user.Role;
 import ru.geekbrains.musicportal.entity.user.User;
+import ru.geekbrains.musicportal.enums.UserMessageEnum;
 import ru.geekbrains.musicportal.enums.UserRoleEnum;
 import ru.geekbrains.musicportal.exception.UserAlreadyExistsException;
-import ru.geekbrains.musicportal.message.UserMessage;
 import ru.geekbrains.musicportal.repository.RoleRepository;
 import ru.geekbrains.musicportal.repository.UserRepository;
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findOneByUsername(username.toLowerCase());
         if (user == null) {
-            throw new UsernameNotFoundException(UserMessage.INVALID_USERNAME.getText());
+            throw new UsernameNotFoundException(UserMessageEnum.INVALID_USERNAME.getText());
         }
         return user;
     }

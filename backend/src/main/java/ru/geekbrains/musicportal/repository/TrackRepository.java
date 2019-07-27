@@ -24,4 +24,9 @@ public interface TrackRepository extends CommonRepository<TrackDto>, PagingAndSo
             "limit :maxEntities",
             nativeQuery = true)
     Collection<Track> getTop(@Param("maxEntities") int maxEntities);
+
+    Collection<TrackDto> findAllByArtist_Id(Long id);
+
+    @Query("select t from Track t inner join fetch t.genres g where g.name = :name")
+    Collection<TrackDto> findAllByGenreName(@Param("name") String name);
 }

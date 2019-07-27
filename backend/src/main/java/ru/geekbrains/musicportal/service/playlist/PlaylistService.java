@@ -14,4 +14,12 @@ public interface PlaylistService extends CommonService<Playlist, PlaylistDto> {
 
     Collection<PlaylistDto> getTop(int max);
 
+    Collection<PlaylistDto> getAllByUserId(Long id);
+
+    Collection<PlaylistDto> findAllByGenreName(String name);
+
+    PlaylistDto addTrackToPlaylist(Long playlistId, Long trackId);
+
+    PlaylistDto deleteTrackFromPlaylist(Long playlistId, Long trackId);
+
 }

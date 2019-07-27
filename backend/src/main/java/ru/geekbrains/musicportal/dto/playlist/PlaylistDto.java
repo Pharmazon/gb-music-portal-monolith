@@ -28,6 +28,9 @@ public class PlaylistDto extends AbstractDto {
     @JsonView(PlaylistViews.All.class)
     private Collection<PlaylistFeatureDto> playlistFeatureDtos;
 
+    @JsonView(PlaylistViews.All.class)
+    private Long userId;
+
     public PlaylistDto(Playlist playlist) {
         if (playlist == null) return;
 
@@ -41,6 +44,7 @@ public class PlaylistDto extends AbstractDto {
                 .map(playTrack -> new TrackDto(playTrack.getTrack()))
                 .collect(Collectors.toList());
         imageId = playlist.getImage() != null ? playlist.getImage().getId() : null;
+        userId = playlist.getUser() != null ? playlist.getUser().getId() : null;
         Collection<PlaylistFeature> playlistFeatures = playlist.getPlaylistFeatures();
         playlistFeatureDtos = playlistFeatures.stream()
                 .map(PlaylistFeatureDto::new)

@@ -28,6 +28,9 @@ public class AlbumDto extends AbstractDto {
     @JsonView(AlbumViews.All.class)
     private Collection<AlbumFeatureDto> albumFeatureDtos;
 
+    @JsonView(AlbumViews.All.class)
+    private Long artistId;
+
     public AlbumDto(Album album) {
         if (album == null) return;
 
@@ -41,6 +44,7 @@ public class AlbumDto extends AbstractDto {
                 .map(albumTrack -> new TrackDto(albumTrack.getTrack()))
                 .collect(Collectors.toList());
         imageId = album.getImage() != null ? album.getImage().getId() : null;
+        artistId = album.getArtist() != null ? album.getArtist().getId() : null;
         Collection<AlbumFeature> albumFeatures = album.getAlbumFeatures();
         albumFeatureDtos = albumFeatures.stream()
                 .map(AlbumFeatureDto::new)

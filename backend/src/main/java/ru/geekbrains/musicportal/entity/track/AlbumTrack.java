@@ -17,7 +17,7 @@ public class AlbumTrack {
     @EmbeddedId
     private AlbumTrackKey id;
 
-    private int position;
+    private Integer position;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("album_id")
