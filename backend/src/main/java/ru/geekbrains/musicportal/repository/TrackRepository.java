@@ -1,6 +1,7 @@
 package ru.geekbrains.musicportal.repository;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +30,9 @@ public interface TrackRepository extends CommonRepository<TrackDto>, PagingAndSo
 
     @Query("select t from Track t inner join fetch t.genres g where g.name = :name")
     Collection<TrackDto> findAllByGenreName(@Param("name") String name);
+
+    @Modifying
+    @Query("update Track t set t.isDeleted = true where t.id = :id")
+    TrackDto markOneAsDeleted(@Param("id") Long id);
+
 }

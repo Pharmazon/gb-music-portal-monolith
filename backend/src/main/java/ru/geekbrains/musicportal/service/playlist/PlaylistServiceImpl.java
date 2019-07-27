@@ -109,7 +109,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         Collection<PlaylistTrack> playlistTracks = playlist.getPlaylistTracks();
         PlaylistTrack playlistTrack = new PlaylistTrack(getNextTrackPosition(playlist), playlist, track);
         playlistTracks.add(playlistTrack);
-        //TODO:Сохранить в базу
+        saveOrUpdate(playlist);
         return convertToDto(playlist);
     }
 
@@ -129,9 +129,29 @@ public class PlaylistServiceImpl implements PlaylistService {
                 break;
             }
         }
-        //TODO:Сохранить в базу
+        saveOrUpdate(playlist);
         return convertToDto(playlist);
     }
+
+    //TODO:Допилить изменение позиций треков в списке треков
+//    @Transactional
+//    @Override
+//    public PlaylistDto changeTrackPositionInPlaylist(Long playlistId, Long trackId, Integer newPosition) {
+//        Optional<Track> optionalTrack = trackRepository.findById(trackId);
+//        if (!optionalTrack.isPresent()) return null;
+//        Optional<Playlist> optionalPlaylist = playlistRepository.findById(playlistId);
+//        if (!optionalPlaylist.isPresent()) return null;
+//        Playlist playlist = optionalPlaylist.get();
+//        Track track = optionalTrack.get();
+//        List<PlaylistTrack> playlistTracks = (List<PlaylistTrack>) playlist.getPlaylistTracks();
+//        for (int i = 1; i < playlistTracks.size(); i++) {
+//            if (playlistTracks.get(i).getTrack().equals(track)) {
+//                @NonNull Integer prevPosition = playlistTracks.get(i - 1).getPosition();
+//                @NonNull Integer currentPosition = playlistTracks.get(i).getPosition();
+//            }
+//        }
+//        return null;
+//    }
 
     private int getNextTrackPosition(Playlist playlist) {
         int max = 0;

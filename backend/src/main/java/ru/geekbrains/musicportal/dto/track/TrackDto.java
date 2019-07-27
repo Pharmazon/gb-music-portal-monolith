@@ -32,6 +32,9 @@ public class TrackDto extends AbstractDto {
     @JsonView(TrackViews.All.class)
     private String url;
 
+    @JsonView(TrackViews.All.class)
+    private Boolean isDeleted;
+
     public TrackDto(Track track) {
         if (track == null) return;
 
@@ -44,5 +47,6 @@ public class TrackDto extends AbstractDto {
         artistName = track.getArtist() == null ? null : track.getArtist().getName();
         fileLink = track.getFileLink();
         url = UrlConfig.serverUrl + UrlConfig.apiPath + UrlConfig.trackPath + track.getId();
+        isDeleted = track.getIsDeleted();
     }
 }

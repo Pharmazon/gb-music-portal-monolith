@@ -119,9 +119,9 @@ public class TrackRestController {
     @JsonView(AlbumViews.All.class)
     @DeleteMapping("{id}")
     public ResponseWrapper delete(@PathVariable("id") Long id) {
-        boolean deleted = trackService.deleteById(id);
-        return deleted ? ResponseWrapper.success(TrackResponse.SUCCESS_DELETED) :
-                ResponseWrapper.notFound(TrackResponse.ERROR_NOT_FOUND);
+        TrackDto trackDto = trackService.markOneAsDeleted(id);
+        return trackDto != null ? ResponseWrapper.success(TrackResponse.SUCCESS_MARKED_AS_DELETED) :
+                ResponseWrapper.notFound(TrackResponse.ERROR_MARKED_AS_DELETED);
     }
 
     @JsonView(AlbumViews.All.class)

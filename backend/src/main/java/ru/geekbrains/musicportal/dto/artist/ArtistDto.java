@@ -16,6 +16,9 @@ public class ArtistDto extends AbstractDto {
     @JsonView(ArtistViews.All.class)
     private Long imageId;
 
+    @JsonView(ArtistViews.All.class)
+    private Boolean isDeleted;
+
     public ArtistDto(Artist artist) {
         if (artist == null) return;
         super.setId(artist.getId());
@@ -24,5 +27,6 @@ public class ArtistDto extends AbstractDto {
         super.setCreationDate(artist.getCreationDate());
         super.setLastUpdate(artist.getLastUpdate());
         imageId = artist.getImage() == null ? null : artist.getImage().getId();
+        isDeleted = artist.getIsDeleted();
     }
 }

@@ -1,12 +1,12 @@
 --исполнители
-INSERT INTO app_artists (id, creation_date, description, last_update, name)
-    VALUES (1, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Лучшая группа', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'METALLICA');
+INSERT INTO app_artists (id, creation_date, description, last_update, name, is_deleted)
+    VALUES (1, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Лучшая группа', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'METALLICA', false);
 
-INSERT INTO app_artists (id, creation_date, description, last_update, name)
-    VALUES (2, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Один исполнитель', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Иыван Иванов');
+INSERT INTO app_artists (id, creation_date, description, last_update, name, is_deleted)
+    VALUES (2, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Один исполнитель', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Иыван Иванов', false);
 
-INSERT INTO app_artists (id, creation_date, description, last_update, name)
-    VALUES (3, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Дуэт', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Иван Иванов и Марина');
+INSERT INTO app_artists (id, creation_date, description, last_update, name, is_deleted)
+    VALUES (3, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Дуэт', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Иван Иванов и Марина', false);
 
 --типы свойств треков
 INSERT INTO app_track_feature_types (id, description, name) VALUES (4, 'INT', 'Битрейт, кбит/с');
@@ -40,16 +40,16 @@ INSERT INTO app_genres (id, name) VALUES (17, 'Металл');
 INSERT INTO app_genres (id, name) VALUES (18, 'Рок');
 
 --треки
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
-    VALUES (14, current_timestamp, 'Песня о жизни', current_timestamp, 'О жизни', '14.mp3', 2);
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
-    VALUES (15, current_timestamp, 'Юмор', current_timestamp, 'На лабутенах', '15.mp3', 3);
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
-    VALUES (16, current_timestamp, 'Поем вечные хиты', current_timestamp, 'Unforgiven', '16.mp3', 3);
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
-    VALUES (17, current_timestamp, '', current_timestamp, 'Zebra crossing the street', '17.mp3', 3);
-INSERT INTO app_tracks (id, creation_date, description, last_update, name, link, artist_id)
-    VALUES (18, current_timestamp, '', current_timestamp, 'Coldwater Canyon', '18.mp3', 2);
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, is_deleted, link, artist_id)
+    VALUES (14, current_timestamp, 'Песня о жизни', current_timestamp, 'О жизни', false, '14.mp3', 2);
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, is_deleted, link, artist_id)
+    VALUES (15, current_timestamp, 'Юмор', current_timestamp, 'На лабутенах', false, '15.mp3', 3);
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, is_deleted, link, artist_id)
+    VALUES (16, current_timestamp, 'Поем вечные хиты', current_timestamp, 'Unforgiven', false, '16.mp3', 3);
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, is_deleted, link, artist_id)
+    VALUES (17, current_timestamp, '', current_timestamp, 'Zebra crossing the street', false, '17.mp3', 3);
+INSERT INTO app_tracks (id, creation_date, description, last_update, name, is_deleted, link, artist_id)
+    VALUES (18, current_timestamp, '', current_timestamp, 'Coldwater Canyon', false, '18.mp3', 2);
 
 --трек-жанр
 INSERT INTO join_tracks_genres (track_id, genre_id) VALUES (14, 8);
@@ -90,12 +90,12 @@ INSERT INTO app_user_profiles (id, creation_date, last_update, birth_date, city,
   VALUES (24, current_timestamp, current_timestamp, to_timestamp('1990-01-05', 'yyyy-mm-dd'), 'Москва', 'Россия', '111@222.ru', 'Билл', 'Прыжки с парашютом', 'Гейтс', '8-909-111-11-11', NULL, NULL, 20 );
 
 --плейлисты
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id)
-    VALUES (25, current_timestamp, 'Любимый плейлист Вероники', current_timestamp, 'хиты', 22);
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id)
-    VALUES (26, current_timestamp, 'Билл слушает на работе', current_timestamp, 'работа', 23);
-INSERT INTO app_playlists (id, creation_date, description, last_update, name, user_id)
-    VALUES (27, current_timestamp, 'Вилли слушает на природе', current_timestamp, 'Домашний', 23);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, is_deleted, user_id)
+    VALUES (25, current_timestamp, 'Любимый плейлист Вероники', current_timestamp, 'хиты', false, 22);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, is_deleted, user_id)
+    VALUES (26, current_timestamp, 'Билл слушает на работе', current_timestamp, 'работа', false, 23);
+INSERT INTO app_playlists (id, creation_date, description, last_update, name, is_deleted, user_id)
+    VALUES (27, current_timestamp, 'Вилли слушает на природе', current_timestamp, 'Домашний', false, 23);
 
 --плейлист-трек
 INSERT INTO join_playlists_tracks (track_id, playlist_id, position) VALUES(14,25,1);
@@ -176,18 +176,18 @@ INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (2, 12);
 INSERT INTO join_artists_genres (artist_id, genre_id) VALUES (3, 13);
 
 --альбом
-INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
-    VALUES (200, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 1', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Горгород', 1);
-INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
-    VALUES (201, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 1.5', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Пустота', 1);
-INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
-    VALUES (202, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 2', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Лето', 2);
-INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
-    VALUES (203, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 3', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Оборона', 2);
-INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
-    VALUES (204, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 4', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Садовой', 3);
-INSERT INTO app_albums (id, creation_date, description, last_update, name, artist_id)
-    VALUES (205, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 5', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Городничий', 3);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, is_deleted, artist_id)
+    VALUES (200, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 1', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Горгород', false, 1);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, is_deleted, artist_id)
+    VALUES (201, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 1.5', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Пустота', false, 1);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, is_deleted, artist_id)
+    VALUES (202, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 2', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Лето', false, 2);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, is_deleted, artist_id)
+    VALUES (203, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 3', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Оборона', false, 2);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, is_deleted, artist_id)
+    VALUES (204, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 4', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Садовой', false, 3);
+INSERT INTO app_albums (id, creation_date, description, last_update, name, is_deleted, artist_id)
+    VALUES (205, to_timestamp('2019-05-01', 'yyyy-mm-dd'), 'Альбом 5', to_timestamp('2019-06-05', 'yyyy-mm-dd'), 'Городничий', false, 3);
 
 --типы свойств альбомов
 INSERT INTO app_album_feature_types (id, description, name) VALUES (400, '', 'Год');

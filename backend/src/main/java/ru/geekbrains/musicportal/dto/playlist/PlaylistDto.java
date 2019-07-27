@@ -31,6 +31,9 @@ public class PlaylistDto extends AbstractDto {
     @JsonView(PlaylistViews.All.class)
     private Long userId;
 
+    @JsonView(PlaylistViews.All.class)
+    private Boolean isDeleted;
+
     public PlaylistDto(Playlist playlist) {
         if (playlist == null) return;
 
@@ -49,6 +52,7 @@ public class PlaylistDto extends AbstractDto {
         playlistFeatureDtos = playlistFeatures.stream()
                 .map(PlaylistFeatureDto::new)
                 .collect(Collectors.toList());
+        isDeleted = playlist.getIsDeleted();
     }
 
 }

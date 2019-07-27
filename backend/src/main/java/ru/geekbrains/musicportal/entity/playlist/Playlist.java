@@ -21,6 +21,9 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 public class Playlist extends AbstractEntity {
 
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -32,7 +35,8 @@ public class Playlist extends AbstractEntity {
 
     @OneToMany(
             mappedBy = "playlist",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     private Collection<PlaylistTrack> playlistTracks;
 
     @OneToOne(fetch = FetchType.EAGER)

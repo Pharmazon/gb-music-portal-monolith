@@ -70,6 +70,7 @@ CREATE TABLE "app_artists" (
 "description" varchar(255) COLLATE "default",
 "last_update" timestamp(6) NOT NULL,
 "name" varchar(255) COLLATE "default",
+"is_deleted" boolean NOT NULL,
 "image_id" int8,
 CONSTRAINT "app_artists_pkey" PRIMARY KEY ("id")
 )
@@ -83,6 +84,7 @@ CREATE TABLE "app_playlists" (
 "description" varchar(255) COLLATE "default",
 "last_update" timestamp(6) NOT NULL,
 "name" varchar(255) COLLATE "default",
+"is_deleted" boolean NOT NULL,
 "user_id" int8,
 "image_id" int8,
 CONSTRAINT "app_playlists_pkey" PRIMARY KEY ("id")
@@ -131,6 +133,7 @@ CREATE TABLE "app_tracks" (
 "description" varchar(255) COLLATE "default",
 "last_update" timestamp(6) NOT NULL,
 "name" varchar(255) COLLATE "default",
+"is_deleted" boolean NOT NULL,
 "link" varchar(255) COLLATE "default",
 "artist_id" int8,
 CONSTRAINT "app_track_pkey" PRIMARY KEY ("id")

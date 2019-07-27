@@ -7,9 +7,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.musicportal.dto.artist.ArtistDto;
+import ru.geekbrains.musicportal.entity.album.Album;
 import ru.geekbrains.musicportal.entity.artist.Artist;
+import ru.geekbrains.musicportal.entity.track.AlbumTrack;
 import ru.geekbrains.musicportal.repository.ArtistRepository;
-import ru.geekbrains.musicportal.repository.TrackRepository;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -19,16 +20,13 @@ import java.util.stream.Collectors;
 public class ArtistServiceImpl implements ArtistService {
 
     private ArtistRepository artistRepository;
-    private TrackRepository trackRepository;
     private ModelMapper modelMapper;
 
     @Autowired
     public ArtistServiceImpl(ArtistRepository artistRepository,
-                             TrackRepository trackRepository,
                              ModelMapper modelMapper) {
         this.artistRepository = artistRepository;
         this.modelMapper = modelMapper;
-        this.trackRepository = trackRepository;
     }
 
     @Override
@@ -68,7 +66,9 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public Page<Artist> getArtistsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Artist> specification) {
+    public Page<Artist> getArtistsWithPagingAndFiltering(int pageNumber,
+                                                         int pageSize,
+                                                         Specification<Artist> specification) {
         return artistRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
     }
 
@@ -86,7 +86,26 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    public ArtistDto markOneAsDeleted(Long id) {
+        Optional<Artist> optional = artistRepository.findById(id);
+        if (!optional.isPresent()) return null;
+        Artist artist = optional.get();
+        artist.setIsDeleted(true);
+        Collection<Album> albums = artist.getAlbums();
+        for (Album album : albums) {
+            album.setIsDeleted(true);
+            Collection<AlbumTrack> albumTracks = album.getAlbumTracks();
+            for (AlbumTrack albumTrack : albumTracks) {
+                albumTrack.getTrack().setIsDeleted(true);
+            }
+        }
+        saveOrUpdate(artist);
+        return convertToDto(artist);
+    }
+
+    @Override
     public ArtistDto convertToDto(Artist entity) {
         return modelMapper.map(entity, ArtistDto.class);
     }
+
 }

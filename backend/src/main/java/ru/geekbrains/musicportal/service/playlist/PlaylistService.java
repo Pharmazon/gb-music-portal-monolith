@@ -22,4 +22,6 @@ public interface PlaylistService extends CommonService<Playlist, PlaylistDto> {
 
     PlaylistDto deleteTrackFromPlaylist(Long playlistId, Long trackId);
 
+//    PlaylistDto changeTrackPositionInPlaylist(Long playlistId, Long trackId, Integer newPosition);
+
 }

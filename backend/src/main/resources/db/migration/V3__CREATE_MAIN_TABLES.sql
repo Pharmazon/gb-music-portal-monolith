@@ -37,6 +37,7 @@ CREATE TABLE "app_albums" (
  "description" varchar(255) COLLATE "default",
  "last_update" timestamp(6) NOT NULL,
  "name" varchar(255) COLLATE "default",
+ "is_deleted" boolean NOT NULL,
  "artist_id" int8,
  "image_id" int8,
  CONSTRAINT "app_albums_pkey" PRIMARY KEY ("id")

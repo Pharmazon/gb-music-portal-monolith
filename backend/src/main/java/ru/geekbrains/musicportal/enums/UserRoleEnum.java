@@ -2,6 +2,7 @@ package ru.geekbrains.musicportal.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import ru.geekbrains.musicportal.entity.user.Role;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,36 +17,41 @@ public enum UserRoleEnum {
     ADMINISTRATOR("ADMIN"),
     SUPER_ADMINISTRATOR("SUPERADMIN");
 
-    private static List<UserRoleEnum> listUserArtist = new ArrayList<>();
-    private static List<UserRoleEnum> listUser = new ArrayList<>();
-    private static List<UserRoleEnum> listUserAdmin = new ArrayList<>();
-    private static List<UserRoleEnum> listUserSuperAdmin = new ArrayList<>();
+    private static List<Role> listUserArtist = new ArrayList<>();
+    private static List<Role> listUser = new ArrayList<>();
+    private static List<Role> listUserAdmin = new ArrayList<>();
+    private static List<Role> listUserSuperAdmin = new ArrayList<>();
 
     static {
-        listUser.add(USER);
-        listUserArtist.add(USER);
-        listUserArtist.add(ARTIST);
-        listUserAdmin.add(USER);
-        listUserAdmin.add(ADMINISTRATOR);
-        listUserSuperAdmin.add(USER);
-        listUserSuperAdmin.add(SUPER_ADMINISTRATOR);
+        Role roleUser = new Role(USER);
+        Role roleArtist = new Role(ARTIST);
+        Role roleAdmin = new Role(ADMINISTRATOR);
+        Role roleSuperAdmin = new Role(SUPER_ADMINISTRATOR);
+
+        listUser.add(roleUser);
+        listUserArtist.add(roleUser);
+        listUserArtist.add(roleArtist);
+        listUserAdmin.add(roleUser);
+        listUserAdmin.add(roleAdmin);
+        listUserSuperAdmin.add(roleUser);
+        listUserSuperAdmin.add(roleSuperAdmin);
     }
 
     private String name;
 
-    public static Collection<UserRoleEnum> getArtist() {
+    public static Collection<Role> getArtist() {
         return listUserArtist;
     }
 
-    public static Collection<UserRoleEnum> getAdmin() {
+    public static Collection<Role> getAdmin() {
         return listUserAdmin;
     }
 
-    public static Collection<UserRoleEnum> getUser() {
+    public static Collection<Role> getUser() {
         return listUser;
     }
 
-    public static Collection<UserRoleEnum> getSuperAdmin() {
+    public static Collection<Role> getSuperAdmin() {
         return listUserSuperAdmin;
     }
 }

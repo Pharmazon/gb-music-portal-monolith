@@ -21,6 +21,9 @@ import java.util.Collection;
 @ToString(exclude = {"artist", "genres", "albumTracks", "albumFeatures"})
 public class Album extends AbstractEntity {
 
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist_id")
     private Artist artist;
@@ -32,7 +35,8 @@ public class Album extends AbstractEntity {
 
     @OneToMany(
             mappedBy = "album",
-            fetch = FetchType.LAZY)
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Collection<AlbumTrack> albumTracks;
 
     @OneToOne(fetch = FetchType.EAGER)

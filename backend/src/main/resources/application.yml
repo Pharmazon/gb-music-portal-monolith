@@ -6,7 +6,7 @@ server:
 storage.folder.path: 'storage'
 backend:
   server: 'http://localhost:8080'
-  server.api.track.path: '/tracks/pl ay/'
+  server.api.track.path: '/tracks/play/'
 
 musicportal:
   app:

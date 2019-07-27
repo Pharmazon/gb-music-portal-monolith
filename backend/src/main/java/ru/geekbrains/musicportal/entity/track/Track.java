@@ -22,6 +22,9 @@ public class Track extends AbstractEntity {
     @Column(name = "link")
     private String fileLink;
 
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "artist_id")
     private Artist artist;

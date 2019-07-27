@@ -1,12 +1,13 @@
 package ru.geekbrains.musicportal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.musicportal.dto.user.UserDto;
 import ru.geekbrains.musicportal.dto.user.UserRegistrationDto;
-import ru.geekbrains.musicportal.service.user.UserServiceImpl;
+import ru.geekbrains.musicportal.entity.user.User;
+import ru.geekbrains.musicportal.response.UserResponse;
+import ru.geekbrains.musicportal.response.common.ResponseWrapper;
+import ru.geekbrains.musicportal.service.user.UserService;
 
 import javax.validation.Valid;
 
@@ -20,10 +21,10 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 public class UserRegistrationRestController {
 
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    public void setUserService(UserServiceImpl userService) {
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
@@ -33,8 +34,9 @@ public class UserRegistrationRestController {
     }
 
     @PostMapping
-    public ResponseEntity<?> registerUserAccount(@Valid @RequestBody UserRegistrationDto userRegistrationDto) {
-        userService.save(userRegistrationDto);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseWrapper registerUserAccount(@Valid @RequestBody UserRegistrationDto userRegistrationDto) {
+        User user = userService.save(userRegistrationDto);
+        return user != null ? ResponseWrapper.success(UserResponse.SUCCESS_REGISTERED) :
+                ResponseWrapper.success(UserResponse.ERROR_REGISTERED);
     }
 }

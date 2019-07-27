@@ -15,4 +15,6 @@ public interface ArtistService extends CommonService<Artist, ArtistDto> {
     Collection<ArtistDto> findAllByGenreName(String name);
 
     Collection<ArtistDto> getTop(int max);
+
+    ArtistDto markOneAsDeleted(Long id);
 }

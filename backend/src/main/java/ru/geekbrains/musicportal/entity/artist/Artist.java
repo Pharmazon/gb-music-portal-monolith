@@ -21,6 +21,9 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 public class Artist extends AbstractEntity {
 
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
+
     @ManyToMany(
             cascade = CascadeType.DETACH,
             fetch = FetchType.EAGER)
@@ -32,7 +35,8 @@ public class Artist extends AbstractEntity {
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "artist")
+            mappedBy = "artist",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Collection<Album> albums;
 
     @OneToOne(fetch = FetchType.EAGER)

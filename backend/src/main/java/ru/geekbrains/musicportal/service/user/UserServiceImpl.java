@@ -23,7 +23,6 @@ import ru.geekbrains.musicportal.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -154,8 +153,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userRegistrationDto.getEmail());
         user.setLastPasswordChangeDate(LocalDateTime.now());
         user.setLastLoginDate(LocalDateTime.now());
-        Collection<Role> roles = getRolesFromEnum(UserRoleEnum.getUser());
-        user.setRoles(roles);
+        user.setRoles(UserRoleEnum.getUser());
         user.setPasswordQuestion(userRegistrationDto.getPasswordQuestion());
         user.setPasswordAnswer(userRegistrationDto.getPasswordAnswer());
         user.setApproved(userRegistrationDto.isApproved());
@@ -165,11 +163,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void registerUser (
-            String username,
-            String password,
-            String email,
-            Collection<UserRoleEnum> rolesEnum) throws UserAlreadyExistsException {
+    public void registerUser (String username,
+                              String password,
+                              String email) throws UserAlreadyExistsException {
         if (isExistsByName(username)) {
             throw new UserAlreadyExistsException(username);
         }
@@ -178,8 +174,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
-        Collection<Role> roles = getRolesFromEnum(rolesEnum);
-        user.setRoles(roles);
+        user.setRoles(UserRoleEnum.getUser());
         saveOrUpdate(user);
     }
 
@@ -210,17 +205,4 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    /**
-     * Конвертирует enum ролей в список ролей из БД
-     * @param roleEnums - коллекция enum ролей
-     * @return - коллекция ролей из базы
-     */
-    private Collection<Role> getRolesFromEnum(Collection<UserRoleEnum> roleEnums) {
-        List<Role> roles = new ArrayList<>();
-        for (UserRoleEnum roleEnum : roleEnums) {
-            Role fromDb = roleRepository.findOneByName(roleEnum.getName());
-            roles.add(fromDb);
-        }
-        return roles;
-    }
 }

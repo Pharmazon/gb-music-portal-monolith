@@ -1,6 +1,7 @@
 package ru.geekbrains.musicportal.repository;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +30,8 @@ public interface AlbumRepository extends CommonRepository<AlbumDto>, CrudReposit
 
     @Query("select a from Album a inner join fetch a.genres g where g.name = :name")
     Collection<AlbumDto> findAllByGenreName(@Param("name") String name);
+
+    @Modifying
+    @Query("update Album a set a.isDeleted = true")
+    AlbumDto markOneAsDeleted(Long id);
 }

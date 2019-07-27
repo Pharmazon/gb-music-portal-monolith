@@ -1,6 +1,7 @@
 package ru.geekbrains.musicportal.repository;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +30,8 @@ public interface PlaylistRepository extends CommonRepository<PlaylistDto>, CrudR
 
     @Query("select p from Playlist p inner join fetch p.genres g where g.name = :name")
     Collection<PlaylistDto> findAllByGenreName(@Param("name") String name);
+
+    @Modifying
+    @Query("UPDATE Playlist p SET p.isDeleted = true")
+    PlaylistDto markOneAsDeleted(Long id);
 }

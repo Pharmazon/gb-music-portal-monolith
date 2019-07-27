@@ -31,6 +31,9 @@ public class AlbumDto extends AbstractDto {
     @JsonView(AlbumViews.All.class)
     private Long artistId;
 
+    @JsonView(AlbumViews.All.class)
+    private Boolean isDeleted;
+
     public AlbumDto(Album album) {
         if (album == null) return;
 
@@ -49,6 +52,7 @@ public class AlbumDto extends AbstractDto {
         albumFeatureDtos = albumFeatures.stream()
                 .map(AlbumFeatureDto::new)
                 .collect(Collectors.toList());
+        isDeleted = album.getIsDeleted();
     }
 
 }

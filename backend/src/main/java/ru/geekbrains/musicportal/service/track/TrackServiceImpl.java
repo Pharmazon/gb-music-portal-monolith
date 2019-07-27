@@ -65,6 +65,11 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
+    public TrackDto markOneAsDeleted(Long id) {
+        return trackRepository.markOneAsDeleted(id);
+    }
+
+    @Override
     public TrackDto convertToDto(Track entity) {
         return modelMapper.map(entity, TrackDto.class);
     }

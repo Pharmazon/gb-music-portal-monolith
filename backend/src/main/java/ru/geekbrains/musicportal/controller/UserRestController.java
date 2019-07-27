@@ -33,9 +33,7 @@ public class UserRestController {
     @GetMapping
     public ResponseWrapper getAll() {
         Collection<UserDto> dtos = userService.findAllDtos();
-        if (dtos != null) {
-            return ResponseWrapper.ok(dtos, UserResponse.SUCCESS_READ);
-        }
+        if (dtos != null) return ResponseWrapper.ok(dtos, UserResponse.SUCCESS_READ);
         return ResponseWrapper.notFound(UserResponse.ERROR_NOT_FOUND);
     }
 
@@ -43,9 +41,7 @@ public class UserRestController {
     @GetMapping("{id}")
     public ResponseWrapper getOne(@PathVariable("id") Long id) {
         UserDto dto = userService.findOneDtoById(id);
-        if (dto != null) {
-            return ResponseWrapper.ok(dto, UserResponse.SUCCESS_READ);
-        }
+        if (dto != null) return ResponseWrapper.ok(dto, UserResponse.SUCCESS_READ);
         return ResponseWrapper.notFound(UserResponse.ERROR_NOT_FOUND);
     }
 
@@ -54,9 +50,7 @@ public class UserRestController {
     public ResponseWrapper update(@Valid UserDto dto) {
         User converted = userService.convertToEntity(dto);
         User artist = userService.saveOrUpdate(converted);
-        if (converted != null && artist != null) {
-            return ResponseWrapper.ok(dto, UserResponse.SUCCESS_UPDATED);
-        }
+        if (converted != null && artist != null) return ResponseWrapper.ok(dto, UserResponse.SUCCESS_UPDATED);
         return ResponseWrapper.notFound(UserResponse.ERROR_NOT_FOUND);
     }
 
@@ -64,9 +58,7 @@ public class UserRestController {
     @DeleteMapping("{id}")
     public ResponseWrapper delete(@PathVariable("id") Long id) {
         boolean deleted = userService.deleteById(id);
-        if (deleted) {
-            return ResponseWrapper.success(UserResponse.SUCCESS_DELETED);
-        }
+        if (deleted) return ResponseWrapper.success(UserResponse.SUCCESS_DELETED);
         return ResponseWrapper.notFound(UserResponse.ERROR_NOT_FOUND);
     }
 
