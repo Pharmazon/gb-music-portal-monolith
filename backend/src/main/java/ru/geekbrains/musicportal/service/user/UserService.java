@@ -35,4 +35,6 @@ public interface UserService extends UserDetailsService, CommonService<User, Use
 
     boolean isExistsByName(String username);
 
+    User getDefaultUser();
+
 }

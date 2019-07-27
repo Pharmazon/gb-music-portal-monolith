@@ -91,6 +91,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getDefaultUser() {
+        return userRepository.findOneByUsername("default");
+    }
+
+    @Override
     public User saveOrUpdate(User entity) {
         return userRepository.save(entity);
     }
@@ -125,8 +130,14 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(entity, UserDto.class);
     }
 
+    @Transactional
     @Override
     public boolean deleteById(Long id) {
+        Optional<User> optional = userRepository.findById(id);
+        if (!optional.isPresent()) return false;
+        User user = optional.get();
+        User defaultUser = getDefaultUser();
+        modelMapper.map(user, defaultUser);
         userRepository.deleteById(id);
         return true;
     }
