@@ -7,12 +7,7 @@ public class TrackSpecs {
 
     public static Specification<Track> artistIdEquals(Long artistId) {
         return (Specification<Track>) (root, criteriaQuery, criteriaBuilder) ->
-            criteriaBuilder.equal(root.get("artist_id"), artistId);
-    }
-
-    public static Specification<Track> playlistIdEquals(Long playlistId) {
-        return (Specification<Track>) (root, criteriaQuery, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("playlist_id"), playlistId);
+            criteriaBuilder.equal(root.get("artist").get("id"), artistId);
     }
 
     public static Specification<Track> trackNameContains(String word) {

@@ -14,4 +14,7 @@ public interface AlbumService extends CommonService<Album, AlbumDto> {
 
     Collection<AlbumDto> getTop(int max);
 
+    Collection<AlbumDto> getAllByArtistId(Long id);
+
+    Collection<AlbumDto> findAllByGenreName(String name);
 }

@@ -13,6 +13,7 @@ import ru.geekbrains.musicportal.repository.TrackRepository;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistServiceImpl implements ArtistService {
@@ -69,6 +70,19 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     public Page<Artist> getArtistsWithPagingAndFiltering(int pageNumber, int pageSize, Specification<Artist> specification) {
         return artistRepository.findAll(specification, PageRequest.of(pageNumber, pageSize));
+    }
+
+    @Override
+    public Collection<ArtistDto> findAllByGenreName(String name) {
+        return artistRepository.findAllByGenreName(name);
+    }
+
+    @Override
+    public Collection<ArtistDto> getTop(int max) {
+        Collection<Artist> top = artistRepository.getTop(max);
+        return top.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @Override

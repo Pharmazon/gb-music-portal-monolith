@@ -55,6 +55,16 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
+    public Collection<TrackDto> getAllByArtistId(Long id) {
+        return trackRepository.findAllByArtist_Id(id);
+    }
+
+    @Override
+    public Collection<TrackDto> findAllByGenreName(String genreName) {
+        return trackRepository.findAllByGenreName(genreName);
+    }
+
+    @Override
     public TrackDto convertToDto(Track entity) {
         return modelMapper.map(entity, TrackDto.class);
     }

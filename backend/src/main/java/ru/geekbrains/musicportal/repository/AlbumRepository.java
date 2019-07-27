@@ -19,9 +19,14 @@ public interface AlbumRepository extends CommonRepository<AlbumDto>, CrudReposit
             "from app_albums" +
             "right join app_likes on app_likes.entity_id = app_albums.id" +
             "where app_likes.entity = 'ALBUM'" +
-            "group by like_id, app_tracks.id" +
+            "group by like_id, app_albums.id" +
             "order by lid desc" +
             "limit :maxEntities",
             nativeQuery = true)
     Collection<Album> getTop(@Param("maxEntities") int maxEntities);
+
+    Collection<AlbumDto> getAllByArtist_Id(Long id);
+
+    @Query("select a from Album a inner join fetch a.genres g where g.name = :name")
+    Collection<AlbumDto> findAllByGenreName(@Param("name") String name);
 }

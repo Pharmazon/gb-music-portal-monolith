@@ -77,6 +77,16 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
+    public Collection<AlbumDto> getAllByArtistId(Long id) {
+        return albumRepository.getAllByArtist_Id(id);
+    }
+
+    @Override
+    public Collection<AlbumDto> findAllByGenreName(String name) {
+        return albumRepository.findAllByGenreName(name);
+    }
+
+    @Override
     public AlbumDto convertToDto(Album entity) {
         return modelMapper.map(entity, AlbumDto.class);
     }
