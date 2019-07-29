@@ -43,4 +43,14 @@ public class Track extends AbstractEntity {
             fetch = FetchType.LAZY)
     private Collection<PlaylistTrack> playlistTracks;
 
+    public Double getDuration(){
+        Double duration = 0d;
+        return duration;
+    }
+
+    public Double getSize(){
+        Double size = 0d;
+        return size;
+    }
+
 }

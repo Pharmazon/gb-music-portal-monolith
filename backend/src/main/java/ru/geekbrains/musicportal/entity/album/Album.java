@@ -45,4 +45,22 @@ public class Album extends AbstractEntity {
             joinColumns = @JoinColumn(name = "album_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Collection<Genre> genres;
+
+    public Double getTotalDuration(){
+        Double total = 0d;
+        for (AlbumTrack track: albumTracks) {
+            total = total + track.getTrack().getDuration();
+        }
+
+        return total;
+    }
+
+    public Double getTotalSize(){
+        Double total = 0d;
+        for (AlbumTrack track: albumTracks) {
+            total = total + track.getTrack().getSize();
+        }
+
+        return total;
+    }
 }
