@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {StatisticsServiceService} from "../../../services/statistics-service/statistics-service.service";
+// import {StatisticsServiceService} from "../../../services/statistics-service/statistics-service.service";
 
 @Component({
   selector: 'statistics-component',
@@ -13,7 +13,7 @@ export class StatisticsComponentComponent implements OnInit {
   numberOfTUploadedTracks: number = 0;
   numberOfUploadedAlbums: number = 0;
 
-  constructor(private statisticsService: StatisticsServiceService) { }
+  // constructor(private statisticsService: StatisticsServiceService) { }
 
   ngOnInit() {
   }
